@@ -1,1 +1,207 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Research | KNU Water Resources Lab</title>
+  <meta name="description" content="KNU WRS Lab Research — Urban flood modeling, FVM shallow water, System Dynamics decision support">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css"/>
+  <style>
+    :root{
+      --brand:#B5121B; --brand-600:#8F0E16; --ink:#111827; --muted:#6b7280;
+      --bg:#fff; --surface:#f9fafb; --line:#e5e7eb; --radius:14px; --maxw:1200px;
+      --shadow:0 12px 30px rgba(2,8,23,.08);
+    }
+    *{box-sizing:border-box} body{margin:0;font-family:"Pretendard Variable",system-ui,-apple-system,Segoe UI,Roboto,Noto Sans KR,sans-serif;color:var(--ink);background:var(--bg)}
+    a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
+    .container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+
+    /* header */
+    header{position:sticky;top:0;z-index:40;background:#ffffffcc;backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--line)}
+    .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .brand-logo{width:44px;height:44px;border-radius:50%;object-fit:contain}
+    .brand-stack{display:flex;flex-direction:column;line-height:1.05}
+    .brand-stack .dept{font-size:12px;color:var(--muted);font-weight:700}
+    .brand-stack .lab{font-size:16px;font-weight:900}
+    .menu{display:flex;gap:28px;align-items:center}
+    .menu a{font-weight:600}
+    .menu .cta{padding:10px 14px;background:var(--brand);color:#fff;border-radius:12px;box-shadow:var(--shadow)}
+    .menu-toggle{display:none;background:none;border:0;width:44px;height:44px}
+    @media (max-width:980px){
+      .menu{display:none} .menu-toggle{display:inline-grid;place-items:center}
+      .menu.open{display:flex;position:absolute;top:72px;right:16px;left:16px;flex-direction:column;gap:12px;padding:16px;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}
+    }
+
+    /* hero */
+    .hero{position:relative;height:340px;display:grid;place-items:center;color:#fff;overflow:hidden}
+    .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.45))}
+    .hero-bg{position:absolute;inset:0;background:url('/assets/research-hero.jpg') center/cover no-repeat;} /* ← 교체 */
+    .hero h1{position:relative;font-size:44px;margin:0;text-shadow:0 3px 8px rgba(0,0,0,.5)}
+    @media (max-width:980px){.hero{height:260px}.hero h1{font-size:32px}}
+
+    /* content */
+    .section{padding:56px 0}
+    .kicker{font-weight:900;font-size:24px;margin:0 0 10px}
+    .intro{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 2px 10px rgba(2,8,23,.04)}
+    .intro ul{margin:0;padding-left:16px;color:#1f2937}
+    .icons{margin-top:18px;border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;background:#fff}
+    .ic{display:flex;gap:12px;align-items:center}
+    .ic img{width:58px;height:58px;border-radius:50%;object-fit:cover;border:1px solid var(--line);background:#f3f4f6}
+    .ic b{display:block}
+
+    /* research blocks */
+    .block{margin-top:28px;border:1px solid var(--line);border-radius:14px;background:#fff;box-shadow:0 2px 10px rgba(2,8,23,.04)}
+    .block .wrap{padding:18px}
+    .block h3{margin:4px 0 10px}
+    .block p{margin:0 0 12px;color:#111827}
+    .block .fig{padding:14px;border-top:1px dashed var(--line);background:#fafafa}
+    .block .fig img{border-radius:10px}
+
+    /* footer */
+    footer{padding:36px 0;border-top:1px solid var(--line);color:#475569;margin-top:56px}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:20px}
+    .footer-links{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+    @media (max-width:980px){.footer-grid{grid-template-columns:1fr 1fr}}
+
+  </style>
+</head>
+<body>
+  <!-- header -->
+  <header>
+    <div class="container nav">
+      <a class="brand" href="/index.html">
+        <img class="brand-logo" src="/assets/knu-logo.png" alt="KNU logo">
+        <span class="brand-stack">
+          <span class="dept">경북대학교 토목공학과</span>
+          <span class="lab">수자원 연구실</span>
+        </span>
+      </a>
+      <nav>
+        <button class="menu-toggle" aria-label="메뉴 열기" onclick="toggleMenu()">☰</button>
+        <div id="menu" class="menu">
+          <a href="/index.html">Home</a>
+          <a href="/research.html">Research</a>
+          <a href="/members.html">Members</a>
+          <a href="/publication.html">Publication</a>
+          <a href="/gallery.html">Gallery</a>
+          <a href="/about.html">About</a>
+          <a href="/contact.html" class="cta">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- hero -->
+  <section class="hero" aria-label="research-hero">
+    <div class="hero-bg"></div>
+    <h1>Research</h1>
+  </section>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <h2 class="kicker">│ Our research focuses on :</h2>
+
+        <div class="intro">
+          <ul>
+            <li><b>자연 유체역학 원리를 규명</b>하고 이를 응용한 <b>바이오-영감형( bio-inspired ) 유량·정화 기술</b> 개발</li>
+            <li>도시·자연 복합 환경의 <b>다상/다중규모 흐름</b>과 <b>산업 공정 수송 현상</b>을 정량 분석</li>
+          </ul>
+        </div>
+
+        <div class="icons">
+          <div class="ic">
+            <img src="/assets/ic1.png" alt="Water management"> <!-- 아이콘1 -->
+            <div><b>Water management</b><br><small>Transport · Storage · Purification</small></div>
+          </div>
+          <div class="ic">
+            <img src="/assets/ic2.png" alt="Transport phenomena"> <!-- 아이콘2 -->
+            <div><b>Transport phenomena</b><br><small>Micro/meso systems · Mass transport</small></div>
+          </div>
+          <div class="ic">
+            <img src="/assets/ic3.png" alt="Flow visualization"> <!-- 아이콘3 -->
+            <div><b>Flow visualization</b><br><small>Imaging · Rheological processes</small></div>
+          </div>
+        </div>
+
+        <!-- Block 1 -->
+        <article class="block">
+          <div class="wrap">
+            <h3>From Natural Hydrodynamics to Bio-Inspired Fluid Management</h3>
+            <p>식물의 수송·정화 메커니즘(예: 수중 부유·정화 구조)을 모사하여, 고부가 정수/정화 플랫폼을 설계합니다.
+               식물 구조의 안정성과 위상 특성을 활용해 부유 안정성이 높은 모듈형 마이크로플루이딕 플랫폼을 구현합니다.</p>
+          </div>
+          <div class="fig">
+            <img src="/assets/r1.jpg" alt="bio-inspired platform"> <!-- 대표이미지1 -->
+          </div>
+        </article>
+
+        <!-- Block 2 -->
+        <article class="block">
+          <div class="wrap">
+            <h3>Flow Visualization and Analysis of Jet Dynamics</h3>
+            <p>마이크로버블 제트의 불안정성, PIV 기반 유속장 해석 등 <b>유동 가시화</b>와 <b>정량 검증</b>을 수행합니다.
+               실측 영상·사진·현장 관측을 활용해 모델링 결과를 체계적으로 교차 검증합니다.</p>
+          </div>
+          <div class="fig">
+            <img src="/assets/r2.jpg" alt="jet dynamics & PIV"> <!-- 대표이미지2 -->
+          </div>
+        </article>
+
+        <!-- Block 3 -->
+        <article class="block">
+          <div class="wrap">
+            <h3>From Microfluidic Flow Control to Real-World Applications</h3>
+            <p>FVM 기반 2D 천수해석과 HEC-RAS/SWMM 연계를 통해 도시 외수·내수 <b>복합 홍수</b>를 재현하고,
+               시스템 다이내믹스로 장기 <b>수요-공급</b> 시나리오를 평가합니다. 결과는 실무 의사결정 대시보드로 연결합니다.</p>
+          </div>
+          <div class="fig">
+            <img src="/assets/r3.jpg" alt="applications to flood & water systems"> <!-- 대표이미지3 -->
+          </div>
+        </article>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand" style="margin-bottom:8px">
+            <img class="brand-logo" src="/assets/knu-logo.png" alt="KNU logo">
+            <span class="brand-stack">
+              <span class="dept">경북대학교 토목공학과</span>
+              <span class="lab">수자원 연구실</span>
+            </span>
+          </div>
+          <p style="margin:0;color:#6b7280">© <span id="year"></span> KNU Water Resources Lab</p>
+        </div>
+        <div>
+          <h4>Links</h4>
+          <ul class="footer-links">
+            <li><a href="/publication.html">Publication</a></li>
+            <li><a href="/members.html">Members</a></li>
+            <li><a href="/gallery.html">Gallery</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:hello@example.com">hello@example.com</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu(){ const m=document.getElementById('menu'); if(m) m.classList.toggle('open'); }
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
 
