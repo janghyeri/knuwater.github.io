@@ -2,44 +2,35 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Members | KNU Water Resources Lab</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css"/>
   <style>
-    :root{--brand:#B5121B;--ink:#0f172a;--line:#e5e7eb;--muted:#64748b;--maxw:1200px;}
-    body{margin:0;font-family:"Pretendard Variable",sans-serif;color:var(--ink);background:#fff}
-    a{text-decoration:none;color:inherit}
-    header{position:sticky;top:0;z-index:30;background:#ffffffcc;backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--line)}
-    .nav{max-width:var(--maxw);margin:0 auto;min-height:64px;display:flex;align-items:center;gap:20px;padding:0 20px;font-weight:600}
-    .nav a:hover{color:var(--brand)}
-    .hero{position:relative;min-height:220px;display:grid;place-items:center;background:#0a1424;color:#fff;padding:40px 20px}
-    .hero h1{font-size:40px;margin:0}
-    main{max-width:var(--maxw);margin:0 auto;padding:40px 20px}
-    h2.section-title{font-size:26px;font-weight:800;margin:40px 0 20px}
-    footer{padding:20px;border-top:1px solid var(--line);color:var(--muted);font-size:14px;text-align:center}
-    
-    /* Professor cards */
-    .prof-card{display:flex;flex-wrap:wrap;gap:20px;border:1px solid var(--line);border-radius:12px;padding:20px;margin-bottom:30px}
-    .prof-card img{width:220px;height:280px;object-fit:cover;border-radius:12px}
-    .prof-body{flex:1}
-    .prof-body h3{margin:0;font-size:22px;font-weight:800}
-    .prof-body p{margin:6px 0;color:var(--muted)}
-    
-    /* Student cards */
-    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
-    @media (max-width:980px){.cards{grid-template-columns:repeat(2,1fr)}}
-    @media (max-width:640px){.cards{grid-template-columns:1fr}}
-    .s-card{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 2px 4px rgba(0,0,0,.05);display:flex;flex-direction:column}
-    .s-photo{width:100%;height:220px;object-fit:cover}
-    .s-body{padding:18px}
-    .s-name{margin:0;text-align:center;font-size:18px;font-weight:800;color:#0b2149}
-    .s-sub{text-align:center;color:#475569;font-weight:600;margin-top:6px;font-size:14px}
-    .s-sub small{display:block;color:#64748b;margin-top:2px}
-    .divider{height:1px;background:#e5e7eb;margin:14px 0}
-    .s-label{font-weight:700;color:#334155;margin-bottom:6px;font-size:14px}
-    .pill{display:inline-block;font-size:12px;padding:3px 8px;border:1px solid var(--line);border-radius:6px;background:#f9fafb;margin:4px 4px 0 0}
-    .s-row{display:flex;gap:6px;align-items:center;color:#475569;font-size:13px;margin-top:6px}
-    .email{word-break:break-all}
+    :root{
+      --brand:#B5121B; --ink:#0f172a; --line:#e5e7eb; --maxw:1200px;
+    }
+    body{margin:0;font-family:"Pretendard Variable",sans-serif;background:#fff;color:var(--ink)}
+    header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);z-index:100}
+    .nav{max-width:var(--maxw);margin:0 auto;display:flex;gap:20px;padding:16px;font-weight:600}
+    .nav a{text-decoration:none;color:var(--ink)} .nav a:hover{color:var(--brand)}
+
+    .hero{background:#0a1424;color:#fff;text-align:center;padding:60px 20px}
+    .hero h1{margin:0;font-size:40px}
+
+    .tabs{display:flex;justify-content:center;gap:12px;padding:20px;flex-wrap:wrap}
+    .tabs button{padding:10px 16px;border:1px solid var(--line);border-radius:10px;
+      background:#fff;font-weight:700;cursor:pointer}
+    .tabs button.active{background:var(--brand);color:#fff;border:none}
+
+    main{max-width:var(--maxw);margin:0 auto;padding:32px 20px}
+    .section-title{font-size:26px;font-weight:900;margin:32px 0 20px}
+
+    .prof-card{display:flex;gap:24px;align-items:flex-start;border-bottom:1px solid var(--line);padding:24px 0}
+    .prof-card img{width:220px;height:260px;object-fit:cover;border-radius:12px;background:#ddd}
+    .prof-body h3{margin:0 0 8px;font-size:22px;font-weight:800}
+    .prof-body p{margin:4px 0;font-size:15px;line-height:1.6;color:#334155}
+
+    footer{background:#0a1424;color:#cbd5e1;padding:24px;margin-top:40px;text-align:center;font-size:14px}
   </style>
 </head>
 <body>
@@ -54,111 +45,138 @@
   </nav>
 </header>
 
-<section class="hero"><h1>Members</h1></section>
+<section class="hero">
+  <h1>Members</h1>
+</section>
+
+<div class="tabs">
+  <button class="active" data-tab="prof">Professor</button>
+  <button data-tab="emeritus">Emeritus Professor</button>
+  <button data-tab="students">Students</button>
+  <button data-tab="alumni">Alumni</button>
+</div>
+
 <main>
-  <!-- Professors -->
-  <h2 class="section-title">Professors</h2>
-  <div class="prof-card">
-    <img src="prof_bhkim.jpg" alt="Prof. Byunghyun Kim">
-    <div class="prof-body">
-      <h3>Byunghyun Kim (김병현), Ph.D.</h3>
-      <p>Professor, Dept. of Civil Engineering, Kyungpook National University</p>
-      <p>Email: bhkim@knu.ac.kr</p>
-      <p>Research: Urban flood modeling, CFD/FVM, HEC-RAS, Hydrodynamic models</p>
+  <!-- Professor -->
+  <section id="prof" class="panel">
+    <h2 class="section-title">Professor</h2>
+    <div class="prof-card">
+      <img src="kim_bh.jpg" alt="Byunghyun Kim">
+      <div class="prof-body">
+        <h3>Byunghyun Kim (김병현)</h3>
+        <p>Professor, Department of Civil Engineering, Kyungpook National University</p>
+        <p>Email: bhkim@knu.ac.kr</p>
+        <p>Research Interests: Urban Flood Modeling, Hydrodynamic Simulation, AI-based Disaster Prediction</p>
+      </div>
     </div>
-  </div>
-  <div class="prof-card">
-    <img src="prof_kyhan.jpg" alt="Prof. Kunyeon Han">
-    <div class="prof-body">
-      <h3>Kunyeon Han (한건연), Ph.D.</h3>
-      <p>Emeritus Professor, Dept. of Civil Engineering, Kyungpook National University</p>
-      <p>Email: kyhan@knu.ac.kr</p>
-      <p>Research: Hydrology, Dam-break analysis, River hydraulics</p>
+  </section>
+
+  <!-- Emeritus Professor -->
+  <section id="emeritus" class="panel" hidden>
+    <h2 class="section-title">Emeritus Professor</h2>
+    <div class="prof-card">
+      <img src="han_ky.jpg" alt="Kunyeon Han">
+      <div class="prof-body">
+        <h3>Kunyeon Han (한건연)</h3>
+        <p>Emeritus Professor, Department of Civil Engineering, Kyungpook National University</p>
+        <p>Research Interests: Hydraulic Engineering, River Modeling, Flood Risk Assessment</p>
+      </div>
     </div>
-  </div>
+  </section>
 
   <!-- Students -->
-  <h2 class="section-title">Students & Researchers</h2>
-  <div class="cards">
-    <div class="s-card">
-      <img src="stu_jaehwan.jpg" class="s-photo" alt="Jaehwan Yoo">
-      <div class="s-body">
-        <h3 class="s-name">Jaehwan Yoo (유재환)</h3>
-        <div class="s-sub">Graduate Student · M.S./Ph.D.<small>(2023.03)</small></div>
-        <div class="divider"></div>
-        <div class="s-label">Research Interests</div>
-        <div><span class="pill">Coastal overtopping</span><span class="pill">Urban flooding</span><span class="pill">3D CFD/SPH</span></div>
-        <div class="divider"></div>
-        <div class="s-row"><strong>Email:</strong><span class="email">jaehwan@knu.ac.kr</span></div>
+  <section id="students" class="panel" hidden>
+    <h2 class="section-title">Students</h2>
+
+    <div class="prof-card">
+      <img src="yoo_jh.jpg" alt="Jaehwan Yoo">
+      <div class="prof-body">
+        <h3>Jaehwan Yoo (유재환)</h3>
+        <p>M.S./Ph.D. Student (2023.03 ~ )</p>
+        <p>Email: jaehwan@knu.ac.kr</p>
+        <p>Research Interests: Coastal overtopping, Urban flooding, 3D CFD/SPH</p>
       </div>
     </div>
-    <div class="s-card">
-      <img src="stu_gwiun.jpg" class="s-photo" alt="Gwiun Jeong">
-      <div class="s-body">
-        <h3 class="s-name">Gwiun Jeong (정귀운)</h3>
-        <div class="s-sub">Graduate Student · M.S.<small>(2024.02)</small></div>
-        <div class="divider"></div>
-        <div class="s-label">Research Interests</div>
-        <div><span class="pill">Coastal flood</span><span class="pill">Rain-on-Mesh</span></div>
-        <div class="divider"></div>
-        <div class="s-row"><strong>Email:</strong><span class="email">gwiun@knu.ac.kr</span></div>
+
+    <div class="prof-card">
+      <img src="jung_gw.jpg" alt="Gwiun Jeong">
+      <div class="prof-body">
+        <h3>Gwiun Jeong (정귀운)</h3>
+        <p>M.S./Ph.D. Student</p>
+        <p>Email: gwiun@knu.ac.kr</p>
+        <p>Research Interests: Hydrologic modeling, Machine learning flood prediction</p>
       </div>
     </div>
-    <div class="s-card">
-      <img src="stu_hyuntak.jpg" class="s-photo" alt="Hyuntak Cho">
-      <div class="s-body">
-        <h3 class="s-name">Hyuntak Cho (조현탁)</h3>
-        <div class="s-sub">Graduate Student · M.S.<small>(2024.10)</small></div>
-        <div class="divider"></div>
-        <div class="s-label">Research Interests</div>
-        <div><span class="pill">XAI</span><span class="pill">ClimaX/ViT rainfall</span></div>
-        <div class="divider"></div>
-        <div class="s-row"><strong>Email:</strong><span class="email">hyuntak@knu.ac.kr</span></div>
+
+    <div class="prof-card">
+      <img src="choi_ht.jpg" alt="Hyuntak Choi">
+      <div class="prof-body">
+        <h3>Hyuntak Choi (조현탁)</h3>
+        <p>M.S./Ph.D. Student</p>
+        <p>Email: hyuntak@knu.ac.kr</p>
+        <p>Research Interests: Climate data analysis, AI-based hydrology</p>
       </div>
     </div>
-    <div class="s-card">
-      <img src="stu_hoyoun.jpg" class="s-photo" alt="Hoyoun Kim">
-      <div class="s-body">
-        <h3 class="s-name">Hoyoun Kim (김호연)</h3>
-        <div class="s-sub">Graduate Student · M.S.<small>(2024.10)</small></div>
-        <div class="divider"></div>
-        <div class="s-label">Research Interests</div>
-        <div><span class="pill">System Dynamics</span><span class="pill">Damage Analysis</span></div>
-        <div class="divider"></div>
-        <div class="s-row"><strong>Email:</strong><span class="email">hoyoun@knu.ac.kr</span></div>
+
+    <div class="prof-card">
+      <img src="kim_hy.jpg" alt="Hoyun Kim">
+      <div class="prof-body">
+        <h3>Hoyun Kim (김호연)</h3>
+        <p>M.S./Ph.D. Student</p>
+        <p>Email: hoyun@knu.ac.kr</p>
+        <p>Research Interests: Urban drainage, Hydrodynamic modeling</p>
       </div>
     </div>
-    <div class="s-card">
-      <img src="stu_hyeri.jpg" class="s-photo" alt="Hyeri Jang">
-      <div class="s-body">
-        <h3 class="s-name">Hyeri Jang (장혜리)</h3>
-        <div class="s-sub">Graduate Student · M.S.<small>(2024.10)</small></div>
-        <div class="divider"></div>
-        <div class="s-label">Research Interests</div>
-        <div><span class="pill">HEC-RAS 2D</span><span class="pill">FVM</span></div>
-        <div class="divider"></div>
-        <div class="s-row"><strong>Email:</strong><span class="email">hyeri@knu.ac.kr</span></div>
+
+    <div class="prof-card">
+      <img src="jang_hr.jpg" alt="Hyeri Jang">
+      <div class="prof-body">
+        <h3>Hyeri Jang (장혜리)</h3>
+        <p>M.S. Student</p>
+        <p>Email: hyerijang@knu.ac.kr</p>
+        <p>Research Interests: HEC-RAS 2D, Urban flood modeling, System Dynamics</p>
       </div>
     </div>
-    <div class="s-card">
-      <img src="stu_jiyun.jpg" class="s-photo" alt="Jiyun Jeon">
-      <div class="s-body">
-        <h3 class="s-name">Jiyun Jeon (전지윤)</h3>
-        <div class="s-sub">Graduate Student · M.S.<small>(2024.10)</small></div>
-        <div class="divider"></div>
-        <div class="s-label">Research Interests</div>
-        <div><span class="pill">XAI maps</span><span class="pill">Urban flood</span></div>
-        <div class="divider"></div>
-        <div class="s-row"><strong>Email:</strong><span class="email">jiyun@knu.ac.kr</span></div>
+
+    <div class="prof-card">
+      <img src="jeon_jy.jpg" alt="Jiyoon Jeon">
+      <div class="prof-body">
+        <h3>Jiyoon Jeon (전지윤)</h3>
+        <p>M.S. Student</p>
+        <p>Email: jiyoon@knu.ac.kr</p>
+        <p>Research Interests: System Dynamics, Flood resilience</p>
       </div>
     </div>
-  </div>
+  </section>
+
+  <!-- Alumni -->
+  <section id="alumni" class="panel" hidden>
+    <h2 class="section-title">Alumni</h2>
+    <div class="prof-card">
+      <img src="alumni_sample.jpg" alt="Alumni">
+      <div class="prof-body">
+        <h3>Alumni Name (졸업생)</h3>
+        <p>Current Position: Researcher at XXX Institute</p>
+        <p>Research Area: Flood Modeling, Water Resources</p>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer>
-  경북대학교 수자원 연구실 (KNU Water Resources Lab) · 대표자명 : 김병현 <br>
-  주소: 경북대학교 공과대학 2호관 111호, Daegu, Korea | Email: bhkim@knu.ac.kr <br>
-  COPYRIGHT © 2025 KNU Water Resources Lab. All rights reserved | Designed by Hye ri Jang
+  COPYRIGHT © 2025 KNU Water Resources Lab. All rights reserved
 </footer>
+
+<script>
+  // 탭 전환 스크립트
+  document.querySelectorAll(".tabs button").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      document.querySelectorAll(".tabs button").forEach(b=>b.classList.remove("active"));
+      document.querySelectorAll(".panel").forEach(p=>p.hidden=true);
+      btn.classList.add("active");
+      document.getElementById(btn.dataset.tab).hidden=false;
+    })
+  });
+</script>
 </body>
 </html>
