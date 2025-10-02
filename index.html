@@ -3,132 +3,148 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>새 홈페이지 제목 | 브랜드명</title>
-  <meta name="description" content="짧은 사이트 설명을 여기에 입력하세요." />
-  <meta name="keywords" content="키워드, 키워드, 키워드" />
-  <meta property="og:title" content="새 홈페이지 제목" />
-  <meta property="og:description" content="짧은 사이트 설명을 여기에 입력하세요." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="/assets/og-image.jpg" />
-  <meta name="theme-color" content="#0ea5e9" />
+  <title>MFEL 스타일 기업 홈페이지 샘플 | KNUWATER</title>
+  <meta name="description" content="기업 소개, 사업분야, 제품/솔루션, 소식, 문의까지 한 페이지로 보는 반응형 홈페이지 샘플" />
+  <meta name="theme-color" content="#0a66c2" />
   <link rel="icon" href="/favicon.ico" />
-
-  <!-- 기본 폰트 (선택): Pretendard CDN 예시 -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css" />
-
   <style>
-    /* ===== 디자인 토큰: 여기 숫자만 바꿔도 전체 톤이 바뀝니다 ===== */
     :root{
-      --brand:#0ea5e9;           /* 포인트 컬러 */
-      --brand-700:#0284c7;       /* 포인트 짙은 색 */
-      --ink:#0f172a;             /* 본문 글자색 */
-      --muted:#64748b;           /* 보조 텍스트 */
-      --bg:#ffffff;              /* 배경 */
-      --surface:#f8fafc;         /* 카드 배경 */
-      --radius:16px;             /* 둥근 정도 */
-      --shadow:0 10px 25px rgba(2,8,23,.08);
-      --maxw:1200px;             /* 컨텐트 최대폭 */
+      --brand:#B5121B; /* KNU Red */      /* 메인 블루 */
+      --brand-600:#8F0E16; /* KNU Deep Red */  /* 딥 블루 */
+      --ink:#0f172a;        /* 본문 글자 */
+      --muted:#64748b;      /* 보조 텍스트 */
+      --bg:#ffffff;         /* 배경 */
+      --surface:#f8fafc;    /* 카드 배경 */
+      --line:#e2e8f0;       /* 경계선 */
+      --radius:14px;        /* 둥근 정도 */
+      --shadow:0 12px 30px rgba(2,8,23,.08);
+      --maxw:1200px;
     }
-
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0; font-family:"Pretendard Variable", system-ui, -apple-system, Segoe UI, Roboto, Noto Sans KR, sans-serif; color:var(--ink); background:var(--bg);}
+    body{margin:0; font-family:"Pretendard Variable", system-ui, -apple-system, Segoe UI, Roboto, Noto Sans KR, sans-serif; color:var(--ink); background:var(--bg)}
     a{color:inherit; text-decoration:none}
     img{max-width:100%; display:block}
     .container{max-width:var(--maxw); margin:0 auto; padding:0 20px}
 
-    /* 헤더 & 내비 */
-    header{position:sticky; top:0; z-index:50; background:#ffffffcc; backdrop-filter:saturate(180%) blur(12px); border-bottom:1px solid #e2e8f0}
-    .nav{display:flex; align-items:center; justify-content:space-between; height:64px}
-    .brand{display:flex; gap:12px; align-items:center}
-    .brand-logo{width:32px; height:32px; border-radius:8px; background:linear-gradient(135deg, var(--brand), var(--brand-700));}
-    .brand-name{font-weight:700}
-    .menu{display:flex; gap:24px; align-items:center}
-    .menu a{color:#0f172a; font-weight:500}
-    .cta{padding:10px 14px; background:var(--brand); color:#fff; border-radius:12px; box-shadow:var(--shadow)}
+    /* 상단 바 */
+    .topbar{background:#0b1e39; color:#cbd5e1; font-size:13px}
+    .topbar .container{display:flex; gap:16px; align-items:center; justify-content:space-between; height:36px}
+    .topbar small{opacity:.9}
 
-    /* 모바일 메뉴 토글 */
-    .menu-toggle{display:none; background:none; border:0; width:40px; height:40px}
-    @media (max-width: 900px){
+    /* 헤더 */
+    header{position:sticky; top:0; z-index:50; background:#ffffffcc; backdrop-filter:saturate(180%) blur(12px); border-bottom:1px solid var(--line)}
+    .nav{display:flex; align-items:center; justify-content:space-between; height:72px}
+    .brand{display:flex; gap:10px; align-items:center}
+    .brand-logo{width:36px; height:36px; border-radius:8px; background:linear-gradient(135deg, var(--brand), var(--brand-600)); box-shadow:var(--shadow)}
+    .brand-name{font-weight:800; letter-spacing:.2px}
+    .menu{display:flex; gap:28px; align-items:center}
+    .menu a{font-weight:600}
+    .menu .cta{padding:10px 14px; background:var(--brand); color:#fff; border-radius:12px; box-shadow:var(--shadow)}
+    .menu-toggle{display:none; background:none; border:0; width:44px; height:44px}
+    @media (max-width: 980px){
       .menu{display:none}
       .menu-toggle{display:inline-grid; place-items:center}
-      .menu.open{display:flex; position:absolute; top:64px; right:16px; left:16px; flex-direction:column; gap:12px; padding:16px; background:#fff; border:1px solid #e2e8f0; border-radius:16px; box-shadow:var(--shadow)}
+      .menu.open{display:flex; position:absolute; top:72px; right:16px; left:16px; flex-direction:column; gap:12px; padding:16px; background:#fff; border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow)}
     }
 
-    /* 히어로 */
-    .hero{padding:80px 0}
-    .hero-grid{display:grid; grid-template-columns: 1.2fr 1fr; gap:40px; align-items:center}
-    .badge{display:inline-block; padding:6px 10px; font-size:14px; background:var(--surface); border:1px solid #e2e8f0; color:var(--brand-700); border-radius:999px}
+    /* 히어로 배너 (풀폭) */
+    .hero{position:relative; isolation:isolate}
+    .hero-media{height:56vh; min-height:360px; background:linear-gradient(120deg, #3b0a0c, #B5121B); display:grid; place-items:center; color:#e2e8f0}
+    .hero .overlay{position:absolute; inset:0; background:linear-gradient(180deg, #00000040, #00000055)}
+    .hero .inner{position:absolute; inset:0; display:grid; align-items:center}
+    .hero .content{max-width:var(--maxw); margin:0 auto; padding:0 20px; color:#fff}
+    .badge{display:inline-block; padding:6px 10px; font-size:13px; background:#ffffff26; border:1px solid #ffffff40; border-radius:999px}
     h1{font-size:44px; line-height:1.15; margin:14px 0 10px}
-    .lead{font-size:18px; color:var(--muted)}
+    .lead{font-size:18px; opacity:.95}
     .hero-cta{margin-top:24px; display:flex; gap:12px}
-    .btn{padding:12px 16px; border-radius:14px; font-weight:600; border:1px solid transparent}
-    .btn.primary{background:var(--brand); color:#fff}
-    .btn.ghost{border-color:#e2e8f0; background:#fff}
-    .hero-card{background:var(--surface); border:1px solid #e2e8f0; padding:20px; border-radius:var(--radius); box-shadow:var(--shadow)}
-    .hero-media{aspect-ratio: 16/10; background:#e2e8f0; border-radius:12px; display:grid; place-items:center; color:#334155}
-    @media (max-width: 900px){
-      .hero-grid{grid-template-columns:1fr}
-      h1{font-size:36px}
-    }
+    .btn{padding:12px 16px; border-radius:14px; font-weight:700; border:1px solid transparent}
+    .btn.primary{background:#fff; color:#0a2955}
+    .btn.ghost{border-color:#ffffff70; color:#fff; background:#ffffff1a}
+    @media (max-width: 980px){ h1{font-size:34px} }
 
-    /* 특징 섹션 */
-    .section{padding:64px 0}
+    /* 섹션 공통 */
+    .section{padding:72px 0; background:#fff}
+    .section.alt{background:var(--surface)}
     .section-title{font-size:28px; margin:0 0 10px}
     .section-lead{color:var(--muted); margin:0 0 24px}
-    .features{display:grid; grid-template-columns:repeat(3, 1fr); gap:20px}
-    .card{background:#fff; border:1px solid #e2e8f0; border-radius:var(--radius); padding:20px; box-shadow:var(--shadow)}
+
+    /* 회사소개 + 핵심지표 */
+    .about-grid{display:grid; grid-template-columns: 1.2fr 1fr; gap:32px; align-items:start}
+    .stats{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+    .stat{background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:18px; text-align:center; box-shadow:var(--shadow)}
+    .stat b{font-size:24px}
+    @media (max-width: 980px){ .about-grid{grid-template-columns:1fr} .stats{grid-template-columns:1fr 1fr} }
+
+    /* 사업분야 */
+    .features{display:grid; grid-template-columns:repeat(3,1fr); gap:20px}
+    .card{background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:22px; box-shadow:var(--shadow)}
     .card h3{margin:0 0 8px}
-    @media (max-width: 900px){
-      .features{grid-template-columns:1fr}
-    }
+    .icon{width:44px; height:44px; border-radius:10px; background:linear-gradient(135deg, var(--brand), var(--brand-600)); margin-bottom:10px}
+    @media (max-width:980px){ .features{grid-template-columns:1fr} }
 
-    /* 갤러리/포트폴리오 */
-    .gallery{display:grid; grid-template-columns:repeat(3, 1fr); gap:16px}
-    .tile{border-radius:12px; overflow:hidden; border:1px solid #e2e8f0; background:#fff}
-    .tile>div{aspect-ratio:4/3; background:#e2e8f0}
-    @media (max-width: 900px){
-      .gallery{grid-template-columns:1fr 1fr}
-    }
+    /* 제품/솔루션 */
+    .products{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
+    .product{background:#fff; border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:var(--shadow)}
+    .product .thumb{aspect-ratio:16/9; background:#cbd5e1}
+    .product .body{padding:14px}
+    .product .meta{font-size:13px; color:var(--muted)}
+    @media (max-width:980px){ .products{grid-template-columns:1fr} }
 
-    /* 블로그/소식 */
-    .posts{display:grid; grid-template-columns:repeat(3, 1fr); gap:20px}
-    .post{background:#fff; border:1px solid #e2e8f0; border-radius:var(--radius); overflow:hidden}
-    .post .thumb{aspect-ratio:16/9; background:#e2e8f0}
+    /* 파트너 */
+    .partners{display:grid; grid-template-columns:repeat(6,1fr); gap:16px; align-items:center}
+    .partners .logo{height:44px; background:#e2e8f0; border:1px solid var(--line); border-radius:10px}
+    @media (max-width:980px){ .partners{grid-template-columns:repeat(3,1fr)} }
+
+    /* 소식 */
+    .posts{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
+    .post{background:#fff; border:1px solid var(--line); border-radius:14px; overflow:hidden}
+    .post .thumb{aspect-ratio:16/9; background:#cbd5e1}
     .post .body{padding:16px}
-    .post .meta{font-size:14px; color:var(--muted)}
-    @media (max-width: 900px){
-      .posts{grid-template-columns:1fr}
-    }
+    .post .meta{font-size:13px; color:var(--muted)}
+    @media (max-width:980px){ .posts{grid-template-columns:1fr} }
 
-    /* CTA 섹션 */
-    .cta-band{background:linear-gradient(135deg, var(--brand), var(--brand-700)); color:#fff; border-radius:20px; padding:28px; display:grid; gap:12px; align-items:center; box-shadow:var(--shadow)}
-    .cta-actions{display:flex; gap:12px; flex-wrap:wrap}
+    /* 문의/주소 */
+    .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:20px}
+    .map{aspect-ratio: 16/11; border-radius:14px; border:1px solid var(--line); background:#e2e8f0}
+    .contact-card{background:#fff; border:1px solid var(--line); border-radius:14px; padding:20px; box-shadow:var(--shadow)}
+    @media (max-width:980px){ .contact-grid{grid-template-columns:1fr} }
 
     /* 푸터 */
-    footer{padding:32px 0; border-top:1px solid #e2e8f0; color:#475569}
+    footer{padding:36px 0; border-top:1px solid var(--line); color:#475569}
     .footer-grid{display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:20px}
     .footer-grid h4{margin:0 0 10px}
-    .copyright{border-top:1px solid #e2e8f0; margin-top:20px; padding-top:12px; font-size:14px}
-    @media (max-width: 900px){
-      .footer-grid{grid-template-columns:1fr 1fr}
-    }
+    .copyright{border-top:1px solid var(--line); margin-top:18px; padding-top:12px; font-size:14px}
+    @media (max-width:980px){ .footer-grid{grid-template-columns:1fr 1fr} }
   </style>
 </head>
 <body>
+  <!-- 상단바 -->
+  <div class="topbar">
+    <div class="container">
+      <small>고객센터 053-000-0000 · 평일 09:00–18:00</small>
+      <small>KR | EN</small>
+    </div>
+  </div>
+
+  <!-- 헤더 -->
   <header>
     <div class="container nav">
       <a class="brand" href="#">
         <div class="brand-logo" aria-hidden="true"></div>
-        <span class="brand-name">브랜드명</span>
+        <span class="brand-name">KNU Water Resources Lab</span>
       </a>
       <nav>
         <button class="menu-toggle" aria-label="메뉴 열기" onclick="toggleMenu()">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
         </button>
         <div id="menu" class="menu">
-          <a href="#features">특징</a>
+          <a href="#about">연구실 소개</a>
+          <a href="#research">연구</a>
+          <a href="#members">멤버</a>
+          <a href="#publications">논문</a>
           <a href="#gallery">갤러리</a>
           <a href="#news">소식</a>
           <a href="#contact" class="cta">문의하기</a>
@@ -137,131 +153,208 @@
     </div>
   </header>
 
-  <main>
-    <!-- 히어로 -->
-    <section class="hero">
-      <div class="container hero-grid">
-        <div>
-          <span class="badge">신규 런칭 ✦ 2025</span>
-          <h1>당신의 아이디어를
-            <br/> 깔끔하고 빠르게 보여주는 <span style="color:var(--brand)">반응형 홈페이지</span></h1>
-          <p class="lead">여기에 한두 문장으로 핵심 가치 제안을 적으세요. 연구실, 포트폴리오, 제품 랜딩 등 어떤 용도로도 쉽게 맞출 수 있습니다.</p>
-          <div class="hero-cta">
-            <a class="btn primary" href="#contact">프로젝트 시작하기</a>
-            <a class="btn ghost" href="#features">자세히 보기</a>
-          </div>
-        </div>
-        <div class="hero-card">
-          <div class="hero-media">미디어/모형/스샷 자리</div>
-          <p style="margin:12px 0 0; color:var(--muted); font-size:14px">* 이미지나 동영상을 여기 삽입하세요.</p>
+  <!-- 히어로 배너 (이미지/영상 자리) -->
+  <section class="hero" aria-label="메인 배너">
+    <div class="hero-media">배너 이미지/영상 영역</div>
+    <div class="overlay"></div>
+    <div class="inner">
+      <div class="content">
+        <span class="badge">스마트 물관리 · 도시침수 대응 · 데이터 융합</span>
+        <h1>지속가능한 물관리와<br/>도시 홍수 대응 솔루션</h1>
+        <p class="lead">HEC‑RAS 1D/2D, FVM, 시스템다이내믹스 기반의 데이터 융합 분석과 실증 프로젝트 경험으로, 안전한 도시를 설계합니다.</p>
+        <div class="hero-cta">
+          <a class="btn primary" href="#biz">사업분야 보기</a>
+          <a class="btn ghost" href="#contact">견적/협업 문의</a>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- 특징 -->
-    <section id="features" class="section">
-      <div class="container">
-        <h2 class="section-title">왜 이 템플릿인가요?</h2>
-        <p class="section-lead">컴포넌트 기반 레이아웃, 쉬운 색상 커스터마이징, 접근성/SEO 준수</p>
-        <div class="features">
-          <div class="card">
-            <h3>빠른 적용</h3>
-            <p>단일 HTML 파일로 시작하여 바로 배포 가능. 섹션만 켜고 끄면 됩니다.</p>
-          </div>
-          <div class="card">
-            <h3>반응형 그리드</h3>
-            <p>모바일/태블릿/데스크톱에서 자연스럽게 재배치됩니다.</p>
-          </div>
-          <div class="card">
-            <h3>연구/프로젝트 친화</h3>
-            <p>논문/데모/코드 링크, 포스터/이미지, 유튜브 임베드 등 손쉽게 추가.</p>
-          </div>
+  <!-- 회사소개 -->
+  <section id="about" class="section">
+    <div class="container about-grid">
+      <div>
+        <h2 class="section-title">연구실 소개</h2>
+        <p class="section-lead">수자원·방재·기후리스크를 아우르는 실무형 연구·컨설팅 조직입니다. 공공 R&D, 도시 침수 모델링, 정책·플랫폼 개발까지 엔드투엔드로 지원합니다.</p>
+        <p>HEC‑RAS 2D, XP‑SWMM, MODSIM, Vensim(ANEMI) 등 다양한 해석·모델링 도구를 결합하여 외수/내수를 통합적으로 분석하고, 실증 가능한 의사결정 지원체계를 구축합니다.</p>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>10+</b><br/><small>지자체·공공 프로젝트</small></div>
+        <div class="stat"><b>5</b><br/><small>핵심 모델링 툴체인</small></div>
+        <div class="stat"><b>2025</b><br/><small>학회·국제발표 진행</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 사업분야 -->
+  <section id="research" class="section alt">
+    <div class="container">
+      <h2 class="section-title">연구</h2>
+      <p class="section-lead">홍수·물관리 모델링과 데이터 융합</p>
+      <div class="features">
+        <div class="card">
+          <div class="icon" aria-hidden="true"></div>
+          <h3>도시 침수 해석</h3>
+          <p>HEC‑RAS 1D/2D 연계, 외수/내수 통합, 맨홀 월류 반영, CCTV/피해 사진 검증.</p>
+        </div>
+        <div class="card">
+          <div class="icon" aria-hidden="true"></div>
+          <h3>수요‑공급 SD 모델</h3>
+          <p>시스템 다이내믹스(ANEMI) 기반 수자원 수요‑공급 균형 및 시나리오 평가.</p>
+        </div>
+        <div class="card">
+          <div class="icon" aria-hidden="true"></div>
+          <h3>스마트 물관리</h3>
+          <p>센서·위성·관망 데이터 통합, 대시보드/경보 시스템 설계.</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- 갤러리/포트폴리오 -->
-    <section id="gallery" class="section" aria-label="갤러리">
-      <div class="container">
-        <h2 class="section-title">갤러리</h2>
-        <p class="section-lead">스크린샷, 포스터, 현장 사진 등을 전시하세요.</p>
-        <div class="gallery">
-          <div class="tile"><div></div></div>
-          <div class="tile"><div></div></div>
-          <div class="tile"><div></div></div>
-          <div class="tile"><div></div></div>
-          <div class="tile"><div></div></div>
-          <div class="tile"><div></div></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 블로그/소식 -->
-    <section id="news" class="section" aria-label="소식">
-      <div class="container">
-        <h2 class="section-title">소식</h2>
-        <p class="section-lead">학회 발표, 프로젝트 소식, 채용 공지 등을 공유하세요.</p>
-        <div class="posts">
-          <article class="post">
-            <div class="thumb"></div>
-            <div class="body">
-              <div class="meta">2025-10-02 • 카테고리</div>
-              <h3 style="margin:8px 0">첫 게시글 제목</h3>
-              <p>한두 문장으로 요약을 적고, 자세한 내용은 별도 페이지나 노션/블로그로 링크하세요.</p>
-              <a href="#" aria-label="첫 게시글 더보기" style="color:var(--brand)">더보기 →</a>
-            </div>
-          </article>
-          <article class="post">
-            <div class="thumb"></div>
-            <div class="body">
-              <div class="meta">2025-09-15 • 발표</div>
-              <h3 style="margin:8px 0">학회 발표 자료 업로드</h3>
-              <p>슬라이드 PDF, 포스터 이미지, 요약문 등을 연결하세요.</p>
-              <a href="#" style="color:var(--brand)">자료 보기 →</a>
-            </div>
-          </article>
-          <article class="post">
-            <div class="thumb"></div>
-            <div class="body">
-              <div class="meta">2025-08-01 • 공지</div>
-              <h3 style="margin:8px 0">연구실 학부연구생 모집</h3>
-              <p>모집 기간과 지원 방법을 간단히 안내하고 상세 공고로 이동시키세요.</p>
-              <a href="#" style="color:var(--brand)">지원 안내 →</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- 연락/문의 -->
-    <section id="contact" class="section">
-      <div class="container">
-        <div class="cta-band">
-          <h2 style="margin:0">프로젝트/협업 문의</h2>
-          <p style="margin:0">이메일, 구글폼, 네이버폼, 깃허브 이슈 등 원하는 채널로 연결하세요.</p>
-          <div class="cta-actions">
-            <a class="btn" style="background:#fff; color:var(--ink)" href="mailto:hello@example.com">이메일 보내기</a>
-            <a class="btn ghost" href="#">문의 폼 열기</a>
+  <!-- 제품/솔루션 -->
+  <section id="publications" class="section">
+    <div class="container">
+      <h2 class="section-title">논문</h2>
+      <p class="section-lead">최근 게재/학회 발표</p>
+      <div class="products">
+        <article class="product">
+          <div class="thumb"></div>
+          <div class="body">
+            <div class="meta">Journal</div>
+            <h3 style="margin:6px 0">Urban Flood Simulation with HEC‑RAS 2D</h3>
+            <p>외수/내수 통합 해석 및 사진 기반 검증.</p>
+            <a href="#" style="color:var(--brand)">PDF/DOI →</a>
           </div>
+        </article>
+        <article class="product">
+          <div class="thumb"></div>
+          <div class="body">
+            <div class="meta">Conference</div>
+            <h3 style="margin:6px 0">AOGS 2025 Poster: Naengcheon Flood</h3>
+            <p>HEC‑RAS vs FVM 비교 분석.</p>
+            <a href="#" style="color:var(--brand)">Poster →</a>
+          </div>
+        </article>
+        <article class="product">
+          <div class="thumb"></div>
+          <div class="body">
+            <div class="meta">Preprint</div>
+            <h3 style="margin:6px 0">Water Demand–Supply SD Model</h3>
+            <p>시나리오 기반 수자원 리스크 평가.</p>
+            <a href="#" style="color:var(--brand)">ArXiv →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 파트너/고객사 -->
+  <section id="gallery" class="section alt" aria-label="갤러리">
+    <div class="container">
+      <h2 class="section-title">갤러리</h2>
+      <p class="section-lead">현장 사진·랩 라이프</p>
+      <div class="products" style="grid-template-columns:repeat(4,1fr)">
+        <div class="product"><div class="thumb"></div></div>
+        <div class="product"><div class="thumb"></div></div>
+        <div class="product"><div class="thumb"></div></div>
+        <div class="product"><div class="thumb"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 소식/공지 -->
+  <section id="news" class="section" aria-label="소식">
+    <div class="container">
+      <h2 class="section-title">소식</h2>
+      <p class="section-lead">학회 발표, 프로젝트 소식, 채용 공지</p>
+      <div class="posts">
+        <article class="post">
+          <div class="thumb"></div>
+          <div class="body">
+            <div class="meta">2025-10-02 • 발표</div>
+            <h3 style="margin:8px 0">AOGS 2025 포스터 발표</h3>
+            <p>HEC‑RAS 2D와 FVM 기반 2022 포항 홍수 비교 연구.</p>
+            <a href="#" style="color:var(--brand)">자세히 보기 →</a>
+          </div>
+        </article>
+        <article class="post">
+          <div class="thumb"></div>
+          <div class="body">
+            <div class="meta">2025-09-15 • 소식</div>
+            <h3 style="margin:8px 0">스마트 물관리 대시보드 베타</h3>
+            <p>실시간 관측 연계와 경보 기능 업데이트.</p>
+            <a href="#" style="color:var(--brand)">업데이트 노트 →</a>
+          </div>
+        </article>
+        <article class="post">
+          <div class="thumb"></div>
+          <div class="body">
+            <div class="meta">2025-08-01 • 공지</div>
+            <h3 style="margin:8px 0">학부연구생 모집</h3>
+            <p>모델링·데이터 분석에 관심 있는 학생 환영.</p>
+            <a href="#" style="color:var(--brand)">지원 안내 →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 문의/주소 -->
+  <section id="members" class="section">
+    <div class="container">
+      <h2 class="section-title">멤버</h2>
+      <p class="section-lead">Professor · Researchers · Students · Alumni</p>
+      <div class="features">
+        <div class="card"><h3>Professor</h3><p>지도교수 소개 및 연구 관심사.</p></div>
+        <div class="card"><h3>Researchers/Students</h3><p>석·박사/연구원 명단 및 역할.</p></div>
+        <div class="card"><h3>Alumni</h3><p>졸업생 진로/소속.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section alt">
+    <div class="container contact-grid">
+      <div class="contact-card">
+        <h2 class="section-title" style="margin-top:0">문의하기</h2>
+        <p class="section-lead">프로젝트·견적·협업 문의를 기다립니다.</p>
+        <form onsubmit="event.preventDefault(); alert('문의가 접수되었습니다. (데모)');">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px">
+            <input required placeholder="성함" style="padding:12px; border:1px solid var(--line); border-radius:10px"/>
+            <input required type="email" placeholder="이메일" style="padding:12px; border:1px solid var(--line); border-radius:10px"/>
+          </div>
+          <input placeholder="회사/기관명" style="margin-top:12px; width:100%; padding:12px; border:1px solid var(--line); border-radius:10px"/>
+          <textarea required placeholder="문의 내용" rows="5" style="margin-top:12px; width:100%; padding:12px; border:1px solid var(--line); border-radius:10px"></textarea>
+          <button class="btn" style="margin-top:12px; background:var(--brand); color:#fff">문의 보내기</button>
+        </form>
+      </div>
+      <div>
+        <div class="map">지도 자리 (이미지/임베드)</div>
+        <div style="margin-top:12px; color:var(--muted); font-size:14px">
+          주소: 대구광역시 ○○구 ○○로 00, KNU ○○관 ○○호<br/>
+          전화: 053-000-0000 · 이메일: hello@example.com
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
+  <!-- 푸터 -->
   <footer>
     <div class="container">
       <div class="footer-grid">
         <div>
           <div class="brand" style="margin-bottom:8px">
             <div class="brand-logo" aria-hidden="true"></div>
-            <span class="brand-name">브랜드명</span>
+            <span class="brand-name">KNUWATER</span>
           </div>
-          <p style="margin:0; color:var(--muted)">© <span id="year"></span> 브랜드명. All rights reserved.</p>
+          <p style="margin:0; color:var(--muted)">© <span id="year"></span> KNUWATER. All rights reserved.</p>
         </div>
         <div>
           <h4>바로가기</h4>
           <ul style="list-style:none; padding:0; margin:0; display:grid; gap:8px">
-            <li><a href="#features">특징</a></li>
+            <li><a href="#about">연구실 소개</a></li>
+            <li><a href="#research">연구</a></li>
+            <li><a href="#members">멤버</a></li>
+            <li><a href="#publications">논문</a></li>
             <li><a href="#gallery">갤러리</a></li>
             <li><a href="#news">소식</a></li>
             <li><a href="#contact">문의</a></li>
@@ -270,16 +363,25 @@
         <div>
           <h4>리소스</h4>
           <ul style="list-style:none; padding:0; margin:0; display:grid; gap:8px">
-            <li><a href="#">문서</a></li>
-            <li><a href="#">깃허브</a></li>
-            <li><a href="#">오픈데이터</a></li>
+            <li><a href="#about">연구실 소개</a></li>
+            <li><a href="#research">연구</a></li>
+            <li><a href="#members">멤버</a></li>
+            <li><a href="#publications">논문</a></li>
+            <li><a href="#gallery">갤러리</a></li>
+            <li><a href="#news">소식</a></li>
+            <li><a href="#contact">문의</a></li>
           </ul>
         </div>
         <div>
           <h4>연락처</h4>
           <ul style="list-style:none; padding:0; margin:0; display:grid; gap:8px">
-            <li><a href="mailto:hello@example.com">hello@example.com</a></li>
-            <li><a href="#">링크트리</a></li>
+            <li><a href="#about">연구실 소개</a></li>
+            <li><a href="#research">연구</a></li>
+            <li><a href="#members">멤버</a></li>
+            <li><a href="#publications">논문</a></li>
+            <li><a href="#gallery">갤러리</a></li>
+            <li><a href="#news">소식</a></li>
+            <li><a href="#contact">문의</a></li>
           </ul>
         </div>
       </div>
@@ -288,14 +390,8 @@
   </footer>
 
   <script>
-    // 현재 연도 자동 표기
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // 모바일 메뉴 토글
-    function toggleMenu(){
-      const el = document.getElementById('menu');
-      el.classList.toggle('open');
-    }
+    function toggleMenu(){ document.getElementById('menu').classList.toggle('open'); }
   </script>
 </body>
 </html>
