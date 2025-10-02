@@ -7,31 +7,78 @@
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css"/>
   <style>
-    :root{--brand:#B5121B;--ink:#0f172a;--muted:#64748b;--line:#e5e7eb;--r:14px;--maxw:1200px;}
+    :root{
+      --brand:#B5121B; --ink:#0f172a; --muted:#64748b; --line:#e5e7eb;
+      --r:14px; --maxw:1200px; --header-h:64px;
+    }
     *{box-sizing:border-box}
     body{margin:0;font-family:"Pretendard Variable",system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans KR",sans-serif;color:var(--ink);background:#fff}
     a{text-decoration:none;color:inherit}
-    header{position:sticky;top:0;z-index:30;background:#ffffffcc;backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--line)}
-    .nav{display:flex;gap:20px;max-width:var(--maxw);margin:0 auto;padding:20px;font-weight:600}
-    .hero{position:relative;height:240px;display:grid;place-items:center;background:#0a1424;color:#fff}
+
+    /* Header / Nav */
+    header{
+      position:sticky; top:0; z-index:30;
+      background:#ffffffcc; backdrop-filter:saturate(180%) blur(12px);
+      border-bottom:1px solid var(--line);
+    }
+    .nav{
+      max-width:var(--maxw); margin:0 auto;
+      min-height:var(--header-h);
+      display:flex; align-items:center; gap:20px; padding:0 20px;
+      font-weight:600;
+    }
+    .nav a:hover{color:var(--brand)}
+
+    /* Hero */
+    .hero{
+      position:relative; min-height:260px;
+      display:grid; place-items:center;
+      background:#0a1424; color:#fff;
+      padding:40px 20px 56px; /* 아래 여백 넉넉히 → 탭 안 겹치게 */
+    }
     .hero h1{font-size:40px;margin:0}
-    .tabs{display:flex;justify-content:center;gap:12px;margin-top:-18px;flex-wrap:wrap}
-    .tabs button{padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:#fff;font-weight:800;cursor:pointer}
+
+    /* Tabs */
+    .tabs{
+      display:flex; justify-content:center; flex-wrap:wrap;
+      gap:12px; padding:16px 20px 0; /* 예전 -18px 제거 */
+    }
+    .tabs button{
+      padding:10px 14px; border:1px solid var(--line); border-radius:10px;
+      background:#fff; font-weight:800; cursor:pointer;
+      transition:all .15s ease;
+    }
+    .tabs button:hover{border-color:#cbd5e1; transform:translateY(-1px)}
     .tabs button.active{background:var(--brand);color:#fff;border-color:transparent}
-    main{max-width:var(--maxw);margin:0 auto;padding:40px 20px}
-    .kicker{font-size:22px;font-weight:900;margin:0 0 12px}
+
+    /* Main */
+    main{max-width:var(--maxw); margin:0 auto; padding:32px 20px 40px}
+    .kicker{font-size:22px;font-weight:900;margin:12px 0 16px}
     .pub-list{border-top:2px solid #0f172a10}
-    .row{display:grid;grid-template-columns:56px 1fr 110px;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+
+    .row{
+      display:grid; grid-template-columns:56px 1fr 110px;
+      gap:12px; align-items:center;
+      padding:12px 0; border-bottom:1px solid var(--line)
+    }
     .row .num{font-weight:900}
     .row .meta{font-size:14px;color:var(--muted)}
     .btn{padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:#f9fafb}
     .btn:hover{background:#eef2f7}
+
+    /* Small screens */
+    @media (max-width:640px){
+      .row{grid-template-columns:36px 1fr; gap:8px}
+      .row>div:last-child{grid-column:1/-1; justify-self:start; margin-top:6px}
+      .hero h1{font-size:32px}
+    }
+
     footer{padding:20px;border-top:1px solid var(--line);text-align:center;color:var(--muted)}
   </style>
 </head>
 <body>
 <header>
-  <nav class="nav">
+  <nav class="nav" aria-label="Primary">
     <a href="index.html">Home</a>
     <a href="research.html">Research</a>
     <a href="members.html">Members</a>
@@ -41,31 +88,34 @@
   </nav>
 </header>
 
-<section class="hero">
-  <h1>Publication</h1>
+<section class="hero" role="banner" aria-labelledby="page-title">
+  <h1 id="page-title">Publication</h1>
 </section>
 
-<div class="tabs">
-  <button class="active" data-tab="sci">SCI(E) 논문</button>
-  <button data-tab="domestic">국내 논문</button>
-  <button data-tab="int-conf">국제 학술발표</button>
-  <button data-tab="dom-conf">국내 학술발표</button>
+<div class="tabs" role="tablist" aria-label="Publication categories">
+  <button class="active" role="tab" aria-selected="true" aria-controls="panel-sci" data-tab="sci">SCI(E) 논문</button>
+  <button role="tab" aria-selected="false" aria-controls="panel-domestic" data-tab="domestic">국내 논문</button>
+  <button role="tab" aria-selected="false" aria-controls="panel-int-conf" data-tab="int-conf">국제 학술발표</button>
+  <button role="tab" aria-selected="false" aria-controls="panel-dom-conf" data-tab="dom-conf">국내 학술발표</button>
 </div>
 
 <main>
-  <section id="panel-sci" class="panel">
+  <section id="panel-sci" class="panel" role="tabpanel" aria-labelledby="tab-sci">
     <h2 class="kicker">│ SCI(E) 논문</h2>
     <div id="list-sci" class="pub-list"></div>
   </section>
-  <section id="panel-domestic" class="panel" style="display:none">
+
+  <section id="panel-domestic" class="panel" role="tabpanel" aria-labelledby="tab-domestic" hidden>
     <h2 class="kicker">│ 국내 논문</h2>
     <div id="list-domestic" class="pub-list"></div>
   </section>
-  <section id="panel-int-conf" class="panel" style="display:none">
+
+  <section id="panel-int-conf" class="panel" role="tabpanel" aria-labelledby="tab-int-conf" hidden>
     <h2 class="kicker">│ 국제 학술발표</h2>
     <div id="list-int-conf" class="pub-list"></div>
   </section>
-  <section id="panel-dom-conf" class="panel" style="display:none">
+
+  <section id="panel-dom-conf" class="panel" role="tabpanel" aria-labelledby="tab-dom-conf" hidden>
     <h2 class="kicker">│ 국내 학술발표</h2>
     <div id="list-dom-conf" class="pub-list"></div>
   </section>
@@ -82,7 +132,7 @@ document.getElementById("year").textContent=new Date().getFullYear();
    전체 데이터 (완성본)
    ====================== */
 const data = {
-  // ---------- SCI(E) 논문 (1~19) ----------
+  /* ---------- SCI(E) 논문 (1~19) ---------- */
   sci: [
     {year:2014,title:"Calibration of stormwater management model using flood extent data",authors:"Kim, B.H.; Sanders, B.F.; Han, K.Y.; Kim, Y.J.; Famiglietti, J.S.",venue:"Proceedings of the Institution of Civil Engineers – Water Management, 167(1), 17–29",link:"https://www.icevirtuallibrary.com/doi/pdf/10.1680/wama.12.00051"},
     {year:2014,title:"A well-balanced unsplit finite volume model with geometric flexibility",authors:"Kim, B.H.; Kim, T.H.; Kim, J.H.; Han, K.Y.",venue:"Journal of Vibroengineering, 16(3), 1574–1589",link:"#"},
@@ -98,14 +148,14 @@ const data = {
     {year:2020,title:"Flood Hazard Rating Prediction for Urban Areas Using Random Forest and LSTM",authors:"Kim, H.I.; Kim, B.H.*",venue:"KSCE Journal of Civil Engineering, 24, 3884–3896",link:"#"},
     {year:2021,title:"Scenario-Based Real-Time Flood Prediction with Logistic Regression",authors:"Lee, J.Y.; Kim, B.H.*",venue:"Water, 13(9), 1191",link:"https://doi.org/10.3390/w13091191"},
     {year:2022,title:"FLOW-3D Model Development for the Analysis of the Flow Characteristics of Downstream Hydraulic Structures",authors:"Kim, B.-J.; Hwang, J.-H.; Kim, B.H.*",venue:"Sustainability, 14(17), 10493",link:"https://doi.org/10.3390/su141710493"},
-    {year:2022,title:"A Study on the Optimal Deep Learning Model for Dam Inflow Prediction",authors:"Kim, B.-J.; Lee, Y.-T.; Kim, B.H.*",venue:"Water, 14(17), 2766",link:"https://doi.org/10.3390/w14172766"},
+    {year:2022,title:"A Study on the Optimal Deep Learning Model for Dam Inflow Prediction",authors:"Kim, B.-J.; Lee, Y.-T; Kim, B.H.*",venue:"Water, 14(17), 2766",link:"https://doi.org/10.3390/w14172766"},
     {year:2022,title:"FLOW-3D model development for the analysis of the flow characteristics of downstream hydraulic structures",authors:"Kim, B.J.; Hwang, J.H.; Kim, B.H.*",venue:"Sustainability, 14, 10493",link:"https://doi.org/10.3390/su141710493"},
     {year:2023,title:"Parameter Optimization of Coupled 1D–2D Hydrodynamic Model for Urban Flood Inundation",authors:"Kim, B.H.*; Kim, B.J.; Ha, C.Y.; Lee, J.N.",venue:"Water, 15, 2946",link:"https://doi.org/10.3390/w15162946"},
     {year:2025,title:"Flood prediction in urban areas based on machine learning considering the statistical characteristics of rainfall",authors:"Jang, S. D.; Yoo, J. H.; Lee, Y. S.; Kim, B.H.*",venue:"Progress in Disaster Science, 26, 100415",link:"https://doi.org/10.1016/j.pdisas.2025.100415"},
     {year:2025,title:"Rapid Simulation for Real-time Flood Depth Prediction Using Support Vector Machine",authors:"Kim, B.J.; Kim, M.K.; Yoo, J.H.; Kim, B.H.*",venue:"",link:"#"}
   ],
 
-  // ---------- 국내 논문 (1~41) ----------
+  /* ---------- 국내 논문 (1~41) ---------- */
   domestic: [
     {year:2009,title:"신뢰도 지수를 적용한 하천제방의 위험도 평가",authors:"안기홍; 한건연; 김병현*",venue:"한국수자원학회 논문집 42(7), 547-558 (2009.07)",link:"#"},
     {year:2009,title:"GIS를 이용한 2차원 수리모형의 자연하천 적용",authors:"김병현; 한건연",venue:"한국지리정보학회지 12(3), 128-142 (2009.09)",link:"#"},
@@ -150,7 +200,7 @@ const data = {
     {year:2024,title:"SWMM-LID 모형을 이용한 효율적 도시유출저감 방안 연구",authors:"금호준; 장세동; 김영민; 김병현*",venue:"한국안전학회논문집 39(6), 70-80 (2024.12)",link:"#"}
   ],
 
-  // ---------- 국제 학술발표 (1~23) ----------
+  /* ---------- 국제 학술발표 (1~23) ---------- */
   "int-conf": [
     {year:2007,title:"Two-Dimensional River Flow Analysis Modeling by Finite Element Method",authors:"Han, K.Y.; Kim, B.H.; Choi, S.Y.",venue:"AOGS, Bangkok, 2007.08",link:"#"},
     {year:2008,title:"Generalized Two-Dimensional Model For Flow Analysis In Natural River",authors:"Han, K.Y.; Kim, B.H.; Choi, S.Y.; Lee, S.C.",venue:"AOGS, Korea, 2008.06",link:"#"},
@@ -177,7 +227,7 @@ const data = {
     {year:2024,title:"Spatio-Temporal Flooding Forecast Using Machine Learning",authors:"Jang, S.D.; Jeong, G.U.; Jeon, J.Y.; Jo, J.Y.; Kim, B.H.",venue:"ICATI 2024, Kanazawa, Japan, 2024.04",link:"#"}
   ],
 
-  // ---------- 국내 학술발표 (1~72) ----------
+  /* ---------- 국내 학술발표 (1~72) ---------- */
   "dom-conf": [
     {year:2003,title:"GIS 와 연계한 금호강에서의 수문분석",authors:"김병현; 김지성; 한건연",venue:"대한토목학회 학술발표회논문집, 2003",link:"#"},
     {year:2005,title:"태풍 루사시 장현·동막 저수지 붕괴에 따른 홍수범람해석",authors:"한건연; 김극수; 김병현; 박상덕",venue:"한국수자원학회 학술대회논문집, 2005",link:"#"},
@@ -256,7 +306,9 @@ const data = {
 
 /* ---------- 렌더 ---------- */
 function makeRow(idx, item){
-  const link = item.link && item.link !== "#" ? `<a class="btn" href="${item.link}" target="_blank" rel="noopener">Link</a>` : `<span class="btn" style="opacity:.45;cursor:not-allowed">No link</span>`;
+  const link = item.link && item.link !== "#"
+    ? `<a class="btn" href="${item.link}" target="_blank" rel="noopener">Link</a>`
+    : `<span class="btn" style="opacity:.45;cursor:not-allowed">No link</span>`;
   return `<div class="row">
     <div class="num">${idx}</div>
     <div>
@@ -266,13 +318,11 @@ function makeRow(idx, item){
     <div style="justify-self:end">${link}</div>
   </div>`;
 }
-
 function renderList(key, targetId){
   const list = (data[key]||[]).slice().sort((a,b)=>(b.year||0)-(a.year||0));
-  const el = document.getElementById(targetId);
-  el.innerHTML = list.map((it,i)=>makeRow(i+1,it)).join("");
+  document.getElementById(targetId).innerHTML =
+    list.map((it,i)=>makeRow(i+1,it)).join("");
 }
-
 renderList("sci","list-sci");
 renderList("domestic","list-domestic");
 renderList("int-conf","list-int-conf");
@@ -281,11 +331,16 @@ renderList("dom-conf","list-dom-conf");
 /* ---------- 탭 ---------- */
 document.querySelectorAll(".tabs button").forEach(btn=>{
   btn.addEventListener("click",()=>{
-    document.querySelectorAll(".tabs button").forEach(b=>b.classList.remove("active"));
+    document.querySelectorAll(".tabs button").forEach(b=>{
+      b.classList.remove("active");
+      b.setAttribute("aria-selected","false");
+    });
     btn.classList.add("active");
+    btn.setAttribute("aria-selected","true");
+
     const key = btn.dataset.tab;
-    document.querySelectorAll(".panel").forEach(p=>p.style.display="none");
-    document.getElementById("panel-"+key).style.display="block";
+    document.querySelectorAll(".panel").forEach(p=>p.hidden=true);
+    document.getElementById("panel-"+key).hidden=false;
   });
 });
 </script>
