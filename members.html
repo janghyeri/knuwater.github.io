@@ -1,203 +1,170 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>Members | Water Resources Lab</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Members · KNU Water Resources Lab</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css"/>
   <style>
-    body{margin:0;font-family:"Noto Sans KR",Arial,sans-serif;background:#fff;color:#111;line-height:1.5}
+    :root{
+      --brand:#B5121B; --ink:#111827; --muted:#6b7280; --line:#e5e7eb;
+      --radius:14px; --maxw:1200px; --shadow:0 12px 30px rgba(2,8,23,.08);
+    }
+    body{margin:0;font-family:"Pretendard Variable",system-ui,sans-serif;color:var(--ink)}
     a{text-decoration:none;color:inherit}
+    .container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+
+    /* Hero */
+    .hero{position:relative;background:#0b1e39 url('/assets/members-hero.jpg') center/cover no-repeat;color:#fff;text-align:center;padding:100px 20px}
+    .hero h1{font-size:48px;margin:0}
     
-    /* === Index 스타일 헤더 === */
-    .site-header{
-      position:fixed;top:0;left:0;right:0;width:100%;
-      z-index:50; border-bottom:1px solid transparent;
-      background:transparent; transition:.25s;
-    }
-    .site-header.scrolled{
-      background:#ffffffd9; backdrop-filter:saturate(180%) blur(12px);
-      border-color:#e5e7eb;
-    }
-    .site-nav{max-width:1100px;margin:0 auto;padding:18px 20px;display:flex;gap:22px;font-weight:800}
-    .site-nav a.active{color:#B5121B}
+    /* Tabs */
+    .tabs{display:flex;justify-content:center;gap:16px;margin:40px 0}
+    .tab{padding:10px 20px;border:1px solid var(--line);border-radius:999px;background:#fff;font-weight:600;cursor:pointer}
+    .tab.active{background:var(--brand);color:#fff;border-color:transparent}
+    .tab-content{display:none}
+    .tab-content.active{display:block}
 
-    /* Hero 배너 */
-    .hero-banner{
-      position:relative;height:320px;color:#fff;display:flex;align-items:flex-end;
-      background:url("img/hero-water.jpg") center/cover no-repeat;
-    }
-    .hero-banner::after{
-      content:"";position:absolute;inset:0;
-      background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.55));
-    }
-    .hero-inner{position:relative;z-index:1;max-width:1100px;margin:0 auto;width:100%;padding:0 20px 28px}
-    .hero-title{margin:0;font-size:48px;font-weight:900;letter-spacing:.2px}
+    /* Professor CV style */
+    .cv-card{display:grid;grid-template-columns:200px 1fr;gap:28px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px;margin-bottom:32px;box-shadow:var(--shadow)}
+    .cv-photo{width:200px;height:240px;background:#d1d5db;display:flex;align-items:center;justify-content:center;font-size:14px;color:#555}
+    .cv-body h2{margin:0 0 8px}
+    .cv-section{margin:18px 0}
+    .cv-section h3{margin:0 0 6px;font-size:18px;color:var(--brand)}
 
-    /* 탭 */
-    .tabs-wrap{max-width:1100px;margin:24px auto 0;padding:0 20px}
-    .tabs{display:flex;gap:10px;flex-wrap:wrap}
-    .tab-btn{padding:10px 14px;border:1px solid #e5e7eb;border-radius:12px;background:#fff;font-weight:900;cursor:pointer}
-    .tab-btn.active{background:#B5121B;color:#fff;border-color:transparent}
+    /* Students grid cards */
+    .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
+    .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+    .photo{width:100%;aspect-ratio:3/4;background:#e5e7eb;margin-bottom:12px}
+    .card h4{margin:0 0 6px}
+    .card .role{font-size:14px;color:var(--muted);margin-bottom:8px}
+    .card .email{font-size:14px;color:var(--brand)}
 
-    /* Section 공통 */
-    .tab-panel{display:none;max-width:1100px;margin:28px auto;padding:0 20px}
-    .tab-panel.active{display:block}
-
-    /* 교수 카드 */
-    .professor-card{
-      display:flex;gap:20px;align-items:flex-start;padding:20px;background:#fafafa;
-      border-radius:12px;border:1px solid #ddd;
-    }
-    .professor-photo{
-      width:160px;height:200px;background:#ccc;display:flex;align-items:center;justify-content:center;
-      font-weight:bold;color:#666;
-    }
-    .professor-info h2{margin:0;font-size:22px;font-weight:700}
-    .professor-info p{margin:4px 0}
-
-    /* 학생 카드 */
-    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
-    .student-card{
-      background:#fff;border:1px solid #ddd;border-radius:12px;padding:16px;text-align:center;
-    }
-    .student-photo{
-      width:120px;height:150px;background:#ccc;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;color:#666;font-size:14px
-    }
-    .student-card h3{margin:0;font-size:16px;font-weight:700}
-    .student-card p{margin:4px 0;font-size:14px}
+    /* Alumni */
+    .alumni-list{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+    .alumni-list li{background:#f9fafb;border:1px solid var(--line);padding:12px;border-radius:var(--radius)}
   </style>
 </head>
 <body>
 
-<header class="site-header" id="siteHeader">
-  <nav class="site-nav">
-    <a href="index.html">Home</a>
-    <a href="research.html">Research</a>
-    <a class="active" href="members.html">Members</a>
-    <a href="publication.html">Publication</a>
-    <a href="gallery.html">Gallery</a>
-    <a href="about.html">About</a>
-  </nav>
-</header>
-
-<section class="hero-banner">
-  <div class="hero-inner">
-    <h1 class="hero-title">Members</h1>
-  </div>
+<!-- Hero -->
+<section class="hero">
+  <h1>Members</h1>
 </section>
 
-<div class="tabs-wrap">
+<div class="container">
+  <!-- Tabs -->
   <div class="tabs">
-    <button class="tab-btn active" data-panel="professor">Professor</button>
-    <button class="tab-btn" data-panel="honorary">Honorary Professor</button>
-    <button class="tab-btn" data-panel="students">Students &amp; Researchers</button>
-    <button class="tab-btn" data-panel="alumni">Alumni</button>
+    <div class="tab active" onclick="switchTab('professor',this)">Professor</div>
+    <div class="tab" onclick="switchTab('students',this)">Students & Researchers</div>
+    <div class="tab" onclick="switchTab('alumni',this)">Alumni</div>
   </div>
-</div>
 
-<!-- Professor -->
-<div class="tab-panel active" id="professor">
-  <div class="professor-card">
-    <div class="professor-photo">160x200</div>
-    <div class="professor-info">
-      <h2>김병현 (Byunghyun Kim), Ph.D.</h2>
-      <p>Professor, Dept. of Civil Engineering, Kyungpook National University</p>
-      <p><strong>Email:</strong> woghks629@naver.com</p>
-      <h3>Education</h3>
-      <p>2010–2014: University of California, Irvine (Postdoc)</p>
-      <p>2007: Ph.D. in Civil & Environmental Eng., KNU</p>
-      <h3>Research Interests</h3>
-      <p>Flood modeling, Hydraulics, AI, Water resources management</p>
+  <!-- Professor -->
+  <div id="professor" class="tab-content active">
+    <!-- 교수님 -->
+    <div class="cv-card">
+      <div class="cv-photo">교수님 사진</div>
+      <div class="cv-body">
+        <h2>김병현 교수</h2>
+        <p>경북대학교 토목공학과 · 도시 및 유역 홍수영향분석 전문가</p>
+        <div class="cv-section">
+          <h3>학력 및 경력</h3>
+          <p>2010–2014 · UC Irvine 박사후연구원</p>
+          <p>2015–2017 · 경북대학교 방재연구소 연구교수</p>
+          <p>2017–2019 · 국가민방위재난안전교육원 교수</p>
+          <p>2019–현재 · 경북대학교 토목공학과 교수</p>
+        </div>
+        <div class="cv-section">
+          <h3>주요 수상 경력</h3>
+          <p>2023 · 한국수자원학회 우수논문상</p>
+          <p>2022 · 행정안전부 장관 표창</p>
+          <p>2021 · 한국건설기술연구원 원장 표창</p>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
-<!-- Honorary Professor -->
-<div class="tab-panel" id="honorary">
-  <div class="professor-card">
-    <div class="professor-photo">160x200</div>
-    <div class="professor-info">
-      <h2>명예교수님 성함 (Honorary Professor)</h2>
-      <p>Professor Emeritus, Dept. of Civil Engineering, KNU</p>
-      <p><strong>Email:</strong> sample@knu.ac.kr</p>
-      <h3>Note</h3>
-      <p>명예교수님 소개 및 연구 업적을 간단히 기술하는 영역.</p>
-    </div>
-  </div>
-</div>
-
-<!-- Students -->
-<div class="tab-panel" id="students">
-  <div class="grid">
-    <div class="student-card">
-      <div class="student-photo">120x150</div>
-      <h3>유재환 (Yoo, Jaehwan)</h3>
-      <p>Ph.D. Candidate</p>
-      <p>Email: woghks629@naver.com</p>
-    </div>
-    <div class="student-card">
-      <div class="student-photo">120x150</div>
-      <h3>정귀운 (Jeong, Gwiun)</h3>
-      <p>M.S. Student</p>
-      <p>Email: ryryanan1999@gmail.com</p>
-    </div>
-    <div class="student-card">
-      <div class="student-photo">120x150</div>
-      <h3>조현탁 (Jo, Hyeontak)</h3>
-      <p>M.S. Student</p>
-      <p>Email: hogata0922@icloud.com</p>
-    </div>
-    <div class="student-card">
-      <div class="student-photo">120x150</div>
-      <h3>김호연 (Kim, Hoyeon)</h3>
-      <p>M.S. Student</p>
-      <p>Email: hoy8977@naver.com</p>
-    </div>
-    <div class="student-card">
-      <div class="student-photo">120x150</div>
-      <h3>장혜리 (Jang, Hyeri)</h3>
-      <p>M.S. Student</p>
-      <p>Email: hyeri4540@knu.ac.kr</p>
-    </div>
-    <div class="student-card">
-      <div class="student-photo">120x150</div>
-      <h3>전지윤 (Jeon, Jiyun)</h3>
-      <p>M.S. Student</p>
-      <p>Email: wendyjjy215@naver.com</p>
-    </div>
-    <div class="student-card">
-      <div class="student-photo">120x150</div>
-      <h3>학부 연구생 (Undergraduate)</h3>
-      <p>B.S. Student</p>
-      <p>Email: - </p>
+    <!-- 명예교수님 -->
+    <div class="cv-card">
+      <div class="cv-photo">명예교수님 사진</div>
+      <div class="cv-body">
+        <h2>○○○ 명예교수</h2>
+        <p>경북대학교 토목공학과 명예교수</p>
+        <div class="cv-section">
+          <h3>학력 및 경력</h3>
+          <p>경북대학교 토목공학과 교수 역임</p>
+          <p>수자원학회 회장 역임</p>
+        </div>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Alumni -->
-<div class="tab-panel" id="alumni">
-  <p>졸업생 명단 및 진로는 이곳에 표시</p>
+  <!-- Students -->
+  <div id="students" class="tab-content">
+    <div class="cards">
+      <div class="card">
+        <div class="photo"></div>
+        <h4>유재환 (Yoo, Jaehwan)</h4>
+        <div class="role">박사 수료</div>
+        <div class="email">woghks629@naver.com</div>
+      </div>
+      <div class="card">
+        <div class="photo"></div>
+        <h4>정귀운 (Jeong, Gwiun)</h4>
+        <div class="role">석사과정</div>
+        <div class="email">ryryanan1999@gmail.com</div>
+      </div>
+      <div class="card">
+        <div class="photo"></div>
+        <h4>조현탁 (Jo, Hyeontak)</h4>
+        <div class="role">석사과정</div>
+        <div class="email">hogata0922@icloud.com</div>
+      </div>
+      <div class="card">
+        <div class="photo"></div>
+        <h4>김호연 (Kim, Hoyeon)</h4>
+        <div class="role">석사과정</div>
+        <div class="email">hoy8977@naver.com</div>
+      </div>
+      <div class="card">
+        <div class="photo"></div>
+        <h4>장혜리 (Jang, Hyeri)</h4>
+        <div class="role">석사과정</div>
+        <div class="email">hyeri4540@knu.ac.kr</div>
+      </div>
+      <div class="card">
+        <div class="photo"></div>
+        <h4>전지윤 (Jeon, Jiyun)</h4>
+        <div class="role">석사과정</div>
+        <div class="email">wendyjjy215@naver.com</div>
+      </div>
+      <!-- 학부 연구생 -->
+      <div class="card">
+        <div class="photo"></div>
+        <h4>학부연구생</h4>
+        <div class="role">Undergraduate Student</div>
+        <div class="email">-</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Alumni -->
+  <div id="alumni" class="tab-content">
+    <ul class="alumni-list">
+      <li>졸업생 1</li>
+      <li>졸업생 2</li>
+      <li>졸업생 3</li>
+    </ul>
+  </div>
 </div>
 
 <script>
-  // Header scroll effect
-  const hdr = document.getElementById('siteHeader');
-  const onScroll = () => {
-    if(window.scrollY > 20) hdr.classList.add('scrolled');
-    else hdr.classList.remove('scrolled');
-  };
-  onScroll(); window.addEventListener('scroll', onScroll);
-
-  // Tabs
-  const btns=document.querySelectorAll('.tab-btn');
-  const panels=document.querySelectorAll('.tab-panel');
-  btns.forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      btns.forEach(b=>b.classList.remove('active'));
-      panels.forEach(p=>p.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById(btn.dataset.panel).classList.add('active');
-    });
-  });
+function switchTab(id,el){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
 </script>
 
 </body>
