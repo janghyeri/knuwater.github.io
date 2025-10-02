@@ -1,1 +1,222 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Members | KNU Water Resources Lab</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css"/>
+<style>
+:root{
+  --brand:#B5121B; --ink:#111827; --muted:#6b7280; --line:#e5e7eb;
+  --maxw:1200px; --shadow:0 12px 30px rgba(2,8,23,.08); --r:14px;
+}
+*{box-sizing:border-box} body{margin:0;font-family:"Pretendard Variable",system-ui,-apple-system,Segoe UI,Roboto,Noto Sans KR,sans-serif;color:var(--ink);background:#fff}
+a{text-decoration:none;color:inherit}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+
+/* header (간단히) */
+header{position:sticky;top:0;z-index:30;background:#ffffffcc;backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+.nav a{margin-right:18px;font-weight:600}
+.nav a:last-child{margin-right:0}
+.cta{padding:8px 12px;border-radius:10px;background:var(--brand);color:#fff}
+
+/* hero */
+.hero{position:relative;height:280px;display:grid;place-items:center;color:#fff;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.45))}
+.hero-bg{position:absolute;inset:0;background:url('/assets/members-hero.jpg') center/cover no-repeat}
+.hero h1{position:relative;font-size:44px;margin:0;text-shadow:0 3px 8px rgba(0,0,0,.55)}
+
+/* tabs */
+.tabs{display:flex;gap:10px;margin:20px 0 10px;flex-wrap:wrap}
+.tabs button{padding:10px 16px;border:1px solid var(--line);background:#f9fafb;border-radius:10px;cursor:pointer;font-weight:700}
+.tabs button.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+
+/* professor detail */
+.prof{display:grid;grid-template-columns:280px 1fr;gap:22px;align-items:start;margin:18px 0 30px;border:1px solid var(--line);border-radius:var(--r);padding:18px;box-shadow:0 4px 14px rgba(2,8,23,.06);background:#fff}
+.prof .photo{width:100%;aspect-ratio:3/4;border-radius:12px;object-fit:cover;background:#eef2f7 url('/assets/members/prof.jpg') center/cover no-repeat}
+.prof h2{margin:0 0 6px}
+.meta{color:var(--muted);margin:0 0 8px}
+.kv{display:grid;grid-template-columns:110px 1fr;gap:8px;margin:10px 0}
+.kv b{color:#374151}
+.badge{display:inline-block;padding:6px 10px;border:1px solid #94a3b8;border-radius:999px;color:#334155;background:#f8fafc}
+
+/* member cards */
+.section{margin:36px 0}
+.section h3{margin:0 0 10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.card{border:1px solid var(--line);border-radius:12px;padding:16px;text-align:center;background:#fff;box-shadow:0 4px 12px rgba(2,8,23,.05)}
+.card .ava{width:110px;height:110px;border-radius:50%;margin:0 auto 12px;background:#e9eef5;object-fit:cover}
+.card h4{margin:6px 0 2px}
+.card small{color:var(--muted)}
+.card .email{display:block;margin-top:8px;color:#334155;font-size:14px}
+
+/* footer */
+footer{margin-top:46px;padding:28px 0;border-top:1px solid var(--line);color:#475569}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <div>
+      <a href="/index.html">Home</a>
+      <a href="/research.html">Research</a>
+      <a href="/members.html">Members</a>
+      <a href="/publication.html">Publication</a>
+      <a href="/gallery.html">Gallery</a>
+      <a href="/about.html">About</a>
+    </div>
+    <a class="cta" href="/contact.html">Contact</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <h1>Members</h1>
+</section>
+
+<main class="container">
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="active" data-tab="all">전체</button>
+    <button data-tab="professor">교수님</button>
+    <button data-tab="phd">박사과정</button>
+    <button data-tab="ms">석사과정</button>
+    <button data-tab="ug">학부연구생</button>
+    <button data-tab="alumni">졸업자</button>
+  </div>
+
+  <!-- 교수님 단독 섹션 -->
+  <section class="tab-panel" id="panel-professor">
+    <div class="prof">
+      <img class="photo" src="/assets/members/prof.jpg" alt="Professor photo">
+      <div>
+        <h2>김병현 <small style="font-weight:700;color:#64748b">Ph.D.</small></h2>
+        <p class="meta">경북대학교 토목공학과 교수 · 분야: 계산수리학, AI, 홍수</p>
+        <div class="kv"><b>소속</b><div>School of Civil Engineering, Kyungpook National University</div></div>
+        <div class="kv"><b>이메일</b><div><a href="mailto:bhkim@knu.ac.kr">bhkim@knu.ac.kr</a></div></div>
+        <p class="meta"><span class="badge">도시 및 유역 홍수 영향분석 전문가</span></p>
+
+        <h3>경력(요약)</h3>
+        <ul>
+          <li>2019–현재 · 경북대학교 토목공학과 교수</li>
+          <li>2017–2019 · 행정안전부 국가민방위재난교육원 교수</li>
+          <li>2015–2017 · 경북대학교 방재연구소 연구교수</li>
+          <li>2010–2014 · University of California, Irvine · Postdoctoral Scholar / Associate Researcher</li>
+        </ul>
+
+        <h3>주요 수상</h3>
+        <ul>
+          <li>2023.05 한국수자원학회 학술발표 우수논문상</li>
+          <li>2023.01 한국수자원학회 학회장 표창</li>
+          <li>2022.12 행정안전부 장관 표창</li>
+          <li>2021.07 한국건설기술연구원 원장 표창상(우수연구자상)</li>
+          <li>2016.08 AOGS 학술발표대회 우수논문상</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 박사과정 -->
+  <section class="section tab-panel" id="panel-phd">
+    <h3>박사과정</h3>
+    <div class="grid">
+      <article class="card">
+        <img class="ava" src="/assets/members/yoo-jaehwan.jpg" alt="Yoo, Jaehwan">
+        <h4>유재환 (Yoo, Jaehwan)</h4>
+        <small>Ph.D. Student</small>
+        <a class="email" href="mailto:woghks629@naver.com">woghks629@naver.com</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- 석사과정 -->
+  <section class="section tab-panel" id="panel-ms">
+    <h3>석사과정</h3>
+    <div class="grid">
+      <article class="card">
+        <img class="ava" src="/assets/members/jeong-gwiun.jpg" alt="Jeong, Gwiun">
+        <h4>정귀운 (Jeong, Gwiun)</h4>
+        <small>M.S. Student</small>
+        <a class="email" href="mailto:ryryanan1999@gmail.com">ryryanan1999@gmail.com</a>
+      </article>
+      <article class="card">
+        <img class="ava" src="/assets/members/jo-hyeontak.jpg" alt="Jo, Hyeontak">
+        <h4>조현탁 (Jo, Hyeontak)</h4>
+        <small>M.S. Student</small>
+        <a class="email" href="mailto:hogata0922@icloud.com">hogata0922@icloud.com</a>
+      </article>
+      <article class="card">
+        <img class="ava" src="/assets/members/kim-hoyeon.jpg" alt="Kim, Hoyeon">
+        <h4>김호연 (Kim, Hoyeon)</h4>
+        <small>M.S. Student</small>
+        <a class="email" href="mailto:hoy8977@naver.com">hoy8977@naver.com</a>
+      </article>
+      <article class="card">
+        <img class="ava" src="/assets/members/jang-hyeri.jpg" alt="Jang, Hyeri">
+        <h4>장혜리 (Jang, Hyeri)</h4>
+        <small>M.S. Student</small>
+        <a class="email" href="mailto:hyeri4540@knu.ac.kr">hyeri4540@knu.ac.kr</a>
+      </article>
+      <article class="card">
+        <img class="ava" src="/assets/members/jeon-jiyun.jpg" alt="Jeon, Jiyun">
+        <h4>전지윤 (Jeon, Jiyun)</h4>
+        <small>M.S. Student</small>
+        <a class="email" href="mailto:wendyjjy215@naver.com">wendyjjy215@naver.com</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- 학부연구생 -->
+  <section class="section tab-panel" id="panel-ug">
+    <h3>학부연구생</h3>
+    <div class="grid">
+      <!-- 추후 추가 -->
+    </div>
+  </section>
+
+  <!-- 졸업자 -->
+  <section class="section tab-panel" id="panel-alumni">
+    <h3>졸업자(Alumni)</h3>
+    <div class="grid">
+      <!-- 추후 추가 -->
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    © <span id="year"></span> KNU Water Resources Lab
+  </div>
+</footer>
+
+<script>
+const buttons=[...document.querySelectorAll('.tabs button')];
+const panels={
+  all: ['panel-professor','panel-phd','panel-ms','panel-ug','panel-alumni'],
+  professor:['panel-professor'],
+  phd:['panel-phd'],
+  ms:['panel-ms'],
+  ug:['panel-ug'],
+  alumni:['panel-alumni']
+};
+function showTab(key){
+  // 버튼 상태
+  buttons.forEach(b=>b.classList.toggle('active', b.dataset.tab===key || (key==='all'&&b.dataset.tab==='all')));
+  // 패널 표시
+  Object.values(panels).flat().forEach(id=>document.getElementById(id).style.display='none');
+  (panels[key]||panels.all).forEach(id=>document.getElementById(id).style.display='block');
+}
+// 이벤트 바인딩
+buttons.forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.tab)));
+document.getElementById('year').textContent=new Date().getFullYear();
+// 초기: 전체
+showTab('all');
+</script>
+</body>
+</html>
 
