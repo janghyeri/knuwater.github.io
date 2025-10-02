@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>새 홈페이지 제목 | 브랜드명</title>
+  <meta name="description" content="짧은 사이트 설명을 여기에 입력하세요." />
+  <meta name="keywords" content="키워드, 키워드, 키워드" />
+  <meta property="og:title" content="새 홈페이지 제목" />
+  <meta property="og:description" content="짧은 사이트 설명을 여기에 입력하세요." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/assets/og-image.jpg" />
+  <meta name="theme-color" content="#0ea5e9" />
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- 기본 폰트 (선택): Pretendard CDN 예시 -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css" />
+
+  <style>
+    /* ===== 디자인 토큰: 여기 숫자만 바꿔도 전체 톤이 바뀝니다 ===== */
+    :root{
+      --brand:#0ea5e9;           /* 포인트 컬러 */
+      --brand-700:#0284c7;       /* 포인트 짙은 색 */
+      --ink:#0f172a;             /* 본문 글자색 */
+      --muted:#64748b;           /* 보조 텍스트 */
+      --bg:#ffffff;              /* 배경 */
+      --surface:#f8fafc;         /* 카드 배경 */
+      --radius:16px;             /* 둥근 정도 */
+      --shadow:0 10px 25px rgba(2,8,23,.08);
+      --maxw:1200px;             /* 컨텐트 최대폭 */
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0; font-family:"Pretendard Variable", system-ui, -apple-system, Segoe UI, Roboto, Noto Sans KR, sans-serif; color:var(--ink); background:var(--bg);}
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; display:block}
+    .container{max-width:var(--maxw); margin:0 auto; padding:0 20px}
+
+    /* 헤더 & 내비 */
+    header{position:sticky; top:0; z-index:50; background:#ffffffcc; backdrop-filter:saturate(180%) blur(12px); border-bottom:1px solid #e2e8f0}
+    .nav{display:flex; align-items:center; justify-content:space-between; height:64px}
+    .brand{display:flex; gap:12px; align-items:center}
+    .brand-logo{width:32px; height:32px; border-radius:8px; background:linear-gradient(135deg, var(--brand), var(--brand-700));}
+    .brand-name{font-weight:700}
+    .menu{display:flex; gap:24px; align-items:center}
+    .menu a{color:#0f172a; font-weight:500}
+    .cta{padding:10px 14px; background:var(--brand); color:#fff; border-radius:12px; box-shadow:var(--shadow)}
+
+    /* 모바일 메뉴 토글 */
+    .menu-toggle{display:none; background:none; border:0; width:40px; height:40px}
+    @media (max-width: 900px){
+      .menu{display:none}
+      .menu-toggle{display:inline-grid; place-items:center}
+      .menu.open{display:flex; position:absolute; top:64px; right:16px; left:16px; flex-direction:column; gap:12px; padding:16px; background:#fff; border:1px solid #e2e8f0; border-radius:16px; box-shadow:var(--shadow)}
+    }
+
+    /* 히어로 */
+    .hero{padding:80px 0}
+    .hero-grid{display:grid; grid-template-columns: 1.2fr 1fr; gap:40px; align-items:center}
+    .badge{display:inline-block; padding:6px 10px; font-size:14px; background:var(--surface); border:1px solid #e2e8f0; color:var(--brand-700); border-radius:999px}
+    h1{font-size:44px; line-height:1.15; margin:14px 0 10px}
+    .lead{font-size:18px; color:var(--muted)}
+    .hero-cta{margin-top:24px; display:flex; gap:12px}
+    .btn{padding:12px 16px; border-radius:14px; font-weight:600; border:1px solid transparent}
+    .btn.primary{background:var(--brand); color:#fff}
+    .btn.ghost{border-color:#e2e8f0; background:#fff}
+    .hero-card{background:var(--surface); border:1px solid #e2e8f0; padding:20px; border-radius:var(--radius); box-shadow:var(--shadow)}
+    .hero-media{aspect-ratio: 16/10; background:#e2e8f0; border-radius:12px; display:grid; place-items:center; color:#334155}
+    @media (max-width: 900px){
+      .hero-grid{grid-template-columns:1fr}
+      h1{font-size:36px}
+    }
+
+    /* 특징 섹션 */
+    .section{padding:64px 0}
+    .section-title{font-size:28px; margin:0 0 10px}
+    .section-lead{color:var(--muted); margin:0 0 24px}
+    .features{display:grid; grid-template-columns:repeat(3, 1fr); gap:20px}
+    .card{background:#fff; border:1px solid #e2e8f0; border-radius:var(--radius); padding:20px; box-shadow:var(--shadow)}
+    .card h3{margin:0 0 8px}
+    @media (max-width: 900px){
+      .features{grid-template-columns:1fr}
+    }
+
+    /* 갤러리/포트폴리오 */
+    .gallery{display:grid; grid-template-columns:repeat(3, 1fr); gap:16px}
+    .tile{border-radius:12px; overflow:hidden; border:1px solid #e2e8f0; background:#fff}
+    .tile>div{aspect-ratio:4/3; background:#e2e8f0}
+    @media (max-width: 900px){
+      .gallery{grid-template-columns:1fr 1fr}
+    }
+
+    /* 블로그/소식 */
+    .posts{display:grid; grid-template-columns:repeat(3, 1fr); gap:20px}
+    .post{background:#fff; border:1px solid #e2e8f0; border-radius:var(--radius); overflow:hidden}
+    .post .thumb{aspect-ratio:16/9; background:#e2e8f0}
+    .post .body{padding:16px}
+    .post .meta{font-size:14px; color:var(--muted)}
+    @media (max-width: 900px){
+      .posts{grid-template-columns:1fr}
+    }
+
+    /* CTA 섹션 */
+    .cta-band{background:linear-gradient(135deg, var(--brand), var(--brand-700)); color:#fff; border-radius:20px; padding:28px; display:grid; gap:12px; align-items:center; box-shadow:var(--shadow)}
+    .cta-actions{display:flex; gap:12px; flex-wrap:wrap}
+
+    /* 푸터 */
+    footer{padding:32px 0; border-top:1px solid #e2e8f0; color:#475569}
+    .footer-grid{display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:20px}
+    .footer-grid h4{margin:0 0 10px}
+    .copyright{border-top:1px solid #e2e8f0; margin-top:20px; padding-top:12px; font-size:14px}
+    @media (max-width: 900px){
+      .footer-grid{grid-template-columns:1fr 1fr}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#">
+        <div class="brand-logo" aria-hidden="true"></div>
+        <span class="brand-name">브랜드명</span>
+      </a>
+      <nav>
+        <button class="menu-toggle" aria-label="메뉴 열기" onclick="toggleMenu()">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <div id="menu" class="menu">
+          <a href="#features">특징</a>
+          <a href="#gallery">갤러리</a>
+          <a href="#news">소식</a>
+          <a href="#contact" class="cta">문의하기</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- 히어로 -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="badge">신규 런칭 ✦ 2025</span>
+          <h1>당신의 아이디어를
+            <br/> 깔끔하고 빠르게 보여주는 <span style="color:var(--brand)">반응형 홈페이지</span></h1>
+          <p class="lead">여기에 한두 문장으로 핵심 가치 제안을 적으세요. 연구실, 포트폴리오, 제품 랜딩 등 어떤 용도로도 쉽게 맞출 수 있습니다.</p>
+          <div class="hero-cta">
+            <a class="btn primary" href="#contact">프로젝트 시작하기</a>
+            <a class="btn ghost" href="#features">자세히 보기</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-media">미디어/모형/스샷 자리</div>
+          <p style="margin:12px 0 0; color:var(--muted); font-size:14px">* 이미지나 동영상을 여기 삽입하세요.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 특징 -->
+    <section id="features" class="section">
+      <div class="container">
+        <h2 class="section-title">왜 이 템플릿인가요?</h2>
+        <p class="section-lead">컴포넌트 기반 레이아웃, 쉬운 색상 커스터마이징, 접근성/SEO 준수</p>
+        <div class="features">
+          <div class="card">
+            <h3>빠른 적용</h3>
+            <p>단일 HTML 파일로 시작하여 바로 배포 가능. 섹션만 켜고 끄면 됩니다.</p>
+          </div>
+          <div class="card">
+            <h3>반응형 그리드</h3>
+            <p>모바일/태블릿/데스크톱에서 자연스럽게 재배치됩니다.</p>
+          </div>
+          <div class="card">
+            <h3>연구/프로젝트 친화</h3>
+            <p>논문/데모/코드 링크, 포스터/이미지, 유튜브 임베드 등 손쉽게 추가.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 갤러리/포트폴리오 -->
+    <section id="gallery" class="section" aria-label="갤러리">
+      <div class="container">
+        <h2 class="section-title">갤러리</h2>
+        <p class="section-lead">스크린샷, 포스터, 현장 사진 등을 전시하세요.</p>
+        <div class="gallery">
+          <div class="tile"><div></div></div>
+          <div class="tile"><div></div></div>
+          <div class="tile"><div></div></div>
+          <div class="tile"><div></div></div>
+          <div class="tile"><div></div></div>
+          <div class="tile"><div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 블로그/소식 -->
+    <section id="news" class="section" aria-label="소식">
+      <div class="container">
+        <h2 class="section-title">소식</h2>
+        <p class="section-lead">학회 발표, 프로젝트 소식, 채용 공지 등을 공유하세요.</p>
+        <div class="posts">
+          <article class="post">
+            <div class="thumb"></div>
+            <div class="body">
+              <div class="meta">2025-10-02 • 카테고리</div>
+              <h3 style="margin:8px 0">첫 게시글 제목</h3>
+              <p>한두 문장으로 요약을 적고, 자세한 내용은 별도 페이지나 노션/블로그로 링크하세요.</p>
+              <a href="#" aria-label="첫 게시글 더보기" style="color:var(--brand)">더보기 →</a>
+            </div>
+          </article>
+          <article class="post">
+            <div class="thumb"></div>
+            <div class="body">
+              <div class="meta">2025-09-15 • 발표</div>
+              <h3 style="margin:8px 0">학회 발표 자료 업로드</h3>
+              <p>슬라이드 PDF, 포스터 이미지, 요약문 등을 연결하세요.</p>
+              <a href="#" style="color:var(--brand)">자료 보기 →</a>
+            </div>
+          </article>
+          <article class="post">
+            <div class="thumb"></div>
+            <div class="body">
+              <div class="meta">2025-08-01 • 공지</div>
+              <h3 style="margin:8px 0">연구실 학부연구생 모집</h3>
+              <p>모집 기간과 지원 방법을 간단히 안내하고 상세 공고로 이동시키세요.</p>
+              <a href="#" style="color:var(--brand)">지원 안내 →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 연락/문의 -->
+    <section id="contact" class="section">
+      <div class="container">
+        <div class="cta-band">
+          <h2 style="margin:0">프로젝트/협업 문의</h2>
+          <p style="margin:0">이메일, 구글폼, 네이버폼, 깃허브 이슈 등 원하는 채널로 연결하세요.</p>
+          <div class="cta-actions">
+            <a class="btn" style="background:#fff; color:var(--ink)" href="mailto:hello@example.com">이메일 보내기</a>
+            <a class="btn ghost" href="#">문의 폼 열기</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand" style="margin-bottom:8px">
+            <div class="brand-logo" aria-hidden="true"></div>
+            <span class="brand-name">브랜드명</span>
+          </div>
+          <p style="margin:0; color:var(--muted)">© <span id="year"></span> 브랜드명. All rights reserved.</p>
+        </div>
+        <div>
+          <h4>바로가기</h4>
+          <ul style="list-style:none; padding:0; margin:0; display:grid; gap:8px">
+            <li><a href="#features">특징</a></li>
+            <li><a href="#gallery">갤러리</a></li>
+            <li><a href="#news">소식</a></li>
+            <li><a href="#contact">문의</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>리소스</h4>
+          <ul style="list-style:none; padding:0; margin:0; display:grid; gap:8px">
+            <li><a href="#">문서</a></li>
+            <li><a href="#">깃허브</a></li>
+            <li><a href="#">오픈데이터</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>연락처</h4>
+          <ul style="list-style:none; padding:0; margin:0; display:grid; gap:8px">
+            <li><a href="mailto:hello@example.com">hello@example.com</a></li>
+            <li><a href="#">링크트리</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">사업자/기관 표기, 주소 또는 저작권 안내 문구를 표기하세요.</div>
+    </div>
+  </footer>
+
+  <script>
+    // 현재 연도 자동 표기
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // 모바일 메뉴 토글
+    function toggleMenu(){
+      const el = document.getElementById('menu');
+      el.classList.toggle('open');
+    }
+  </script>
+</body>
+</html>
