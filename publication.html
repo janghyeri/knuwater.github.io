@@ -1,1 +1,281 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Publication | KNU Water Resources Lab</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css"/>
+  <style>
+    :root{--brand:#B5121B;--ink:#0f172a;--muted:#64748b;--line:#e5e7eb;--r:14px;--maxw:1200px;}
+    body{margin:0;font-family:"Pretendard Variable",sans-serif;color:var(--ink)}
+    header{background:#fff;border-bottom:1px solid var(--line)}
+    .nav{display:flex;gap:20px;max-width:var(--maxw);margin:0 auto;padding:20px;font-weight:600}
+    .hero{position:relative;height:220px;display:grid;place-items:center;background:#001f3f;color:#fff}
+    .hero h1{font-size:40px;margin:0}
+    .tabs{display:flex;justify-content:center;gap:14px;margin-top:-20px}
+    .tabs button{padding:12px 18px;border:1px solid var(--line);border-radius:10px;background:#fff;font-weight:700;cursor:pointer}
+    .tabs button.active{background:var(--brand);color:#fff;border-color:transparent}
+    main{max-width:var(--maxw);margin:0 auto;padding:40px 20px}
+    .kicker{font-size:24px;font-weight:900;margin-bottom:12px}
+    .row{display:grid;grid-template-columns:50px 1fr 100px;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+    .row .num{font-weight:700}
+    .row .meta{font-size:14px;color:var(--muted)}
+    .btn{padding:6px 10px;border:1px solid var(--line);border-radius:8px;font-size:14px;background:#f9fafb}
+    footer{padding:20px;border-top:1px solid var(--line);text-align:center;color:var(--muted)}
+  </style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="index.html">Home</a>
+    <a href="research.html">Research</a>
+    <a href="members.html">Members</a>
+    <a href="publication.html" style="color:var(--brand)">Publication</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="about.html">About</a>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Publication</h1>
+</section>
+
+<div class="tabs">
+  <button class="active" data-tab="sci">SCI 논문</button>
+  <button data-tab="domestic">국내 논문</button>
+  <button data-tab="int-conf">국제 학술발표</button>
+  <button data-tab="dom-conf">국내 학술발표</button>
+</div>
+
+<main>
+  <section id="panel-sci" class="panel">
+    <h2 class="kicker">SCI 논문</h2>
+    <div id="list-sci"></div>
+  </section>
+  <section id="panel-domestic" class="panel" style="display:none">
+    <h2 class="kicker">국내 논문</h2>
+    <div id="list-domestic"></div>
+  </section>
+  <section id="panel-int-conf" class="panel" style="display:none">
+    <h2 class="kicker">국제 학술발표</h2>
+    <div id="list-int-conf"></div>
+  </section>
+  <section id="panel-dom-conf" class="panel" style="display:none">
+    <h2 class="kicker">국내 학술발표</h2>
+    <div id="list-dom-conf"></div>
+  </section>
+</main>
+
+<footer>
+  © <span id="year"></span> KNU Water Resources Lab
+</footer>
+
+<script>
+const data = {
+  // ✅ SCI(E) 논문
+  sci: [
+    {
+      year: 2014,
+      title: "Calibration of stormwater management model using flood extent data",
+      authors: "Kim, B.H.; Sanders, B.F.; Han, K.Y.; Kim, Y.J.; Famiglietti, J.S.",
+      venue: "Proc. ICE – Water Management 167(1), 17–29",
+      link: "https://www.icevirtuallibrary.com/doi/pdf/10.1680/wama.12.00051"
+    },
+    {
+      year: 2014,
+      title: "A well-balanced unsplit finite volume model with geometric flexibility",
+      authors: "Kim, B.H.; Kim, T.H.; Kim, J.H.; Han, K.Y.",
+      venue: "Journal of Vibroengineering 16(3), 1574–1589",
+      link: "#"
+    },
+    {
+      year: 2014,
+      title: "Mesh type tradeoffs in 2D hydrodynamic modeling of flooding with a Godunov-based flow solver",
+      authors: "Kim, B.H.; Sanders, B.F.; Schubert, J.E.; Famiglietti, J.S.",
+      venue: "Advances in Water Resources 68, 42–61",
+      link: "https://doi.org/10.1016/j.advwatres.2014.02.013"
+    },
+    {
+      year: 2014,
+      title: "2-D Equivalent finite element model of quadratic linear electromagnetic actuator",
+      authors: "Lee, J.H.; Kulinsky, L.; Madou, M.; Kim, B.H.; Cho, H.C.; Kim, J.H.",
+      venue: "Journal of Vibroengineering 16(4), 2047–2053",
+      link: "#"
+    },
+    {
+      year: 2015,
+      title: "Electric generator embedded in cellular phone for self-recharge",
+      authors: "Park, S.Y.; Kim, B.H.; Kim, S.W.; Lee, K.B.; Kim, J.H.",
+      venue: "Journal of Vibroengineering 16(8), 3797–3805",
+      link: "#"
+    },
+    {
+      year: 2015,
+      title: "Urban flood modeling with porous shallow-water equations: A case study of model errors in the presence of anisotropic porosity",
+      authors: "Kim, B.H.; Sanders, B.F.; Famiglietti, J.S.; Guinot, V.",
+      venue: "Journal of Hydrology 523, 680–692",
+      link: "#"
+    },
+    {
+      year: 2016,
+      title: "Dam-Break Flood Model Uncertainty Assessment: A Case Study of Extreme Flooding with Multiple Dam Failures in Gangneung, South Korea",
+      authors: "Kim, B.H.; Sanders, B.F.",
+      venue: "Journal of Hydraulic Engineering (ASCE) 142(5), 05016002",
+      link: "#"
+    },
+    {
+      year: 2016,
+      title: "Development of Urban Inundation Reduction Model by Data-Driven Estimation and Hydraulic Analysis",
+      authors: "Han, K.Y.; Son, A.L.; Son, K.I.; Kim, B.H.*; Park, J.H.",
+      venue: "Procedia Engineering 154, 1148–1151",
+      link: "#"
+    },
+    {
+      year: 2016,
+      title: "A Simple and Robust Method for Simultaneous Consideration of Overland and Underground Space in Urban Flood Modeling",
+      authors: "Son, A.L.; Kim, B.H.*; Han, K.Y.",
+      venue: "Water 8(11), 494",
+      link: "https://doi.org/10.3390/w8110494"
+    },
+    {
+      year: 2019,
+      title: "Application of Fuzzy TOPSIS to Flood Hazard Mapping for Levee Failure",
+      authors: "Kim, T.H.; Kim, B.H.*; Han, K.Y.",
+      venue: "Water 11(3), 592",
+      link: "https://doi.org/10.3390/w1103059"
+    },
+    {
+      year: 2019,
+      title: "Integrated Real-Time Flood Forecasting and Inundation Analysis in Small-Medium Streams",
+      authors: "Kim, B.H.; Choi, S.Y.; Han, K.Y.*",
+      venue: "Water 11(5), 919",
+      link: "#"
+    },
+    {
+      year: 2020,
+      title: "Flood Hazard Rating Prediction for Urban Areas Using Random Forest and LSTM",
+      authors: "Kim, H.I.; Kim, B.H.*",
+      venue: "KSCE Journal of Civil Engineering 24, 3884–3896",
+      link: "#"
+    },
+    {
+      year: 2021,
+      title: "Scenario-Based Real-Time Flood Prediction with Logistic Regression",
+      authors: "Lee, J.Y.; Kim, B.H.*",
+      venue: "Water 13(9), 1191",
+      link: "https://doi.org/10.3390/w13091191"
+    },
+    {
+      year: 2022,
+      title: "FLOW-3D Model Development for the Analysis of the Flow Characteristics of Downstream Hydraulic Structures",
+      authors: "Kim, B.-J.; Hwang, J.-H.; Kim, B.H.*",
+      venue: "Sustainability 14(17), 10493",
+      link: "https://doi.org/10.3390/su141710493"
+    },
+    {
+      year: 2022,
+      title: "A Study on the Optimal Deep Learning Model for Dam Inflow Prediction",
+      authors: "Kim, B.-J.; Lee, Y.-T.; Kim, B.H.*",
+      venue: "Water 14(17), 2766",
+      link: "https://doi.org/10.3390/w14172766"
+    },
+    {
+      year: 2022,
+      title: "FLOW-3D model development for the analysis of the flow characteristics of downstream hydraulic structures",
+      authors: "Kim, B.J.; Hwang, J.H.; Kim, B.H.*",
+      venue: "Sustainability 14, 10493",
+      link: "https://doi.org/10.3390/su141710493"
+    },
+    {
+      year: 2023,
+      title: "Parameter Optimization of Coupled 1D–2D Hydrodynamic Model for Urban Flood Inundation",
+      authors: "Kim, B.H.*; Kim, B.J.; Ha, C.Y.; Lee, J.N.",
+      venue: "Water 15, 2946",
+      link: "https://doi.org/10.3390/w15162946"
+    },
+    {
+      year: 2025,
+      title: "Flood prediction in urban areas based on machine learning considering the statistical characteristics of rainfall",
+      authors: "Jang, S.D.; Yoo, J.H.; Lee, Y.S.; Kim, B.H.*",
+      venue: "Progress in Disaster Science 26, 100415",
+      link: "https://doi.org/10.1016/j.pdisas.2025.100415"
+    },
+    {
+      year: 2025,
+      title: "Rapid Simulation for Real-time Flood Depth Prediction Using Support Vector Machine",
+      authors: "Kim, B.J.; Kim, M.K.; Yoo, J.H.; Kim, B.H.*",
+      venue: "",
+      link: "#"
+    }
+  ],
+
+  // 아직 비워둠(추후 주시면 채움)
+  domestic: [],          // 국내 논문
+  "int-conf": [],        // 국제 학술발표
+  "dom-conf": []         // 국내 학술발표
+};
+
+// ===== 렌더링 & 탭 스크립트(이전 템플릿과 동일) =====
+function renderList(key, target){
+  const arr = data[key]||[];
+  document.getElementById(target).innerHTML = arr.length
+    ? arr.sort((a,b)=>(b.year||0)-(a.year||0))
+         .map((it,i)=>`
+            <div class="row">
+              <div class="num">${i+1}</div>
+              <div>
+                <div style="font-weight:700">${it.title}</div>
+                <div class="meta">${[it.authors,it.venue,it.year].filter(Boolean).join(" · ")}</div>
+              </div>
+              <div>${it.link && it.link!=="#" ? `<a class="btn" href="${it.link}" target="_blank" rel="noopener">Link</a>` : `<span class="btn" style="opacity:.45">No link</span>`}</div>
+            </div>`).join("")
+    : `<div class="row"><div class="num">-</div><div>등록된 항목이 없습니다.</div><div></div></div>`;
+}
+document.getElementById?.("year") && (document.getElementById("year").textContent = new Date().getFullYear());
+</script>
+
+  domestic: [
+    {year:2024, title:"통합 재해지도 기반 위험도 평가 모델", authors:"김병현 외", venue:"대한토목학회논문집", link:"#"}
+  ],
+  "int-conf": [
+    {year:2025, title:"Naengcheon Urban Flood Case Study", authors:"Jang H., Yoo J.", venue:"AOGS 2025", link:"#"}
+  ],
+  "dom-conf": [
+    {year:2025, title:"브로콜리 구조 활용한 유동 가시화", authors:"정귀운 외", venue:"한국수자원학회 학술발표회", link:"#"}
+  ]
+};
+
+function renderList(key, target){
+  const arr = data[key]||[];
+  document.getElementById(target).innerHTML = arr.map((it,i)=>`
+    <div class="row">
+      <div class="num">${i+1}</div>
+      <div>
+        <div style="font-weight:700">${it.title}</div>
+        <div class="meta">${it.authors} · ${it.venue} · ${it.year}</div>
+      </div>
+      <div><a class="btn" href="${it.link}" target="_blank">Link</a></div>
+    </div>
+  `).join("");
+}
+renderList("sci","list-sci");
+renderList("domestic","list-domestic");
+renderList("int-conf","list-int-conf");
+renderList("dom-conf","list-dom-conf");
+
+// tab switch
+document.querySelectorAll(".tabs button").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.querySelectorAll(".tabs button").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    const key = btn.dataset.tab;
+    document.querySelectorAll(".panel").forEach(p=>p.style.display="none");
+    document.getElementById("panel-"+key).style.display="block";
+  });
+});
+
+document.getElementById("year").textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
 
