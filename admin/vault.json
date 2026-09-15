@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "repo": "janghyeri/knuwater.github.io",
+  "branch": "main",
+  "kdf": {
+    "name": "PBKDF2",
+    "hash": "SHA-256",
+    "iterations": 300000
+  },
+  "token": {
+    "iv": "5VUrzMp+IvHEPa9x",
+    "data": "LENVP9VD1DgM8MqH2uSrVrTM6fyAUU8edVG26cmkDa+KfW2MdFOiTG9ogqc6koQGJry7VyIBxWeIHQhZypz73HDhZOyu+401JoBJDQCexekNQ/21mJ32vPPxCUQQfRPhGqG5zb90cIoV8o/MPg=="
+  },
+  "accounts": [
+    {
+      "id": "knuwater",
+      "salt": "knhJoDF9ofRr9KKUL/vL2w==",
+      "iv": "qNpop3gyX73eqOJg",
+      "data": "JYoFBC1eTxNJfYQtNurnJQbny+GaGi8mAbEXhMI/AA8kT4Ohxo9tJT/KGTHwISh8",
+      "created": "2026-09-15"
+    }
+  ]
+}
