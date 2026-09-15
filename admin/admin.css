@@ -1,0 +1,83 @@
+/* 관리자 페이지 전용 스타일 (공통 site.css 위에 덧씌움) */
+body{background:#f3f4f6}
+.adm-top{background:var(--navy);color:#e2e8f0;border-top:3px solid var(--brand)}
+.adm-top .in{max-width:1280px;margin:0 auto;padding:0 20px;height:60px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.adm-top .brand{display:flex;align-items:center;gap:12px;color:#fff;font-weight:800}
+.adm-top .brand img{height:30px}
+.adm-top .brand small{font-weight:600;color:#9aa0b0;font-size:12px}
+.adm-top .right{display:flex;align-items:center;gap:12px;font-size:14px}
+.adm-top a{color:#cbd5e1}
+.adm-top a:hover{color:#fff}
+.adm-top .btn{padding:8px 12px;font-size:13px}
+
+.adm-wrap{max-width:1280px;margin:0 auto;padding:24px 20px;display:grid;grid-template-columns:220px 1fr;gap:24px;align-items:start}
+@media (max-width:860px){.adm-wrap{grid-template-columns:1fr}}
+.adm-side{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px;position:sticky;top:16px}
+.adm-side button{display:flex;align-items:center;justify-content:space-between;width:100%;text-align:left;padding:11px 12px;border:0;background:none;border-radius:10px;font-weight:700;color:#374151}
+.adm-side button:hover{background:var(--surface)}
+.adm-side button.active{background:var(--brand-50);color:var(--brand)}
+.adm-side .dot{width:8px;height:8px;border-radius:999px;background:#f59e0b;display:none}
+.adm-side button.dirty .dot{display:block}
+.adm-side hr{border:0;border-top:1px solid var(--line);margin:8px 0}
+
+.adm-main{min-width:0}
+.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:16px}
+.panel h2{margin:0 0 4px;font-size:20px}
+.panel .hint{color:var(--muted);font-size:13px;margin:0 0 14px}
+.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:12px 0}
+.toolbar .grow{flex:1}
+.toolbar select,.toolbar input[type=search]{padding:9px 12px;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fff}
+.btn.primary:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+.btn.danger{background:#fff;border-color:#fecaca;color:#b91c1c}
+.btn.danger:hover{background:#fef2f2}
+
+table.list{width:100%;border-collapse:collapse;font-size:14px}
+table.list th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:8px 10px;border-bottom:2px solid var(--line)}
+table.list td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top}
+table.list td.ops{white-space:nowrap;text-align:right}
+table.list td.ops button{padding:5px 9px;font-size:12px;border-radius:8px;border:1px solid var(--line);background:#fff;margin-left:4px}
+table.list td.ops button:hover{background:var(--surface)}
+table.list tr:hover td{background:#fafafa}
+.trunc{max-width:520px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media (max-width:640px){.trunc{max-width:200px}}
+
+.form{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;margin:12px 0 18px}
+.form h3{margin:0 0 12px;font-size:16px}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px 16px}
+.fgrid .full{grid-column:1/-1}
+@media (max-width:700px){.fgrid{grid-template-columns:1fr}}
+.field label{display:block;font-size:12px;font-weight:800;color:#475569;margin-bottom:4px;letter-spacing:.02em}
+.field label small{font-weight:600;color:var(--muted)}
+.field input,.field select,.field textarea{width:100%;padding:9px 11px;border:1px solid #d1d5db;border-radius:10px;font:inherit;font-size:14px;background:#fff}
+.field textarea{min-height:76px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:2px solid rgba(218,33,39,.2);border-color:var(--brand)}
+.field .img{display:flex;gap:10px;align-items:center}
+.field .img img{width:56px;height:56px;object-fit:cover;border-radius:8px;border:1px solid var(--line);background:#e5e7eb}
+.field .img input[type=file]{display:none}
+.form .actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.req::after{content:" *";color:var(--brand)}
+
+.login{max-width:460px;margin:60px auto;background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px 28px 24px;box-shadow:0 12px 30px rgba(2,8,23,.08)}
+.login h1{margin:0 0 4px;font-size:22px}
+.login p.sub{margin:0 0 18px;color:var(--muted);font-size:14px}
+.login .field{margin-bottom:12px}
+.login .btn{width:100%;justify-content:center;margin-top:6px}
+.login .foot{margin-top:14px;font-size:13px;color:var(--muted);text-align:center}
+.alert{padding:10px 12px;border-radius:10px;font-size:14px;margin:10px 0}
+.alert.err{background:#fef2f2;color:#b91c1c;border:1px solid #fecaca}
+.alert.ok{background:#f0fdf4;color:#166534;border:1px solid #bbf7d0}
+.alert.info{background:#eff6ff;color:#1e40af;border:1px solid #bfdbfe}
+.steps{padding-left:18px;font-size:14px;color:#374151}
+.steps li{margin:4px 0}
+code{background:#f3f4f6;padding:1px 5px;border-radius:5px;font-size:13px}
+
+.toast{position:fixed;right:20px;bottom:20px;z-index:200;background:#111827;color:#fff;padding:12px 16px;border-radius:12px;font-size:14px;box-shadow:0 10px 30px rgba(0,0,0,.3);opacity:0;transform:translateY(8px);transition:all .2s;max-width:360px}
+.toast.show{opacity:1;transform:none}
+.toast.err{background:#b91c1c}
+.spinner{display:inline-block;width:14px;height:14px;border:2px solid #fff;border-right-color:transparent;border-radius:999px;animation:spin .7s linear infinite;vertical-align:-2px;margin-right:6px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.acc{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+.acc b{font-size:15px}
+.acc small{color:var(--muted);margin-left:8px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:800px){.two{grid-template-columns:1fr}}

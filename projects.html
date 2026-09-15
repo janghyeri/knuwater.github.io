@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projects | KNU Water Resources Lab</title>
+  <meta name="description" content="경북대학교 수자원 연구실 연구과제 — 진행 중 및 완료 과제">
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Roboto:wght@400;500;700;900&display=swap">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script src="assets/js/site.js"></script>
+  <script src="data/projects.js"></script>
+</head>
+<body>
+<div id="site-header"></div>
+
+<section class="page-hero" aria-label="Projects">
+  <div class="pattern"></div>
+  <div class="container">
+    <div class="crumbs"><a href="index.html">Home</a> / Projects</div>
+    <h1>Research Projects</h1>
+    <p>정부·공공기관·산업계와 함께 수행한 연구과제입니다.</p>
+  </div>
+</section>
+
+<main class="section" style="padding-top:48px">
+  <div class="container">
+    <div class="chips" id="chips" role="tablist" aria-label="상태"></div>
+    <div id="list"></div>
+  </div>
+</main>
+
+<div id="site-footer"></div>
+
+<script>
+(function () {
+  const PJ = ((window.LAB_DATA || {}).projects || []).slice().sort((a, b) => String(b.period || "").localeCompare(String(a.period || "")));
+  const tabs = ["전체", "진행 중", "완료"];
+  let cur = "전체";
+  const chips = document.getElementById("chips"), list = document.getElementById("list");
+  const count = (t) => t === "전체" ? PJ.length : PJ.filter((p) => p.status === t).length;
+  chips.innerHTML = tabs.map((t) => `<button type="button" data-t="${t}" class="${t === cur ? "active" : ""}">${t} (${count(t)})</button>`).join("");
+  function render() {
+    const items = PJ.filter((p) => cur === "전체" || p.status === cur);
+    list.innerHTML = items.map((p) => `<article class="proj">
+      <div class="period">${esc(p.period || "")}</div>
+      <div>
+        <h3>${esc(p.title)}</h3>
+        <div class="agency">${[p.agency, p.role ? p.role + " 기관" : ""].filter(Boolean).map(esc).join(" · ")}</div>
+        ${p.desc ? `<p class="desc">${esc(p.desc)}</p>` : ""}
+      </div>
+      <span class="status ${p.status === "완료" ? "done" : ""}">${esc(p.status || "")}</span>
+    </article>`).join("") || `<div class="empty">${PJ.length ? "해당하는 과제가 없습니다." : "연구과제 목록을 준비 중입니다."}</div>`;
+  }
+  render();
+  chips.querySelectorAll("button").forEach((b) => b.addEventListener("click", () => {
+    cur = b.dataset.t;
+    chips.querySelectorAll("button").forEach((x) => x.classList.toggle("active", x === b));
+    render();
+  }));
+})();
+</script>
+</body>
+</html>

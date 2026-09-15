@@ -82,8 +82,23 @@ python -m http.server 8000
 
 후 http://localhost:8000 접속.
 
-## admin/ (Decap CMS) 에 대하여
+## 관리자 페이지 (admin/)
 
-`admin/` 폴더는 Decap CMS 설정입니다. GitHub Pages 만으로는 로그인(OAuth) 서버가 없어 동작하지 않으며,
-Netlify 또는 별도의 OAuth 프록시가 필요합니다. 현재 페이지들은 `data/*.js` 를 직접 읽으므로
-CMS 없이도 GitHub 웹 편집만으로 운영할 수 있습니다. 필요 없으면 `admin/` 폴더는 삭제해도 됩니다.
+주소창에 `사이트주소/admin/` 을 입력하거나, 홈페이지 맨 아래 **Designed by** 이름을 3초 안에 5번 클릭하면 관리자 로그인 화면이 열립니다.
+등록된 **관리자 ID + 비밀번호**로만 들어갈 수 있고, 소식·논문·구성원·갤러리·연구과제·메인 슬라이드를 화면에서 편집해 저장하면 GitHub에 자동으로 커밋됩니다 (1~2분 후 반영).
+
+### 처음 한 번만 하는 설정
+
+GitHub Pages에는 서버가 없어서, 저장할 때 쓸 GitHub 토큰을 관리자 비밀번호로 암호화해 `admin/vault.json`에 보관하는 방식입니다.
+
+1. GitHub → Settings → Developer settings → **Personal access tokens → Fine-grained tokens → Generate new token**
+   * Repository access: *Only select repositories* → `knuwater.github.io`
+   * Permissions → Repository permissions → **Contents: Read and write**
+2. 사이트의 `/admin/` 에 접속하면 "관리자 초기 설정" 화면이 나옵니다. 토큰과 첫 관리자 ID·비밀번호(10자 이상)를 입력하면 금고가 만들어집니다.
+3. 이후에는 ID·비밀번호만으로 로그인합니다. 관리자 추가/삭제, 비밀번호 변경, 토큰 교체는 관리자 페이지의 **관리자 계정** 메뉴에서 합니다.
+
+### 보안 메모
+
+* 금고 파일은 공개 저장소에 올라가므로 비밀번호는 길게(문장형) 정하세요. PBKDF2 30만 회 + AES-GCM으로 암호화됩니다.
+* 토큰은 이 저장소의 Contents 권한만 가진 것을 쓰고, 유출이 의심되면 GitHub에서 폐기(Revoke)한 뒤 관리자 페이지에서 교체하세요.
+* 저장소를 직접 수정할 권한(Collaborator)은 여전히 GitHub 계정 기준으로 관리됩니다. 관리자 페이지는 그 위에 얹힌 편집 도구입니다.

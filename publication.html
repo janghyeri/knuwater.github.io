@@ -53,17 +53,22 @@
 <script>
 (function () {
   const P = (window.LAB_DATA || {}).publications || {};
-  const CATS = [
+  const ALL_CATS = [
     { key: "sci",      label: "SCI(E) 논문" },
     { key: "domestic", label: "국내 논문" },
     { key: "intConf",  label: "국제 학술발표" },
-    { key: "domConf",  label: "국내 학술발표" }
+    { key: "domConf",  label: "국내 학술발표" },
+    { key: "patent",   label: "특허" },
+    { key: "book",     label: "저서·보고서" }
   ];
+  // 항목이 하나도 없는 카테고리 탭은 자동으로 숨깁니다.
+  const CATS = ALL_CATS.filter((c) => (P[c.key] || []).length);
+  if (!CATS.length) CATS.push(ALL_CATS[0]);
   const tabsEl = document.getElementById("tabs");
   const listEl = document.getElementById("list");
   const kicker = document.getElementById("kicker");
   const input  = document.getElementById("q");
-  let cur = "sci", q = "";
+  let cur = CATS[0].key, q = "";
 
   // URL 해시로 탭 열기 (publication.html#domestic)
   const h = location.hash.slice(1);

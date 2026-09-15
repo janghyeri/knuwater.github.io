@@ -15,22 +15,28 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Roboto:wght@400;500;700;900&display=swap">
   <link rel="stylesheet" href="assets/css/site.css">
   <script src="assets/js/site.js"></script>
+  <script src="data/hero.js"></script>
   <script src="data/publications.js"></script>
   <script src="data/members.js"></script>
   <script src="data/gallery.js"></script>
   <script src="data/news.js"></script>
   <style>
-    /* ---- 메인 히어로 ---- */
-    .hero{position:relative;isolation:isolate;color:#fff;min-height:72vh;display:grid;align-items:center;background:radial-gradient(1200px 600px at 50% -10%,var(--navy-700) 0%,var(--navy) 45%,var(--navy-900) 100%)}
-    .hero-bg{position:absolute;inset:0;background:url("assets/img/hero.jpg") center/cover no-repeat;opacity:.5;z-index:-3} /* ← assets/img/hero.jpg 넣으면 표시 */
+    /* ---- 메인 히어로 (슬라이드) ---- */
+    .hero{position:relative;isolation:isolate;color:#fff;min-height:72vh;display:grid;align-items:center;background:radial-gradient(1200px 600px at 50% -10%,var(--navy-700) 0%,var(--navy) 45%,var(--navy-900) 100%);overflow:hidden}
+    .hero .slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.2s ease;z-index:-3}
+    .hero .slide.on{opacity:.5}
     .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(3,6,23,.2),rgba(3,6,23,.78));z-index:-2}
     .hero-pattern{position:absolute;inset:0;background:url("assets/img/pattern-waves.svg") center/cover no-repeat;opacity:.4;z-index:-1}
-    .hero-content{padding-top:96px;padding-bottom:96px}
+    .hero-content{padding-top:96px;padding-bottom:110px;transition:opacity .5s ease}
+    .hero-content.fade{opacity:0}
     .badge{display:inline-block;padding:6px 12px;font-size:13px;font-weight:700;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);border-radius:999px}
     .hero h1{font-size:60px;line-height:1.05;margin:18px 0 14px;font-weight:900;letter-spacing:-.02em}
     .hero .lead{font-size:18px;color:#dbe3f5;max-width:720px;margin:0}
     .hero-cta{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}
-    @media (max-width:980px){.hero h1{font-size:38px}.hero{min-height:auto}.hero-content{padding-top:64px;padding-bottom:64px}}
+    .hero-dots{position:absolute;left:0;right:0;bottom:26px;display:flex;justify-content:center;gap:8px;z-index:2}
+    .hero-dots button{width:10px;height:10px;border-radius:999px;border:0;background:rgba(255,255,255,.4);padding:0;transition:all .2s}
+    .hero-dots button.on{background:#fff;width:28px}
+    @media (max-width:980px){.hero h1{font-size:38px}.hero{min-height:auto}.hero-content{padding-top:64px;padding-bottom:80px}}
 
     /* ---- About split ---- */
     .about-split{display:grid;grid-template-columns:1.05fr 1fr;gap:36px;align-items:center}
@@ -66,20 +72,12 @@
 <body>
 <div id="site-header"></div>
 
-<!-- ================= Hero ================= -->
-<section class="hero" aria-label="메인 배너">
-  <div class="hero-bg"></div>
+<!-- ================= Hero (슬라이드: data/hero.js) ================= -->
+<section class="hero" id="hero" aria-label="메인 배너">
+  <div id="slides"></div>
   <div class="hero-pattern"></div>
-  <div class="container hero-content">
-    <span class="badge">KNU Water Resources Lab · 경북대학교 토목공학과 수자원 연구실</span>
-    <h1>Computational Hydraulics<br>for Flood-Resilient Cities</h1>
-    <p class="lead">도시·연안 홍수의 물리 기반 수치모델링과 AI 예측, 그리고 재난 의사결정 지원까지.
-      수자원 연구실은 물의 흐름을 계산하여 더 안전한 도시를 설계합니다.</p>
-    <div class="hero-cta">
-      <a class="btn white" href="research.html">View Research</a>
-      <a class="btn ghost" href="publication.html">Publications</a>
-    </div>
-  </div>
+  <div class="container hero-content" id="hero-content"></div>
+  <div class="hero-dots" id="hero-dots" aria-label="슬라이드 선택"></div>
 </section>
 
 <!-- ================= Stats ================= -->
@@ -154,6 +152,7 @@
       <div>
         <div class="head-row">
           <div><span class="eyebrow">What's new</span><h2 class="section-title">News</h2></div>
+          <a class="btn outline sm" href="news.html">More →</a>
         </div>
         <ul class="news-list" id="news"></ul>
       </div>
@@ -172,6 +171,17 @@
   </div>
 </section>
 
+<!-- ================= Join us ================= -->
+<section class="cta-band" aria-label="모집 안내">
+  <div class="container inner">
+    <div>
+      <h2>함께 연구할 대학원생·학부연구생을 모집합니다</h2>
+      <p>수리학·수문학·수치해석·기계학습에 관심 있는 분이라면 전공 배경과 관계없이 환영합니다.</p>
+    </div>
+    <a class="btn white" href="contact.html">모집 안내 →</a>
+  </div>
+</section>
+
 <div id="site-footer"></div>
 
 <script>
@@ -180,6 +190,33 @@
   const P = D.publications || {};
   const M = D.members || {};
   const n = (k) => (P[k] || []).length;
+  const br = (s) => esc(s).replace(/&lt;br\s*\/?&gt;/gi, "<br>");   // 제목의 <br> 만 허용
+
+  /* 히어로 슬라이드 */
+  const slides = (D.hero && D.hero.length) ? D.hero : [{ badge: "KNU Water Resources Lab", title: "Computational Hydraulics<br>for Flood-Resilient Cities", lead: "", btn1Label: "View Research", btn1Href: "research.html" }];
+  const slidesEl = document.getElementById("slides"), contentEl = document.getElementById("hero-content"), dotsEl = document.getElementById("hero-dots");
+  slidesEl.innerHTML = slides.map((s) => `<div class="slide"${s.image ? ` style="background-image:url('${esc(s.image)}')"` : ""}></div>`).join("");
+  dotsEl.innerHTML = slides.length > 1 ? slides.map((s, i) => `<button type="button" data-i="${i}" aria-label="슬라이드 ${i + 1}"></button>`).join("") : "";
+  let cur = -1, timer = null;
+  function content(s) {
+    const btns = [[s.btn1Label, s.btn1Href, "white"], [s.btn2Label, s.btn2Href, "ghost"]].filter((b) => b[0] && b[1])
+      .map((b) => `<a class="btn ${b[2]}" href="${esc(b[1])}">${esc(b[0])}</a>`).join("");
+    return `${s.badge ? `<span class="badge">${esc(s.badge)}</span>` : ""}<h1>${br(s.title)}</h1>${s.lead ? `<p class="lead">${esc(s.lead)}</p>` : ""}${btns ? `<div class="hero-cta">${btns}</div>` : ""}`;
+  }
+  function show(i, instant) {
+    cur = (i + slides.length) % slides.length;
+    slidesEl.querySelectorAll(".slide").forEach((el, j) => el.classList.toggle("on", j === cur));
+    dotsEl.querySelectorAll("button").forEach((b, j) => b.classList.toggle("on", j === cur));
+    if (instant) { contentEl.innerHTML = content(slides[cur]); return; }
+    contentEl.classList.add("fade");
+    setTimeout(() => { contentEl.innerHTML = content(slides[cur]); contentEl.classList.remove("fade"); }, 350);
+  }
+  function play() { stop(); if (slides.length > 1) timer = setInterval(() => show(cur + 1), 6500); }
+  function stop() { if (timer) clearInterval(timer); timer = null; }
+  show(0, true); play();
+  dotsEl.addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) { show(+b.dataset.i); play(); } });
+  const hero = document.getElementById("hero");
+  hero.addEventListener("mouseenter", stop); hero.addEventListener("mouseleave", play);
 
   /* 현황 숫자 (데이터에서 자동 계산) */
   const stats = [
@@ -211,12 +248,12 @@
 
   /* 소식 */
   const news = (D.news || []).slice().sort((a, b) => String(b.date).localeCompare(String(a.date))).slice(0, 5);
-  document.getElementById("news").innerHTML = news.map((x) => `
+  document.getElementById("news").innerHTML = news.map((x, i) => `
     <li>
       <div class="date">${esc(x.date)}</div>
       <div>
         <span class="tag">${esc(x.tag || "News")}</span>
-        <span class="title">${x.link ? `<a href="${esc(x.link)}">${esc(x.title)}</a>` : esc(x.title)}</span>
+        <span class="title"><a href="news.html#n${i}">${esc(x.title)}</a></span>
         ${x.desc ? `<div class="desc">${esc(x.desc)}</div>` : ""}
       </div>
     </li>`).join("") || `<li class="empty">등록된 소식이 없습니다.</li>`;

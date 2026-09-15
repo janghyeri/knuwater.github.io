@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>News | KNU Water Resources Lab</title>
+  <meta name="description" content="경북대학교 수자원 연구실 소식 — 공지, 논문 게재, 학술대회 발표, 수상">
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Roboto:wght@400;500;700;900&display=swap">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script src="assets/js/site.js"></script>
+  <script src="data/news.js"></script>
+</head>
+<body>
+<div id="site-header"></div>
+
+<section class="page-hero" aria-label="News">
+  <div class="pattern"></div>
+  <div class="container">
+    <div class="crumbs"><a href="index.html">Home</a> / News</div>
+    <h1>News</h1>
+    <p>연구실의 공지, 논문 게재, 학술대회 발표, 수상 소식을 전합니다.</p>
+  </div>
+</section>
+
+<main class="section" style="padding-top:48px">
+  <div class="container">
+    <div class="chips" id="chips" role="tablist" aria-label="구분"></div>
+    <div id="list"></div>
+  </div>
+</main>
+
+<div id="site-footer"></div>
+
+<script>
+(function () {
+  const N = ((window.LAB_DATA || {}).news || []).slice().sort((a, b) => String(b.date).localeCompare(String(a.date)));
+  const tags = ["All", ...Array.from(new Set(N.map((x) => x.tag).filter(Boolean)))];
+  let cur = "All";
+  const chips = document.getElementById("chips"), list = document.getElementById("list");
+  chips.innerHTML = tags.map((t) => `<button type="button" data-tag="${esc(t)}" class="${t === cur ? "active" : ""}">${esc(t)}${t === "All" ? ` (${N.length})` : ""}</button>`).join("");
+
+  function render() {
+    const items = N.map((x, i) => ({ x, i })).filter(({ x }) => cur === "All" || x.tag === cur);
+    let html = "", year = null;
+    items.forEach(({ x, i }) => {
+      const y = String(x.date || "").slice(0, 4);
+      if (y !== year) { year = y; html += `<div class="year-head">${esc(y)}</div>`; }
+      const link = x.link ? `<a class="btn outline sm" href="${esc(x.link)}" ${/^https?:/.test(x.link) ? 'target="_blank" rel="noopener"' : ""}>${/^https?:/.test(x.link) ? "관련 링크 ↗" : "바로가기 →"}</a>` : "";
+      html += `<article class="news-item" id="n${i}">
+        <div class="top"><span class="tag">${esc(x.tag || "News")}</span><span class="date">${esc(x.date)}</span></div>
+        <h3>${esc(x.title)}</h3>
+        ${x.desc ? `<p class="desc">${esc(x.desc)}</p>` : ""}
+        ${x.body ? `<details><summary>자세히 보기</summary><div class="body">${esc(x.body)}</div></details>` : ""}
+        ${link ? `<div style="margin-top:10px">${link}</div>` : ""}
+      </article>`;
+    });
+    list.innerHTML = html || `<p class="empty">등록된 소식이 없습니다.</p>`;
+    if (location.hash) { const el = document.querySelector(location.hash); if (el) { el.scrollIntoView({ block: "center" }); el.style.boxShadow = "0 0 0 3px var(--brand-50)"; } }
+  }
+  render();
+  chips.querySelectorAll("button").forEach((b) => b.addEventListener("click", () => {
+    cur = b.dataset.tag;
+    chips.querySelectorAll("button").forEach((x) => x.classList.toggle("active", x === b));
+    render();
+  }));
+})();
+</script>
+</body>
+</html>

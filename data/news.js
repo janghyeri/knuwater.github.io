@@ -3,6 +3,7 @@
    - date: "YYYY-MM-DD"
    - tag: "Paper" | "Conference" | "Award" | "Notice" | "Welcome"
    - link: 관련 링크 (없으면 "" )
+   - body: 상세 내용 (선택, News 페이지에서 펼쳐서 보여줌)
    ===================================================================== */
 window.LAB_DATA = window.LAB_DATA || {};
 

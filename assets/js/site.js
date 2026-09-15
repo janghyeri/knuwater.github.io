@@ -25,18 +25,30 @@
     address: "대구광역시 북구 대학로 80 (산격동, 경북대학교) 공과대학 2호관 111호",
     addressEn: "Rm 111, Engineering Bldg. 2, 80 Daehak-ro, Buk-gu, Daegu 41566, Republic of Korea",
     designer: "Hyeri Jang",
-    links: [
-      { href: "https://www.knu.ac.kr", label: "경북대학교" },
-      { href: "https://civil.knu.ac.kr", label: "토목공학과" }
-    ],
+    admin: "admin/",                                   // 관리자 페이지 (푸터 'Designed by' 5회 클릭으로도 열림)
+    // 상단 메뉴
     nav: [
-      { href: "index.html",       label: "Home" },
-      { href: "research.html",    label: "Research" },
-      { href: "members.html",     label: "Members" },
-      { href: "publication.html", label: "Publication" },
-      { href: "gallery.html",     label: "Gallery" },
       { href: "about.html",       label: "About" },
+      { href: "research.html",    label: "Research" },
+      { href: "projects.html",    label: "Projects" },
+      { href: "publication.html", label: "Publication" },
+      { href: "members.html",     label: "Members" },
+      { href: "news.html",        label: "News" },
+      { href: "gallery.html",     label: "Gallery" },
       { href: "contact.html",     label: "Contact", cta: true }
+    ],
+    // 푸터 '관련 사이트' 선택 상자
+    related: [
+      { label: "경북대학교", href: "https://www.knu.ac.kr" },
+      { label: "경북대학교 토목공학과", href: "https://civil.knu.ac.kr" },
+      { label: "경북대학교 방재연구소", href: "https://www.knu.ac.kr" },
+      { label: "한국수자원학회 (KWRA)", href: "https://www.kwra.or.kr" },
+      { label: "한국방재학회 (KOSHAM)", href: "https://www.kosham.or.kr" },
+      { label: "대한토목학회 (KSCE)", href: "https://www.ksce.or.kr" },
+      { label: "한국물학술단체연합회", href: "http://www.kfwas.or.kr" },
+      { label: "국가수자원관리종합정보시스템 (WAMIS)", href: "http://www.wamis.go.kr" },
+      { label: "기상청 날씨누리", href: "https://www.weather.go.kr" },
+      { label: "행정안전부", href: "https://www.mois.go.kr" }
     ]
   };
   window.SITE = SITE;
@@ -118,9 +130,10 @@
   function renderFooter() {
     const el = document.getElementById("site-footer");
     if (!el) return;
-    const links = SITE.nav.map((n) => `<li><a href="${n.href}">${esc(n.label)}</a></li>`).join("");
-    const ext = (SITE.links || []).map((n) => `<li><a href="${n.href}" target="_blank" rel="noopener">${esc(n.label)} ↗</a></li>`).join("");
-    const navBottom = SITE.nav.map((n) => `<a href="${n.href}">${esc(n.label)}</a>`).join("");
+    const footerNav = [{ href: "index.html", label: "Home" }].concat(SITE.nav);
+    const links = footerNav.map((n) => `<li><a href="${n.href}">${esc(n.label)}</a></li>`).join("");
+    const navBottom = footerNav.map((n) => `<a href="${n.href}">${esc(n.label)}</a>`).join("");
+    const related = (SITE.related || []).map((r) => `<option value="${esc(r.href)}">${esc(r.label)}</option>`).join("");
     const year = new Date().getFullYear();
 
     el.outerHTML = `
@@ -134,10 +147,11 @@
           ${esc(SITE.collegeEn)}
           <div class="lab">${esc(SITE.deptKo)} ${esc(SITE.labKo)} · ${esc(SITE.labEnFull)}</div>
         </div>
+        ${related ? `<div class="footer-related"><label class="sr-only" for="related">관련 사이트</label><select id="related"><option value="">관련 사이트 바로가기</option>${related}</select></div>` : ""}
       </div>
       <div class="footer-col">
         <h4>Quick Links</h4>
-        <ul class="footer-links">${links}${ext}</ul>
+        <ul class="footer-links">${links}</ul>
       </div>
       <div class="footer-col">
         <h4>Contact</h4>
@@ -150,11 +164,27 @@
     </div>
     <div class="f-bottom">
       <div class="footer-nav">${navBottom}</div>
-      <div>Copyright(c) ${year} ${esc(SITE.labEn)}, ${esc(SITE.univEn)}. All rights reserved. · Designed by <b>${esc(SITE.designer)}</b></div>
+      <div>Copyright(c) ${year} ${esc(SITE.labEn)}, ${esc(SITE.univEn)}. All rights reserved. · Designed by <b id="designer">${esc(SITE.designer)}</b></div>
     </div>
   </div>
 </footer>
 <button class="to-top" id="toTop" type="button" aria-label="맨 위로">↑</button>`;
+
+    const sel = document.getElementById("related");
+    if (sel) sel.addEventListener("change", () => { if (sel.value) { window.open(sel.value, "_blank", "noopener"); sel.value = ""; } });
+
+    // 숨은 관리자 진입: 'Designed by' 이름을 3초 안에 5번 클릭
+    const d = document.getElementById("designer");
+    if (d && SITE.admin) {
+      let n = 0, t0 = 0;
+      d.style.cursor = "default";
+      d.addEventListener("click", () => {
+        const now = Date.now();
+        if (now - t0 > 3000) n = 0;
+        t0 = now; n += 1;
+        if (n >= 5) { n = 0; location.href = SITE.admin; }
+      });
+    }
   }
 
   /* ---------- 맨 위로 버튼 ---------- */
@@ -169,7 +199,7 @@
 
   /* ---------- 페이지 공통 데이터 헬퍼 ---------- */
   window.LAB = {
-    // 논문 4개 카테고리 전체를 최신순 하나의 배열로
+    // 논문 카테고리 전체를 최신순 하나의 배열로
     allPublications() {
       const P = (window.LAB_DATA && window.LAB_DATA.publications) || {};
       const out = [];

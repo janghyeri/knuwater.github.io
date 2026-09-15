@@ -6,6 +6,8 @@
   <url><loc>https://knuwater.github.io/research.html</loc><priority>0.9</priority></url>
   <url><loc>https://knuwater.github.io/members.html</loc><priority>0.8</priority></url>
   <url><loc>https://knuwater.github.io/publication.html</loc><priority>0.9</priority></url>
+  <url><loc>https://knuwater.github.io/projects.html</loc><priority>0.7</priority></url>
+  <url><loc>https://knuwater.github.io/news.html</loc><priority>0.7</priority></url>
   <url><loc>https://knuwater.github.io/gallery.html</loc><priority>0.6</priority></url>
   <url><loc>https://knuwater.github.io/contact.html</loc><priority>0.7</priority></url>
 </urlset>
