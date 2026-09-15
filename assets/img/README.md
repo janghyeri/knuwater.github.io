@@ -5,7 +5,7 @@
 
 | 파일 | 위치 | 권장 크기 |
 |---|---|---|
-| `logo.svg` (또는 `knu-logo.png` 로 교체 후 `assets/js/site.js`의 `logo` 수정) | 헤더/푸터 로고 | 정사각형, 200×200 이상 |
+| `knu-signature.png` / `knu-signature-white.png` / `knu-emblem.png` / `favicon.png` | 헤더·푸터·파비콘 (경북대학교 공식 UI, knu.ac.kr 대학상징 페이지 배포본) | 교체 불필요 |
 | `hero.jpg` | 메인 페이지 상단 배경 | 1920×1080 |
 | `about.jpg` | 메인 About 단체 사진 / About 페이지 | 1600×900 |
 | `research/r1.jpg` ~ `research/r5.jpg` | Research 페이지 대표 이미지 | 1600×900 |

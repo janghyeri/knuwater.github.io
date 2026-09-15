@@ -7,18 +7,28 @@
   "use strict";
 
   const SITE = {
-    deptKo: "경북대학교 토목공학과",
+    univKo: "경북대학교",
+    deptKo: "공과대학 토목공학과",
     labKo: "수자원 연구실",
     labEn: "KNU Water Resources Lab",
     labEnFull: "Water Resources Laboratory",
     univEn: "Kyungpook National University",
     collegeEn: "College of Engineering · Department of Civil Engineering",
-    logo: "assets/img/logo.svg",              // 실제 로고로 바꾸려면 예: "assets/img/knu-logo.png"
+    // 경북대학교 공식 UI (knu.ac.kr 대학상징 페이지 배포본)
+    logo: "assets/img/knu-signature.png",            // 헤더: 엠블럼 + 경북대학교 (컬러)
+    logoWhite: "assets/img/knu-signature-white.png", // 푸터: 흰색 버전
+    emblem: "assets/img/knu-emblem.png",             // 엠블럼 단독
     representative: "김병현",
     email: "bhkim@knu.ac.kr",
-    address: "대구광역시 북구 대학로 80, 경북대학교 공과대학 2호관 111호",
+    phone: "053-950-5114",                            // 학교 안내전화 (연구실 직통 번호가 있으면 교체)
+    zip: "41566",
+    address: "대구광역시 북구 대학로 80 (산격동, 경북대학교) 공과대학 2호관 111호",
     addressEn: "Rm 111, Engineering Bldg. 2, 80 Daehak-ro, Buk-gu, Daegu 41566, Republic of Korea",
     designer: "Hyeri Jang",
+    links: [
+      { href: "https://www.knu.ac.kr", label: "경북대학교" },
+      { href: "https://civil.knu.ac.kr", label: "토목공학과" }
+    ],
     nav: [
       { href: "index.html",       label: "Home" },
       { href: "research.html",    label: "Research" },
@@ -75,7 +85,9 @@
 <header class="site-header">
   <div class="container nav">
     <a class="brand" href="index.html" aria-label="${esc(SITE.labEn)}">
-      <img class="brand-logo" src="${SITE.logo}" alt="${esc(SITE.labEn)} logo">
+      <img class="brand-logo full" src="${SITE.logo}" alt="${esc(SITE.univKo)}">
+      <img class="brand-logo mini" src="${SITE.emblem}" alt="${esc(SITE.univKo)}">
+      <span class="sep" aria-hidden="true"></span>
       <span class="brand-stack">
         <span class="dept">${esc(SITE.deptKo)}</span>
         <span class="lab">${esc(SITE.labKo)}</span>
@@ -102,11 +114,12 @@
     });
   }
 
-  /* ---------- 푸터 ---------- */
+  /* ---------- 푸터 (경북대학교 홈페이지 푸터 형식) ---------- */
   function renderFooter() {
     const el = document.getElementById("site-footer");
     if (!el) return;
     const links = SITE.nav.map((n) => `<li><a href="${n.href}">${esc(n.label)}</a></li>`).join("");
+    const ext = (SITE.links || []).map((n) => `<li><a href="${n.href}" target="_blank" rel="noopener">${esc(n.label)} ↗</a></li>`).join("");
     const navBottom = SITE.nav.map((n) => `<a href="${n.href}">${esc(n.label)}</a>`).join("");
     const year = new Date().getFullYear();
 
@@ -115,29 +128,29 @@
   <div class="container">
     <div class="footer-inner">
       <div class="footer-brand">
-        <div class="mark"><img src="${SITE.logo}" alt="${esc(SITE.labEn)} mark"></div>
+        <div class="mark"><a href="https://www.knu.ac.kr" target="_blank" rel="noopener"><img src="${SITE.logoWhite}" alt="${esc(SITE.univKo)}"></a></div>
         <div class="txt">
           <b>${esc(SITE.univEn)}</b>
-          ${esc(SITE.collegeEn)}<br>
-          <b>${esc(SITE.labEnFull)}</b>
+          ${esc(SITE.collegeEn)}
+          <div class="lab">${esc(SITE.deptKo)} ${esc(SITE.labKo)} · ${esc(SITE.labEnFull)}</div>
         </div>
       </div>
       <div class="footer-col">
         <h4>Quick Links</h4>
-        <ul class="footer-links">${links}</ul>
+        <ul class="footer-links">${links}${ext}</ul>
       </div>
       <div class="footer-col">
         <h4>Contact</h4>
         <div class="footer-meta">
           <div><b>대표자명</b> : ${esc(SITE.representative)}</div>
-          <div>${esc(SITE.address)}</div>
-          <div>Email : <a href="mailto:${SITE.email}">${SITE.email}</a></div>
+          <div>우)${esc(SITE.zip)} ${esc(SITE.address)}</div>
+          <div><b>Tel</b> : ${esc(SITE.phone)} &nbsp;·&nbsp; <b>Email</b> : <a href="mailto:${SITE.email}">${SITE.email}</a></div>
         </div>
       </div>
     </div>
     <div class="f-bottom">
       <div class="footer-nav">${navBottom}</div>
-      <div>© ${year} ${esc(SITE.labEn)}. All rights reserved. · Designed by <b>${esc(SITE.designer)}</b></div>
+      <div>Copyright(c) ${year} ${esc(SITE.labEn)}, ${esc(SITE.univEn)}. All rights reserved. · Designed by <b>${esc(SITE.designer)}</b></div>
     </div>
   </div>
 </footer>

@@ -16,7 +16,7 @@ contact.html        연락처 · 지도 · 모집 안내
 
 assets/css/site.css 공통 스타일 (색상은 :root 변수)
 assets/js/site.js   공통 헤더/푸터/맨위로 버튼 + 연구실 기본정보(SITE)
-assets/img/         로고, 사진 (넣는 방법: assets/img/README.md)
+assets/img/         경북대 공식 로고(knu-signature.png 등), 사진 (넣는 방법: assets/img/README.md)
 
 data/members.js       구성원 데이터
 data/publications.js  논문 데이터
@@ -41,10 +41,16 @@ data/news.js          소식 데이터
 | 소식 추가 | `data/news.js` |
 | 연구 분야 글 수정 | `research.html` 의 각 `<article class="block">` |
 | 연혁 수정 | `about.html` 의 `<ul class="timeline">` |
-| 주소/이메일/로고 | `assets/js/site.js` 의 `SITE` |
+| 주소/전화/이메일/로고 경로 | `assets/js/site.js` 의 `SITE` |
 
 > 주의: `data/*.js` 는 자바스크립트 문법입니다. 항목 사이의 쉼표(`,`)와 따옴표(`"`)가 빠지면 해당 페이지가 비어 보입니다.
 > 저장 전에 한 번 확인하세요. 제목에 따옴표가 들어가면 `\"` 로 씁니다.
+
+## 디자인 기준
+
+경북대학교 홈페이지(knu.ac.kr)의 UI 규정을 따릅니다: KNU Red `#DA2127`, 푸터 `#2E3240`, 포인트 골드 `#C48B3A`,
+서체 Roboto + Noto Sans KR. 색상은 `assets/css/site.css` 맨 위 `:root` 변수에서 관리합니다.
+로고는 대학 UI 페이지에서 배포하는 파일을 사용했으며, 교육·행정 목적(연구실 홈페이지)에 한해 사용합니다.
 
 ## 사진 넣기
 
