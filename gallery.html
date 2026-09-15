@@ -1,1 +1,117 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gallery | KNU Water Resources Lab</title>
+  <meta name="description" content="경북대학교 수자원 연구실 갤러리 — 학술대회, 연구실 생활, 현장 조사 사진">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script src="assets/js/site.js"></script>
+  <script src="data/gallery.js"></script>
+  <style>
+    .g-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .g-grid .year-head{grid-column:1/-1;margin:18px 0 0}
+    .g-grid .year-head:first-child{margin-top:0}
+    .g-card .cat{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--brand);margin-right:6px}
+    @media (max-width:980px){.g-grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:640px){.g-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<div id="site-header"></div>
 
+<section class="page-hero" aria-label="Gallery">
+  <div class="pattern"></div>
+  <div class="container">
+    <div class="crumbs"><a href="index.html">Home</a> / Gallery</div>
+    <h1>Gallery</h1>
+    <p>학술대회, 연구실 생활, 현장 조사의 순간들을 기록합니다.</p>
+  </div>
+</section>
+
+<main class="section" style="padding-top:48px">
+  <div class="container">
+    <div class="chips" id="chips" role="tablist" aria-label="카테고리"></div>
+    <div class="g-grid" id="grid"></div>
+  </div>
+</main>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="사진 크게 보기">
+  <button class="close" type="button" id="lb-close" aria-label="닫기">✕</button>
+  <figure>
+    <div class="lb-media" id="lb-media"></div>
+    <figcaption id="lb-cap"></figcaption>
+  </figure>
+</div>
+
+<div id="site-footer"></div>
+
+<script>
+(function () {
+  const G = ((window.LAB_DATA || {}).gallery || []).slice()
+    .sort((a, b) => String(b.date).localeCompare(String(a.date)));
+  const cats = ["All", ...Array.from(new Set(G.map((g) => g.category).filter(Boolean)))];
+  let cur = "All";
+
+  const chips = document.getElementById("chips");
+  const grid = document.getElementById("grid");
+
+  chips.innerHTML = cats.map((c) =>
+    `<button type="button" data-cat="${esc(c)}" class="${c === cur ? "active" : ""}">${esc(c)}${c === "All" ? ` (${G.length})` : ""}</button>`).join("");
+
+  function thumb(it) {
+    return it.image
+      ? `<img src="${esc(it.image)}" alt="${esc(it.title)}" loading="lazy" data-label="${esc(it.category || "")}" onerror="imgFallback(this)">`
+      : `<span class="ph-label">${esc(it.category || "Photo")}</span>`;
+  }
+
+  function render() {
+    const items = G.filter((g) => cur === "All" || g.category === cur);
+    let html = "", year = null;
+    items.forEach((it, idx) => {
+      const y = String(it.date || "").slice(0, 4);
+      if (y !== year) { year = y; html += `<div class="year-head">${esc(y)}</div>`; }
+      html += `<div class="g-card" data-idx="${G.indexOf(it)}" tabindex="0" role="button" aria-label="${esc(it.title)} 크게 보기">
+        <div class="g-thumb ph">${thumb(it)}</div>
+        <div class="g-body">
+          <div class="date"><span class="cat">${esc(it.category || "")}</span>${esc(it.date)}</div>
+          <div class="title">${esc(it.title)}</div>
+        </div>
+      </div>`;
+    });
+    grid.innerHTML = html || `<p class="empty" style="grid-column:1/-1">등록된 사진이 없습니다.</p>`;
+  }
+  render();
+
+  chips.querySelectorAll("button").forEach((b) => b.addEventListener("click", () => {
+    cur = b.dataset.cat;
+    chips.querySelectorAll("button").forEach((x) => x.classList.toggle("active", x === b));
+    render();
+  }));
+
+  /* ---------- Lightbox ---------- */
+  const lb = document.getElementById("lightbox"), media = document.getElementById("lb-media"), cap = document.getElementById("lb-cap");
+  function open(idx) {
+    const it = G[idx]; if (!it) return;
+    media.className = "lb-media" + (it.image ? "" : " ph");
+    media.innerHTML = it.image
+      ? `<img src="${esc(it.image)}" alt="${esc(it.title)}" onerror="this.parentElement.classList.add('ph');imgFallback(this)">`
+      : `<span class="ph-label">${esc(it.category || "Photo")}</span>`;
+    cap.innerHTML = `<b>${esc(it.title)}</b> · ${esc(it.date)}${it.caption ? `<br><span style="font-size:14px">${esc(it.caption)}</span>` : ""}`;
+    lb.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+  function close() { lb.classList.remove("open"); document.body.style.overflow = ""; }
+  grid.addEventListener("click", (e) => { const c = e.target.closest(".g-card"); if (c) open(+c.dataset.idx); });
+  grid.addEventListener("keydown", (e) => { const c = e.target.closest(".g-card"); if (c && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); open(+c.dataset.idx); } });
+  document.getElementById("lb-close").addEventListener("click", close);
+  lb.addEventListener("click", (e) => { if (e.target === lb) close(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
+})();
+</script>
+</body>
+</html>

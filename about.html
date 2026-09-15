@@ -1,1 +1,155 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About | KNU Water Resources Lab</title>
+  <meta name="description" content="경북대학교 토목공학과 수자원 연구실 소개 — 연구 비전, 연혁, 협력 기관">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script src="assets/js/site.js"></script>
+  <script src="data/publications.js"></script>
+  <script src="data/members.js"></script>
+  <style>
+    .intro{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center}
+    .intro .photo{border-radius:16px;overflow:hidden;aspect-ratio:4/3;border:1px solid var(--line)}
+    .intro p{color:#1f2937}
+    .quote{border-left:4px solid var(--brand);padding:6px 0 6px 18px;color:#374151;font-size:17px;margin:18px 0}
+    @media (max-width:900px){.intro{grid-template-columns:1fr}}
+    .two{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:start}
+    @media (max-width:900px){.two{grid-template-columns:1fr}}
+    .partners{display:flex;flex-wrap:wrap;gap:10px}
+    .partners span{padding:8px 14px;border-radius:999px;background:#fff;border:1px solid var(--line);font-weight:700;font-size:14px}
+    .loc{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center}
+    @media (max-width:900px){.loc{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<div id="site-header"></div>
 
+<section class="page-hero" aria-label="About">
+  <div class="bg" style="background-image:url('assets/img/about.jpg')"></div> <!-- ← 선택: 배경 이미지 -->
+  <div class="pattern"></div>
+  <div class="container">
+    <div class="crumbs"><a href="index.html">Home</a> / About</div>
+    <h1>About the Lab</h1>
+    <p>Water Resources Laboratory · Department of Civil Engineering · Kyungpook National University</p>
+  </div>
+</section>
+
+<main>
+  <!-- Overview -->
+  <section class="section">
+    <div class="container intro">
+      <div>
+        <span class="eyebrow">Who we are</span>
+        <h2 class="section-title">경북대학교 수자원 연구실</h2>
+        <p>수자원 연구실은 경북대학교 공과대학 토목공학과 소속으로, 하천·도시·연안에서 일어나는 <b>홍수 현상의 수치해석</b>과
+          <b>수자원 관리</b>를 연구합니다. 한건연 명예교수님이 하천 수리학과 홍수 해석의 기반을 다졌고,
+          현재는 김병현 교수님의 지도 아래 계산수리학(Computational Hydraulics)을 중심으로 연구 영역을 넓혀 가고 있습니다.</p>
+        <p>자체 개발한 Godunov 기반 유한체적모형(FVM)을 비롯해 HEC-RAS, SWMM, InfoWorks ICM, CFD/SPH 등 다양한 모형을 다루며,
+          최근에는 수치모형과 기계학습을 결합한 <b>실시간 홍수 예측</b>, <b>설명가능한 AI 기반 취약성 평가</b>,
+          <b>원전 부지 확률론적 홍수위험평가</b>로 연구를 확장하고 있습니다.</p>
+        <blockquote class="quote">“물리 기반 모형의 정확성과 인공지능의 속도를 결합하여, 재난 현장에서 바로 쓸 수 있는 홍수 정보를 만듭니다.”</blockquote>
+      </div>
+      <div class="photo ph">
+        <img src="assets/img/about.jpg" alt="수자원 연구실 단체 사진" data-label="Lab photo" onerror="imgFallback(this)"> <!-- ← assets/img/about.jpg -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission -->
+  <section class="section tight" style="background:var(--surface)">
+    <div class="container">
+      <span class="eyebrow">Mission</span>
+      <h2 class="section-title">우리가 하는 일</h2>
+      <p class="section-lead">해석(Modeling) → 예측(Prediction) → 결정(Decision)으로 이어지는 연구 흐름</p>
+      <div class="grid c3">
+        <div class="card"><div class="icon">≋</div><h3>Modeling</h3><p>1D–2D–3D 수리동역학 모형으로 도시·연안·하천의 홍수를 물리적으로 재현하고 실측 자료로 검증합니다.</p></div>
+        <div class="card"><div class="icon">◎</div><h3>Prediction</h3><p>수치모형 시나리오를 학습한 AI로 침수심·위험등급을 실시간 예측하고, XAI로 원인을 설명합니다.</p></div>
+        <div class="card"><div class="icon">⇶</div><h3>Decision</h3><p>System Dynamics, LID 평가, 대피 네트워크 분석으로 정부·산업계의 재난 대응 의사결정을 지원합니다.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- At a glance + Timeline -->
+  <section class="section">
+    <div class="container two">
+      <div>
+        <span class="eyebrow">Milestones</span>
+        <h2 class="section-title">연혁</h2>
+        <ul class="timeline">
+          <li><div class="when">2025</div><div class="what">Progress in Disaster Science 논문 게재 · ISTP, ACFM 발표</div><div class="sub">강우 통계 특성을 고려한 기계학습 기반 도시 침수 예측</div></li>
+          <li><div class="when">2024</div><div class="what">한건연 명예교수, 한국물학술단체연합회 제16대 회장 취임</div><div class="sub">ICATI 2024(일본 가나자와) 연안 도시 2D/3D 침수 해석 발표</div></li>
+          <li><div class="when">2023</div><div class="what">USNRC PFHA Research Workshop(미국) 발표</div><div class="sub">복합 재해에 의한 원전 부지 침수 해석 · IAHR World Congress(비엔나) · AGU Fall Meeting</div></li>
+          <li><div class="when">2022</div><div class="what">김병현 교수, 국가재난안전관리 유공 행정안전부 장관 표창</div><div class="sub">중앙재난평가위원회·재난대비훈련 중앙평가위원회 위원 활동</div></li>
+          <li><div class="when">2016</div><div class="what">Journal of Hydraulic Engineering (ASCE) 논문 게재</div><div class="sub">강릉 다중 댐 붕괴 홍수 모형 불확실성 평가</div></li>
+          <li><div class="when">2011 – 2016</div><div class="what">University of California, Irvine 공동연구</div><div class="sub">Sanders · Famiglietti 연구그룹과 2차원 Godunov 홍수모형(BreZo) 및 도시 홍수 모델링 SCI 논문 다수</div></li>
+          <li><div class="when">2012</div><div class="what">한건연 교수, 한국수자원학회 제24대 회장 선출</div><div class="sub">경북대학교 방재연구소 소장 · 차세대홍수방어기술개발연구단 단장</div></li>
+        </ul>
+        <p class="note">※ 연혁은 공개된 자료를 바탕으로 정리했습니다. 추가·수정할 항목은 about.html 의 timeline 목록에서 편집하세요.</p>
+      </div>
+      <div>
+        <span class="eyebrow">At a glance</span>
+        <h2 class="section-title">한눈에 보기</h2>
+        <div class="stats" id="stats" style="grid-template-columns:1fr 1fr"></div>
+        <div style="margin-top:28px">
+          <span class="eyebrow">Collaboration</span>
+          <h3 style="margin:0 0 12px">협력 및 활동</h3>
+          <div class="partners">
+            <span>University of California, Irvine</span>
+            <span>행정안전부</span>
+            <span>한국수자원학회</span>
+            <span>한국방재학회</span>
+            <span>대한토목학회</span>
+            <span>한국물학술단체연합회</span>
+            <span>AOGS · AGU · IAHR</span>
+            <span>USNRC PFHA Workshop</span>
+            <span>KEPIC-Week</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location teaser -->
+  <section class="section tight" style="background:var(--surface)">
+    <div class="container loc">
+      <div>
+        <span class="eyebrow">Location</span>
+        <h2 class="section-title">찾아오시는 길</h2>
+        <p style="color:#374151" id="addr"></p>
+        <a class="btn primary" href="contact.html">Contact &amp; Map →</a>
+      </div>
+      <div class="card">
+        <h3>연구실에 관심 있으신가요?</h3>
+        <p>대학원 진학, 학부연구생, 공동연구 문의는 언제든 환영합니다. 관심 분야와 간단한 이력을 이메일로 보내 주세요.</p>
+        <p style="margin-top:12px"><a class="btn outline" id="mail" href="#">이메일 보내기</a></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script>
+(function () {
+  const P = (window.LAB_DATA || {}).publications || {};
+  const M = (window.LAB_DATA || {}).members || {};
+  const n = (k) => (P[k] || []).length;
+  const stats = [
+    { n: n("sci"), l: "SCI(E) 논문" },
+    { n: n("domestic"), l: "국내 논문" },
+    { n: n("intConf"), l: "국제 학술발표" },
+    { n: n("domConf"), l: "국내 학술발표" }
+  ];
+  document.getElementById("stats").innerHTML = stats.map((s) =>
+    `<div class="stat"><div class="n">${s.n}</div><div class="l">${s.l}</div></div>`).join("");
+  document.getElementById("addr").textContent = SITE.address;
+  document.getElementById("mail").href = "mailto:" + SITE.email;
+})();
+</script>
+</body>
+</html>

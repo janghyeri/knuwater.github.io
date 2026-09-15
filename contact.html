@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact | KNU Water Resources Lab</title>
+  <meta name="description" content="경북대학교 수자원 연구실 연락처 및 오시는 길 — 대구광역시 북구 대학로 80, 경북대학교 공과대학 2호관 111호">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script src="assets/js/site.js"></script>
+  <style>
+    .c-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:28px;align-items:start}
+    @media (max-width:900px){.c-grid{grid-template-columns:1fr}}
+    .info{display:grid;gap:14px}
+    .info .row{display:grid;grid-template-columns:40px 1fr;gap:12px;align-items:start}
+    .info .ic{width:40px;height:40px;border-radius:12px;background:var(--brand-50);color:var(--brand);display:grid;place-items:center;font-size:18px;font-weight:900}
+    .info b{display:block;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+    .map{border-radius:16px;overflow:hidden;border:1px solid var(--line);aspect-ratio:4/3;background:#e5e7eb}
+    .map iframe{width:100%;height:100%;border:0;display:block}
+    .join{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    @media (max-width:900px){.join{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<section class="page-hero" aria-label="Contact">
+  <div class="pattern"></div>
+  <div class="container">
+    <div class="crumbs"><a href="index.html">Home</a> / Contact</div>
+    <h1>Contact</h1>
+    <p>연구실 방문, 대학원 진학, 공동연구 문의를 환영합니다.</p>
+  </div>
+</section>
+
+<main>
+  <section class="section">
+    <div class="container c-grid">
+      <div class="card">
+        <span class="eyebrow">Get in touch</span>
+        <h2 class="section-title" style="font-size:24px">연락처</h2>
+        <div class="info">
+          <div class="row"><div class="ic">⌂</div><div><b>Lab</b><span id="c-lab"></span></div></div>
+          <div class="row"><div class="ic">◉</div><div><b>Address</b><span id="c-addr"></span><br><span class="note" id="c-addr-en"></span></div></div>
+          <div class="row"><div class="ic">✉</div><div><b>Email</b><a id="c-mail" href="#" style="color:var(--brand);font-weight:700"></a></div></div>
+          <div class="row"><div class="ic">☎</div><div><b>Phone</b><span>학과 사무실을 통해 문의 (경북대학교 대표번호 053-950-5114)</span></div></div>
+          <div class="row"><div class="ic">👤</div><div><b>Principal Investigator</b><span>Prof. Byunghyun Kim (김병현)</span></div></div>
+        </div>
+        <div class="divider"></div>
+        <a class="btn primary" id="c-mail-btn" href="#">이메일 보내기</a>
+      </div>
+      <div>
+        <div class="map">
+          <!-- 구글 지도 임베드 (API 키 불필요). 카카오맵으로 바꾸려면 iframe src 를 교체하세요. -->
+          <iframe title="경북대학교 공과대학 2호관 지도" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            src="https://maps.google.com/maps?q=%EA%B2%BD%EB%B6%81%EB%8C%80%ED%95%99%EA%B5%90%20%EA%B3%B5%EA%B3%BC%EB%8C%80%ED%95%99%202%ED%98%B8%EA%B4%80&t=&z=16&ie=UTF8&iwloc=&output=embed"></iframe>
+        </div>
+        <p class="note" style="margin-top:10px">
+          <a href="https://map.naver.com/p/search/%EA%B2%BD%EB%B6%81%EB%8C%80%ED%95%99%EA%B5%90%20%EA%B3%B5%EA%B3%BC%EB%8C%80%ED%95%99%202%ED%98%B8%EA%B4%80" target="_blank" rel="noopener" style="text-decoration:underline">네이버 지도</a> ·
+          <a href="https://map.kakao.com/?q=%EA%B2%BD%EB%B6%81%EB%8C%80%ED%95%99%EA%B5%90%20%EA%B3%B5%EA%B3%BC%EB%8C%80%ED%95%99%202%ED%98%B8%EA%B4%80" target="_blank" rel="noopener" style="text-decoration:underline">카카오맵</a> ·
+          <a href="https://www.google.com/maps/search/%EA%B2%BD%EB%B6%81%EB%8C%80%ED%95%99%EA%B5%90+%EA%B3%B5%EA%B3%BC%EB%8C%80%ED%95%99+2%ED%98%B8%EA%B4%80" target="_blank" rel="noopener" style="text-decoration:underline">구글 지도</a>에서 열기
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tight" style="background:var(--surface)">
+    <div class="container">
+      <span class="eyebrow">Join us</span>
+      <h2 class="section-title">함께 연구할 분을 찾습니다</h2>
+      <p class="section-lead">수리학·수문학·수치해석·기계학습에 관심 있는 분이라면 전공 배경과 관계없이 환영합니다.</p>
+      <div class="join">
+        <div class="card"><h3>대학원생 (석사·박사)</h3><p>도시·연안 홍수 수치모델링, AI 기반 홍수 예측, 확률론적 홍수위험 평가 등 다양한 주제로 연구할 수 있습니다. 국가 R&amp;D 과제 참여 기회가 있습니다.</p></div>
+        <div class="card"><h3>학부연구생</h3><p>HEC-RAS·SWMM 등 수리 모형과 Python 데이터 분석을 배우며 연구에 참여합니다. 학기 중·방학 중 모두 지원 가능합니다.</p></div>
+        <div class="card"><h3>공동연구 · 자문</h3><p>지자체·공공기관·산업계와의 홍수 위험 평가, 침수 예측 시스템 구축, 재난 대응 계획 수립 협력을 환영합니다.</p></div>
+      </div>
+      <p style="margin-top:20px">지원 시 <b>관심 분야, 간단한 이력(CV), 성적표</b>를 이메일로 보내 주세요. → <a id="c-mail-2" href="#" style="color:var(--brand);font-weight:800;text-decoration:underline"></a></p>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script>
+(function () {
+  document.getElementById("c-lab").textContent = `${SITE.deptKo} ${SITE.labKo} (${SITE.labEn})`;
+  document.getElementById("c-addr").textContent = SITE.address;
+  document.getElementById("c-addr-en").textContent = SITE.addressEn;
+  ["c-mail", "c-mail-2"].forEach((id) => { const a = document.getElementById(id); a.href = "mailto:" + SITE.email; a.textContent = SITE.email; });
+  document.getElementById("c-mail-btn").href = "mailto:" + SITE.email;
+})();
+</script>
+</body>
+</html>

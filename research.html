@@ -1,207 +1,231 @@
 <!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Research | KNU Water Resources Lab</title>
-  <meta name="description" content="KNU WRS Lab Research — Urban flood modeling, FVM shallow water, System Dynamics decision support">
+  <meta name="description" content="경북대학교 수자원 연구실의 연구 분야 — 도시 홍수 모델링, 연안·복합 홍수, AI 기반 홍수 예측, 댐 붕괴·확률론적 홍수위험 평가, 물관리 의사결정 지원">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script src="assets/js/site.js"></script>
   <style>
-    :root{
-      --brand:#B5121B; --brand-600:#8F0E16; --ink:#111827; --muted:#6b7280;
-      --bg:#fff; --surface:#f9fafb; --line:#e5e7eb; --radius:14px; --maxw:1200px;
-      --shadow:0 12px 30px rgba(2,8,23,.08);
-    }
-    *{box-sizing:border-box} body{margin:0;font-family:"Pretendard Variable",system-ui,-apple-system,Segoe UI,Roboto,Noto Sans KR,sans-serif;color:var(--ink);background:var(--bg)}
-    a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
-    .container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+    .focus{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 26px;box-shadow:0 2px 10px rgba(2,8,23,.04)}
+    .focus ul{margin:0;padding-left:18px;color:#1f2937}
+    .focus li{margin:6px 0}
+    .areas{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:18px}
+    .area{display:flex;flex-direction:column;gap:6px;padding:16px;border:1px solid var(--line);border-radius:14px;background:#fff;transition:transform .15s}
+    .area:hover{transform:translateY(-2px);border-color:#cbd5e1}
+    .area .ic{width:42px;height:42px;border-radius:12px;background:var(--brand-50);color:var(--brand);display:grid;place-items:center;font-weight:900}
+    .area b{font-size:15px}
+    .area small{color:var(--muted)}
+    @media (max-width:1100px){.areas{grid-template-columns:repeat(3,1fr)}}
+    @media (max-width:640px){.areas{grid-template-columns:1fr 1fr}}
 
-    /* header */
-    header{position:sticky;top:0;z-index:40;background:#ffffffcc;backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--line)}
-    .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
-    .brand{display:flex;gap:12px;align-items:center}
-    .brand-logo{width:44px;height:44px;border-radius:50%;object-fit:contain}
-    .brand-stack{display:flex;flex-direction:column;line-height:1.05}
-    .brand-stack .dept{font-size:12px;color:var(--muted);font-weight:700}
-    .brand-stack .lab{font-size:16px;font-weight:900}
-    .menu{display:flex;gap:28px;align-items:center}
-    .menu a{font-weight:600}
-    .menu .cta{padding:10px 14px;background:var(--brand);color:#fff;border-radius:12px;box-shadow:var(--shadow)}
-    .menu-toggle{display:none;background:none;border:0;width:44px;height:44px}
-    @media (max-width:980px){
-      .menu{display:none} .menu-toggle{display:inline-grid;place-items:center}
-      .menu.open{display:flex;position:absolute;top:72px;right:16px;left:16px;flex-direction:column;gap:12px;padding:16px;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}
-    }
+    .block{margin-top:36px;border:1px solid var(--line);border-radius:16px;background:#fff;box-shadow:0 2px 10px rgba(2,8,23,.04);overflow:hidden;scroll-margin-top:90px}
+    .block .inner{display:grid;grid-template-columns:1.1fr .9fr;gap:0}
+    .block .txt{padding:28px 30px}
+    .block .fig{min-height:320px}
+    .block:nth-child(even) .inner{grid-template-columns:.9fr 1.1fr}
+    .block:nth-child(even) .fig{order:-1}
+    .block h3{margin:0 0 10px;font-size:24px;font-weight:900}
+    .block .sub{color:var(--brand);font-weight:800;font-size:13px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;display:block}
+    .block p{margin:0 0 12px;color:#1f2937}
+    .block .label{font-weight:800;font-size:13px;color:var(--muted);margin:16px 0 4px;letter-spacing:.06em;text-transform:uppercase}
+    .reps{margin:0;padding-left:18px;color:#374151;font-size:14px}
+    .reps li{margin:4px 0}
+    .reps b{font-weight:700;color:var(--ink)}
+    @media (max-width:900px){.block .inner,.block:nth-child(even) .inner{grid-template-columns:1fr}.block:nth-child(even) .fig{order:0}.block .fig{min-height:220px}}
 
-    /* hero */
-    .hero{position:relative;height:340px;display:grid;place-items:center;color:#fff;overflow:hidden}
-    .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.45))}
-    .hero-bg{position:absolute;inset:0;background:url('/assets/research-hero.jpg') center/cover no-repeat;} /* ← 교체 */
-    .hero h1{position:relative;font-size:44px;margin:0;text-shadow:0 3px 8px rgba(0,0,0,.5)}
-    @media (max-width:980px){.hero{height:260px}.hero h1{font-size:32px}}
-
-    /* content */
-    .section{padding:56px 0}
-    .kicker{font-weight:900;font-size:24px;margin:0 0 10px}
-    .intro{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 2px 10px rgba(2,8,23,.04)}
-    .intro ul{margin:0;padding-left:16px;color:#1f2937}
-    .icons{margin-top:18px;border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;background:#fff}
-    .ic{display:flex;gap:12px;align-items:center}
-    .ic img{width:58px;height:58px;border-radius:50%;object-fit:cover;border:1px solid var(--line);background:#f3f4f6}
-    .ic b{display:block}
-
-    /* research blocks */
-    .block{margin-top:28px;border:1px solid var(--line);border-radius:14px;background:#fff;box-shadow:0 2px 10px rgba(2,8,23,.04)}
-    .block .wrap{padding:18px}
-    .block h3{margin:4px 0 10px}
-    .block p{margin:0 0 12px;color:#111827}
-    .block .fig{padding:14px;border-top:1px dashed var(--line);background:#fafafa}
-    .block .fig img{border-radius:10px}
-
-    /* footer */
-    footer{padding:36px 0;border-top:1px solid var(--line);color:#475569;margin-top:56px}
-    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:20px}
-    .footer-links{list-style:none;padding:0;margin:0;display:grid;gap:8px}
-    @media (max-width:980px){.footer-grid{grid-template-columns:1fr 1fr}}
-
+    .tools{display:flex;flex-wrap:wrap;gap:10px}
+    .tools span{padding:8px 14px;border-radius:999px;background:#fff;border:1px solid var(--line);font-weight:700;font-size:14px}
   </style>
 </head>
 <body>
-  <!-- header -->
-  <header>
-    <div class="container nav">
-      <a class="brand" href="/index.html">
-        <img class="brand-logo" src="/assets/knu-logo.png" alt="KNU logo">
-        <span class="brand-stack">
-          <span class="dept">경북대학교 토목공학과</span>
-          <span class="lab">수자원 연구실</span>
-        </span>
-      </a>
-      <nav>
-        <button class="menu-toggle" aria-label="메뉴 열기" onclick="toggleMenu()">☰</button>
-        <div id="menu" class="menu">
-          <a href="/index.html">Home</a>
-          <a href="/research.html">Research</a>
-          <a href="/members.html">Members</a>
-          <a href="/publication.html">Publication</a>
-          <a href="/gallery.html">Gallery</a>
-          <a href="/about.html">About</a>
-          <a href="/contact.html" class="cta">Contact</a>
-        </div>
-      </nav>
-    </div>
-  </header>
+<div id="site-header"></div>
 
-  <!-- hero -->
-  <section class="hero" aria-label="research-hero">
-    <div class="hero-bg"></div>
+<section class="page-hero" aria-label="Research">
+  <div class="bg" style="background-image:url('assets/img/research/hero.jpg')"></div> <!-- ← 선택: 배경 이미지 -->
+  <div class="pattern"></div>
+  <div class="container">
+    <div class="crumbs"><a href="index.html">Home</a> / Research</div>
     <h1>Research</h1>
-  </section>
+    <p>하천·도시·연안의 홍수를 물리 기반 수치모형으로 재현하고, 인공지능과 결합하여 예측·평가·의사결정까지 연결합니다.</p>
+  </div>
+</section>
 
-  <main>
-    <section class="section">
-      <div class="container">
-        <h2 class="kicker">│ Our research focuses on :</h2>
+<main class="section" style="padding-top:48px">
+  <div class="container">
 
-        <div class="intro">
-          <ul>
-            <li><b>자연 유체역학 원리를 규명</b>하고 이를 응용한 <b>바이오-영감형( bio-inspired ) 유량·정화 기술</b> 개발</li>
-            <li>도시·자연 복합 환경의 <b>다상/다중규모 흐름</b>과 <b>산업 공정 수송 현상</b>을 정량 분석</li>
+    <h2 class="kicker">Our research focuses on</h2>
+    <div class="focus">
+      <ul>
+        <li><b>도시·연안 홍수의 다중규모 수치모델링</b> — 1D 관망(SWMM)과 2D 지표면 흐름(자체 FVM, HEC-RAS 2D, InfoWorks ICM), 3D CFD/SPH를 연계한 복합 침수 해석</li>
+        <li><b>AI 기반 실시간 홍수 예측</b> — 수치모형 시나리오를 학습한 Random Forest · LSTM · SVM 예측 모형, 설명가능한 AI(XAI) 취약성 매핑, Vision Transformer 강우 예측</li>
+        <li><b>극한·복합 재해의 위험도 평가와 의사결정 지원</b> — 댐 붕괴 불확실성, 원전 부지 확률론적 홍수위험평가(PFHA), System Dynamics 피해 분석, SWMM-LID 유출 저감</li>
+      </ul>
+    </div>
+
+    <div class="areas" aria-label="연구 분야 바로가기">
+      <a class="area" href="#urban-flood"><span class="ic">01</span><b>Urban Flood Modeling</b><small>1D–2D coupled hydrodynamics</small></a>
+      <a class="area" href="#coastal"><span class="ic">02</span><b>Coastal &amp; Compound Flooding</b><small>Surge · Overtopping · 3D CFD/SPH</small></a>
+      <a class="area" href="#ai"><span class="ic">03</span><b>AI-based Flood Prediction</b><small>ML · XAI · Vision Transformer</small></a>
+      <a class="area" href="#hazard"><span class="ic">04</span><b>Dam-break &amp; Flood Hazard</b><small>FVM · Uncertainty · PFHA</small></a>
+      <a class="area" href="#decision"><span class="ic">05</span><b>Decision Support</b><small>System Dynamics · LID · Evacuation</small></a>
+    </div>
+
+    <!-- 01 -->
+    <article class="block" id="urban-flood">
+      <div class="inner">
+        <div class="txt">
+          <span class="sub">01 · Urban Flood Modeling</span>
+          <h3>도시 홍수 모델링 — 1D–2D 연계 수리동역학</h3>
+          <p>도시 침수는 하천 범람(외수)과 우수관거 월류(내수)가 동시에 일어나는 복합 현상입니다.
+            1차원 관망 모형(SWMM)과 2차원 지표면 흐름 모형(자체 개발 유한체적모형, HEC-RAS 2D, InfoWorks ICM Rain-on-Mesh)을
+            양방향으로 연계하여 도시 침수를 재현하고, 격자 유형·해상도·매개변수가 결과에 미치는 영향을 정량화합니다.</p>
+          <p>지하철·지하상가와 같은 지하공간, 건물 배치를 고려한 porous shallow-water 접근으로 계산 효율과 정확도를 함께 확보하며,
+            실측 침수흔적과 위성·항공 영상으로 모형을 검증합니다.</p>
+          <div class="label">Methods &amp; Tools</div>
+          <div>
+            <span class="pill">SWMM</span><span class="pill">HEC-RAS 1D/2D</span><span class="pill">InfoWorks ICM (Rain-on-Mesh)</span>
+            <span class="pill">In-house Godunov FVM</span><span class="pill">Mixed / hybrid mesh</span><span class="pill">Porous SWE</span><span class="pill">Parameter optimization</span>
+          </div>
+          <div class="label">Representative publications</div>
+          <ul class="reps">
+            <li><b>Parameter Optimization of Coupled 1D–2D Hydrodynamic Model for Urban Flood Inundation</b> — Water, 2023</li>
+            <li><b>A Simple and Robust Method for Simultaneous Consideration of Overland and Underground Space in Urban Flood Modeling</b> — Water, 2016</li>
+            <li><b>Urban flood modeling with porous shallow-water equations: A case study of model errors in the presence of anisotropic porosity</b> — Journal of Hydrology, 2015</li>
+            <li><b>Mesh type tradeoffs in 2D hydrodynamic modeling of flooding with a Godunov-based flow solver</b> — Advances in Water Resources, 2014</li>
           </ul>
         </div>
+        <div class="fig ph"><img src="assets/img/research/r1.jpg" alt="도시 홍수 모델링 결과" data-label="Urban flood modeling" onerror="imgFallback(this)"></div>
+      </div>
+    </article>
 
-        <div class="icons">
-          <div class="ic">
-            <img src="/assets/ic1.png" alt="Water management"> <!-- 아이콘1 -->
-            <div><b>Water management</b><br><small>Transport · Storage · Purification</small></div>
+    <!-- 02 -->
+    <article class="block" id="coastal">
+      <div class="inner">
+        <div class="txt">
+          <span class="sub">02 · Coastal &amp; Compound Flooding</span>
+          <h3>연안·복합 홍수 해석 — 해일·파랑·강우의 동시 작용</h3>
+          <p>기후변화로 극한 강우와 폭풍해일, 고파랑이 동시에 발생하는 복합 재해가 늘고 있습니다.
+            조위·해일·파랑(SWAN, EurOtop 월파량)과 강우·하천 유량을 함께 경계조건으로 부여하여 연안 도시의 2차원 침수를 해석하고,
+            건물 내부 침수는 CFD(Eulerian)와 SPH(Lagrangian) 기반 3차원 해석으로 비교·검증합니다.</p>
+          <p>2022년 태풍 힌남노 당시 포항 냉천 유역의 내·외수 복합 침수를 HEC-RAS 2D와 FVM으로 재현하고 두 모형의 특성을 비교한 연구가 대표적입니다.</p>
+          <div class="label">Methods &amp; Tools</div>
+          <div>
+            <span class="pill">SWAN</span><span class="pill">EurOtop</span><span class="pill">Storm surge &amp; tide coupling</span>
+            <span class="pill">3D CFD</span><span class="pill">SPH</span><span class="pill">HEC-RAS 2D</span><span class="pill">FVM</span>
           </div>
-          <div class="ic">
-            <img src="/assets/ic2.png" alt="Transport phenomena"> <!-- 아이콘2 -->
-            <div><b>Transport phenomena</b><br><small>Micro/meso systems · Mass transport</small></div>
-          </div>
-          <div class="ic">
-            <img src="/assets/ic3.png" alt="Flow visualization"> <!-- 아이콘3 -->
-            <div><b>Flow visualization</b><br><small>Imaging · Rheological processes</small></div>
-          </div>
+          <div class="label">Representative publications</div>
+          <ul class="reps">
+            <li><b>2D and 3D Coastal City Flood Analysis Considering Extreme Conditions and Climate Change</b> — ICATI 2024, Kanazawa</li>
+            <li><b>Estimation of Wave Overtopping Using SWAN and EurOtop in Coastal Urban Areas</b> — AGU Fall Meeting, 2023</li>
+            <li><b>HEC-RAS 2D 및 FVM 모형 기반 복합 도시 홍수 모델링</b> — 한국수자원학회 학술발표회, 2025</li>
+            <li><b>건물 내부 3차원 침수 분석을 위한 CFD-SPH 모형 비교 검토</b> — 대한토목학회 학술발표회, 2024</li>
+          </ul>
         </div>
+        <div class="fig ph"><img src="assets/img/research/r2.jpg" alt="연안 복합 홍수 해석" data-label="Coastal &amp; compound flooding" onerror="imgFallback(this)"></div>
+      </div>
+    </article>
 
-        <!-- Block 1 -->
-        <article class="block">
-          <div class="wrap">
-            <h3>From Natural Hydrodynamics to Bio-Inspired Fluid Management</h3>
-            <p>식물의 수송·정화 메커니즘(예: 수중 부유·정화 구조)을 모사하여, 고부가 정수/정화 플랫폼을 설계합니다.
-               식물 구조의 안정성과 위상 특성을 활용해 부유 안정성이 높은 모듈형 마이크로플루이딕 플랫폼을 구현합니다.</p>
+    <!-- 03 -->
+    <article class="block" id="ai">
+      <div class="inner">
+        <div class="txt">
+          <span class="sub">03 · AI-based Flood Prediction</span>
+          <h3>AI 기반 홍수 예측 — 수치모형과 기계학습의 결합</h3>
+          <p>물리 모형은 정확하지만 실시간 예측에는 계산 시간이 걸립니다.
+            수치모형으로 생성한 대량의 침수 시나리오를 학습 데이터로 삼아 Random Forest, LSTM, SVM, 로지스틱 회귀 등으로
+            격자별 침수심과 위험등급을 수 초 내에 예측하는 모형을 개발합니다.</p>
+          <p>강우의 통계적 특성(총량·강도·지속시간)을 입력 변수로 반영하고, 설명가능한 인공지능(XAI)으로 침수 취약성 지도를 작성하며,
+            기상위성 자료 기반 Vision Transformer(ClimaX) 모델로 한반도 분포형 강우를 예측하는 연구로 확장하고 있습니다.</p>
+          <div class="label">Methods &amp; Tools</div>
+          <div>
+            <span class="pill">Random Forest</span><span class="pill">LSTM</span><span class="pill">SVM</span><span class="pill">Logistic regression</span>
+            <span class="pill">Explainable AI (XAI)</span><span class="pill">Vision Transformer / ClimaX</span><span class="pill">Scenario database</span>
           </div>
-          <div class="fig">
-            <img src="/assets/r1.jpg" alt="bio-inspired platform"> <!-- 대표이미지1 -->
-          </div>
-        </article>
+          <div class="label">Representative publications</div>
+          <ul class="reps">
+            <li><b>Flood prediction in urban areas based on machine learning considering the statistical characteristics of rainfall</b> — Progress in Disaster Science, 2025</li>
+            <li><b>A Study on the Optimal Deep Learning Model for Dam Inflow Prediction</b> — Water, 2022</li>
+            <li><b>Scenario-Based Real-Time Flood Prediction with Logistic Regression</b> — Water, 2021</li>
+            <li><b>Flood Hazard Rating Prediction for Urban Areas Using Random Forest and LSTM</b> — KSCE Journal of Civil Engineering, 2020</li>
+          </ul>
+        </div>
+        <div class="fig ph"><img src="assets/img/research/r3.jpg" alt="AI 기반 홍수 예측" data-label="AI-based flood prediction" onerror="imgFallback(this)"></div>
+      </div>
+    </article>
 
-        <!-- Block 2 -->
-        <article class="block">
-          <div class="wrap">
-            <h3>Flow Visualization and Analysis of Jet Dynamics</h3>
-            <p>마이크로버블 제트의 불안정성, PIV 기반 유속장 해석 등 <b>유동 가시화</b>와 <b>정량 검증</b>을 수행합니다.
-               실측 영상·사진·현장 관측을 활용해 모델링 결과를 체계적으로 교차 검증합니다.</p>
+    <!-- 04 -->
+    <article class="block" id="hazard">
+      <div class="inner">
+        <div class="txt">
+          <span class="sub">04 · Dam-break &amp; Probabilistic Flood Hazard</span>
+          <h3>댐 붕괴·확률론적 홍수위험 평가 — 극한 사상의 수치해석</h3>
+          <p>댐·저수지 붕괴, 제방 파제와 같은 극한 사상은 관측 자료가 거의 없어 수치모형의 역할이 큽니다.
+            Godunov 기반 유한체적모형으로 불연속 흐름(충격파, 마름/젖음)을 안정적으로 해석하고,
+            다중 댐 붕괴 사례(2002년 강릉)의 불확실성 평가, 병렬 저수지 연쇄 붕괴 해석 등을 수행해 왔습니다.</p>
+          <p>최근에는 원자력발전소 부지를 대상으로 폭풍해일과 강우가 결합된 복합 재해 시나리오의 침수 해석과
+            확률론적 홍수위험평가(PFHA, Probabilistic Flood Hazard Assessment)를 수행하고 있습니다.</p>
+          <div class="label">Methods &amp; Tools</div>
+          <div>
+            <span class="pill">Godunov-type FVM</span><span class="pill">Riemann solvers</span><span class="pill">Well-balanced schemes</span>
+            <span class="pill">Uncertainty analysis</span><span class="pill">PFHA</span><span class="pill">Fuzzy TOPSIS</span>
           </div>
-          <div class="fig">
-            <img src="/assets/r2.jpg" alt="jet dynamics & PIV"> <!-- 대표이미지2 -->
-          </div>
-        </article>
+          <div class="label">Representative publications</div>
+          <ul class="reps">
+            <li><b>Flood Inundation Modelling on Nuclear Power Site due to Combined Hazards</b> — USNRC 8th PFHA Workshop, 2023</li>
+            <li><b>Application of Fuzzy TOPSIS to Flood Hazard Mapping for Levee Failure</b> — Water, 2019</li>
+            <li><b>Dam-Break Flood Model Uncertainty Assessment: A Case Study of Extreme Flooding with Multiple Dam Failures in Gangneung, South Korea</b> — Journal of Hydraulic Engineering (ASCE), 2016</li>
+            <li><b>A well-balanced unsplit finite volume model with geometric flexibility</b> — Journal of Vibroengineering, 2014</li>
+          </ul>
+        </div>
+        <div class="fig ph"><img src="assets/img/research/r4.jpg" alt="댐 붕괴 홍수 해석" data-label="Dam-break &amp; flood hazard" onerror="imgFallback(this)"></div>
+      </div>
+    </article>
 
-        <!-- Block 3 -->
-        <article class="block">
-          <div class="wrap">
-            <h3>From Microfluidic Flow Control to Real-World Applications</h3>
-            <p>FVM 기반 2D 천수해석과 HEC-RAS/SWMM 연계를 통해 도시 외수·내수 <b>복합 홍수</b>를 재현하고,
-               시스템 다이내믹스로 장기 <b>수요-공급</b> 시나리오를 평가합니다. 결과는 실무 의사결정 대시보드로 연결합니다.</p>
+    <!-- 05 -->
+    <article class="block" id="decision">
+      <div class="inner">
+        <div class="txt">
+          <span class="sub">05 · Water Management &amp; Decision Support</span>
+          <h3>물관리 의사결정 지원 — 해석 결과를 정책과 설계로</h3>
+          <p>해석 결과가 실제 정책과 설계로 이어지도록 의사결정 도구를 개발합니다.
+            System Dynamics로 침수 피해와 대응 시나리오의 장기 영향을 평가하고, SWMM-LID로 저영향개발 기법의 물수지 개선·유출 저감 효과를 정량화하며,
+            네트워크 분석으로 대피소까지의 이동거리·대피시간·대피가능 범위를 산정합니다.</p>
+          <p>가뭄 예측, 저수지 탁수·유해 남조류 발생 예측 등 수자원 관리 전반으로 기계학습 기반 연구를 확장하고 있습니다.</p>
+          <div class="label">Methods &amp; Tools</div>
+          <div>
+            <span class="pill">System Dynamics</span><span class="pill">SWMM-LID</span><span class="pill">Network analysis (evacuation)</span>
+            <span class="pill">Integrated hazard mapping</span><span class="pill">ML for drought / water quality</span>
           </div>
-          <div class="fig">
-            <img src="/assets/r3.jpg" alt="applications to flood & water systems"> <!-- 대표이미지3 -->
-          </div>
-        </article>
+          <div class="label">Representative publications</div>
+          <ul class="reps">
+            <li><b>도시지역 물수지 개선 효과 분석을 위한 SWMM-LID 적용</b> — 한국수자원학회논문집, 2024</li>
+            <li><b>네트워크 분석을 통한 대피소까지의 이동거리, 대피시간 및 대피가능 범위 산정</b> — 한국방재학회논문집, 2024</li>
+            <li><b>통합 재해지도 작성 기법 개발 (Ⅰ)·(Ⅱ)</b> — 한국수자원학회논문집, 2022</li>
+            <li><b>FVM 기반 2차원 침수 해석과 System Dynamics 활용 피해 영향 분석</b> — 한국수자원학회 학술발표회, 2025</li>
+          </ul>
+        </div>
+        <div class="fig ph"><img src="assets/img/research/r5.jpg" alt="물관리 의사결정 지원" data-label="Decision support" onerror="imgFallback(this)"></div>
+      </div>
+    </article>
 
+    <!-- Tools -->
+    <section style="margin-top:56px">
+      <h2 class="kicker">Modeling tools we use</h2>
+      <div class="tools">
+        <span>In-house FVM (Godunov)</span><span>HEC-RAS 1D/2D</span><span>SWMM / SWMM-LID</span><span>InfoWorks ICM</span>
+        <span>FLOW-3D</span><span>FLO-2D</span><span>EFDC</span><span>CCHE1D</span><span>SWAN</span><span>EurOtop</span>
+        <span>CFD / SPH</span><span>Python · Machine learning</span><span>System Dynamics</span><span>GIS</span>
       </div>
     </section>
-  </main>
 
-  <!-- footer -->
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <div class="brand" style="margin-bottom:8px">
-            <img class="brand-logo" src="/assets/knu-logo.png" alt="KNU logo">
-            <span class="brand-stack">
-              <span class="dept">경북대학교 토목공학과</span>
-              <span class="lab">수자원 연구실</span>
-            </span>
-          </div>
-          <p style="margin:0;color:#6b7280">© <span id="year"></span> KNU Water Resources Lab</p>
-        </div>
-        <div>
-          <h4>Links</h4>
-          <ul class="footer-links">
-            <li><a href="/publication.html">Publication</a></li>
-            <li><a href="/members.html">Members</a></li>
-            <li><a href="/gallery.html">Gallery</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Contact</h4>
-          <ul class="footer-links">
-            <li><a href="mailto:hello@example.com">hello@example.com</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </footer>
+  </div>
+</main>
 
-  <script>
-    function toggleMenu(){ const m=document.getElementById('menu'); if(m) m.classList.toggle('open'); }
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+<div id="site-footer"></div>
 </body>
 </html>
-

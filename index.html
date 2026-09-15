@@ -1,345 +1,234 @@
 <!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>KNU Water Resources Lab</title>
-  <meta name="description" content="경북대학교 토목공학과 수자원 연구실 · Urban Flood · Water Management · Data Fusion"/>
-  <link rel="preconnect" href="https://cdn.jsdelivr.net"/>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css"/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KNU Water Resources Lab | 경북대학교 토목공학과 수자원 연구실</title>
+  <meta name="description" content="경북대학교 토목공학과 수자원 연구실 — 도시·연안 홍수 수치모델링(FVM, HEC-RAS, SWMM), AI 기반 홍수 예측, 재난 의사결정 지원 연구">
+  <meta property="og:title" content="KNU Water Resources Lab">
+  <meta property="og:description" content="Computational hydraulics for flood-resilient cities — 경북대학교 토목공학과 수자원 연구실">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script src="assets/js/site.js"></script>
+  <script src="data/publications.js"></script>
+  <script src="data/members.js"></script>
+  <script src="data/gallery.js"></script>
+  <script src="data/news.js"></script>
   <style>
-    :root{
-      --brand:#B5121B; --brand-600:#8F0E16; --ink:#111827; --muted:#6b7280;
-      --bg:#fff; --surface:#f9fafb; --line:#e5e7eb; --radius:14px;
-      --shadow:0 12px 30px rgba(2,8,23,.08); --maxw:1200px;
-      --heroOverlay: linear-gradient(180deg, rgba(3,6,23,.15), rgba(3,6,23,.45));
-    }
-    *{box-sizing:border-box} html,body{height:100%}
-    body{margin:0;font-family:"Pretendard Variable",system-ui,-apple-system,Segoe UI,Roboto,Noto Sans KR,sans-serif;color:var(--ink);background:var(--bg)}
-    a{color:inherit;text-decoration:none} img{max-width:100%;display:block}
-    .container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+    /* ---- 메인 히어로 ---- */
+    .hero{position:relative;isolation:isolate;color:#fff;min-height:72vh;display:grid;align-items:center;background:radial-gradient(1200px 600px at 50% -10%,#0b1e39 0%,#0a1424 45%,#07101d 100%)}
+    .hero-bg{position:absolute;inset:0;background:url("assets/img/hero.jpg") center/cover no-repeat;opacity:.5;z-index:-3} /* ← assets/img/hero.jpg 넣으면 표시 */
+    .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(3,6,23,.2),rgba(3,6,23,.78));z-index:-2}
+    .hero-pattern{position:absolute;inset:0;background:url("assets/img/pattern-waves.svg") center/cover no-repeat;opacity:.4;z-index:-1}
+    .hero-content{padding-top:96px;padding-bottom:96px}
+    .badge{display:inline-block;padding:6px 12px;font-size:13px;font-weight:700;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);border-radius:999px}
+    .hero h1{font-size:60px;line-height:1.05;margin:18px 0 14px;font-weight:900;letter-spacing:-.02em}
+    .hero .lead{font-size:18px;color:#dbe3f5;max-width:720px;margin:0}
+    .hero-cta{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}
+    @media (max-width:980px){.hero h1{font-size:38px}.hero{min-height:auto}.hero-content{padding-top:64px;padding-bottom:64px}}
 
-    /* Header */
-    header{position:sticky;top:0;z-index:50;background:#ffffffcc;backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--line)}
-    .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
-    .brand{display:flex;gap:12px;align-items:center}
-    .brand-logo{width:44px;height:44px;border-radius:50%;object-fit:contain}
-    .brand-stack{display:flex;flex-direction:column;line-height:1.05}
-    .brand-stack .dept{font-size:12px;color:var(--muted);font-weight:700}
-    .brand-stack .lab{font-size:16px;font-weight:900}
-    .menu{display:flex;gap:28px;align-items:center}
-    .menu a{font-weight:600}
-    .menu .cta{padding:10px 14px;background:var(--brand);color:#fff;border-radius:12px;box-shadow:var(--shadow)}
-    .menu-toggle{display:none;background:none;border:0;width:44px;height:44px}
-    @media (max-width:980px){
-      .menu{display:none} .menu-toggle{display:inline-grid;place-items:center}
-      .menu.open{display:flex;position:absolute;top:72px;right:16px;left:16px;flex-direction:column;gap:12px;padding:16px;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}
-    }
+    /* ---- About split ---- */
+    .about-split{display:grid;grid-template-columns:1.05fr 1fr;gap:36px;align-items:center}
+    .about-photo{border-radius:14px;overflow:hidden;border:1px solid var(--line);aspect-ratio:16/10}
+    @media (max-width:980px){.about-split{grid-template-columns:1fr}}
 
-    /* Sections */
-    .section{padding:72px 0}
-    .section-title{font-size:28px;margin:0 0 10px}
-    .section-lead{color:var(--muted);margin:0 0 24px}
+    /* ---- Research tiles ---- */
+    .tile-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1.6fr;gap:16px}
+    .tile{position:relative;border-radius:14px;overflow:hidden;min-height:280px;background:linear-gradient(135deg,#13294b,#0a1424);display:block;border:1px solid #24324a;transition:transform .15s ease,box-shadow .15s ease}
+    .tile:hover{transform:translateY(-3px);box-shadow:0 16px 36px rgba(0,0,0,.35)}
+    .tile-cover{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.6}
+    .tile .wave{position:absolute;inset:0;background:url("assets/img/pattern-waves.svg") center/cover no-repeat;opacity:.35}
+    .tile::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.7))}
+    .tile .num{position:absolute;top:14px;left:16px;font-weight:900;font-size:26px;color:#fff;z-index:1;opacity:.9}
+    .tile .title{position:absolute;left:18px;bottom:18px;right:18px;font-weight:900;color:#fff;font-size:20px;line-height:1.2;z-index:1}
+    .tile .title small{display:block;font-weight:600;font-size:13px;color:#cbd5e1;margin-top:6px}
+    .t1 .tile-cover{background-image:url("assets/img/research/tile1.jpg")}  /* ← 교체 */
+    .t2 .tile-cover{background-image:url("assets/img/research/tile2.jpg")}
+    .t3 .tile-cover{background-image:url("assets/img/research/tile3.jpg")}
+    .t4 .tile-cover{background-image:url("assets/img/research/tile4.jpg")}
+    @media (max-width:1100px){.tile-grid{grid-template-columns:1fr 1fr}}
+    @media (max-width:640px){.tile-grid{grid-template-columns:1fr}.tile{min-height:220px}}
 
-    /* Hero */
-    .hero{position:relative; isolation:isolate}
-    .hero-media{
-      height:70vh; min-height:520px; display:grid; place-items:center; color:#fff;
-      background:#0b1e39 url('/assets/hero.jpg') center/cover no-repeat; /* ← 교체: 히어로 이미지 */
-    }
-    .hero::before{content:""; position:absolute; inset:0; background:var(--heroOverlay)}
-    .hero .inner{position:absolute; inset:0; display:grid; align-items:center}
-    .hero .content{max-width:var(--maxw); margin:0 auto; padding:0 20px; color:#fff}
-    .badge{display:inline-block; padding:6px 10px; font-size:13px; background:#ffffff26; border:1px solid #ffffff40; border-radius:999px}
-    .hero h1{font-size:56px; line-height:1.05; margin:14px 0 12px}
-    .hero .lead{font-size:18px; color:#e5e7eb}
-    .hero-cta{margin-top:24px; display:flex; gap:12px}
-    .btn{padding:12px 16px; border-radius:14px; font-weight:800; border:1px solid transparent}
-    .btn.primary{background:#fff; color:#0a1424}
-    .btn.ghost{border-color:#ffffff70; color:#fff; background:#ffffff1c}
-    @media (max-width:980px){ .hero h1{font-size:36px} .hero-media{min-height:420px}}
-
-    /* About split */
-    .about-split{display:grid; grid-template-columns:1.05fr 1fr; gap:28px; align-items:center}
-    .about-photo{border-radius:14px; overflow:hidden; border:1px solid var(--line); background:#e5e7eb; aspect-ratio:16/9;
-      background:url('/assets/about.jpg') center/cover no-repeat;} /* ← 교체: 단체 사진 */
-    .btn.inline{padding:10px 14px; border:1px solid var(--line); border-radius:12px}
-    @media (max-width:980px){ .about-split{grid-template-columns:1fr} }
-
-    /* Research tiles */
-    .tiles-wrap{background:radial-gradient(1200px 600px at 50% -10%, #0b1e39 0%, #0a1424 40%, #07101d 100%); color:#fff; padding:48px 0}
-    .tiles .head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-    .tiles h2{margin:0;font-size:28px}
-    .tiles .more{padding:8px 12px;border:1px solid #93a3bf33;border-radius:12px;color:#dbe3f5;background:#ffffff10}
-    .tile-grid{display:grid; grid-template-columns:1.1fr 1.1fr 1.1fr 1.7fr; gap:16px}
-    .tile{position:relative; border-radius:14px; overflow:hidden; min-height:260px; background:#0f172a}
-    .tile::before{content:""; position:absolute; inset:0; background:linear-gradient(180deg, #0000003c, #00000090)}
-    .tile .num{position:absolute; top:12px; left:12px; font-weight:900; font-size:26px; opacity:.9}
-    .tile .title{position:absolute; left:18px; bottom:18px; right:18px; font-weight:900; line-height:1.2}
-    .tile-cover{position:absolute; inset:0; background-size:cover; background-position:center}
-    /* 배경 샘플(교체) */
-    .t1 .tile-cover{background-image:url('/assets/research01.jpg')}  /* 01 */
-    .t2 .tile-cover{background-image:url('/assets/research02.jpg')}  /* 02 */
-    .t3 .tile-cover{background-image:url('/assets/research03.jpg')}  /* 03 */
-    .t4 .tile-cover{background-image:url('/assets/research04.jpg')}  /* 04 큰 카드 */
-    @media (max-width:1100px){ .tile-grid{grid-template-columns:1fr 1fr} }
-
-    /* Publication */
-    .pub{padding:72px 0}
-    .pub-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:18px}
-    .pub-list{background:#fff; border:1px solid var(--line); border-radius:14px; padding:12px}
-    .pub-item{display:grid; grid-template-columns:56px 1fr; gap:12px; padding:12px 8px; border-bottom:1px solid var(--line)}
-    .pub-item:last-child{border-bottom:none}
-    .pub-date{display:grid; place-items:center; font-weight:900; color:#0f1d33}
-    .pub-cards{display:grid; grid-template-columns:1fr 1fr; gap:14px}
-    .pub-card{background:#fff; border:1px solid var(--line); border-radius:14px; padding:14px}
-    .tabs{display:flex; gap:16px; margin:6px 0 14px}
-    .tab{padding:6px 10px; border:1px solid var(--line); border-radius:999px; background:#fff}
-    .tab.active{background:var(--brand); color:#fff; border-color:transparent}
-    @media (max-width:980px){ .pub-grid{grid-template-columns:1fr} .pub-cards{grid-template-columns:1fr} }
-
-    /* Gallery dark */
-    .gallery{background:radial-gradient(1200px 600px at 50% -10%, #0b1e39 0%, #0a1424 40%, #07101d 100%); color:#e2e8f0; padding:64px 0}
-    .gallery .section-title{color:#fff}
-    .g-row{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
-    .gcard{background:#0f1d33; border:1px solid #24324a; border-radius:14px; overflow:hidden}
-    .gthumb{aspect-ratio:16/11; background:#1e293b}
-    .gbody{padding:14px}
-    @media (max-width:980px){ .g-row{grid-template-columns:1fr} }
-
-    /* Footer */
-    footer{padding:36px 0;border-top:1px solid var(--line);color:#475569}
-    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:20px}
-    .footer-links{list-style:none;padding:0;margin:0;display:grid;gap:8px}
-    @media (max-width:980px){.footer-grid{grid-template-columns:1fr 1fr}}
+    /* ---- Publications + News ---- */
+    .pub-grid{display:grid;grid-template-columns:1.25fr .85fr;gap:28px;align-items:start}
+    .pub-box{border:1px solid var(--line);border-radius:14px;background:#fff;padding:2px 18px}
+    .pub-box .pub-row{grid-template-columns:64px 1fr auto}
+    .pub-box .pub-row:last-child{border-bottom:0}
+    .pub-box .year{font-weight:900;color:var(--navy);font-size:15px;text-align:center;background:var(--surface);border-radius:10px;padding:8px 0}
+    @media (max-width:980px){.pub-grid{grid-template-columns:1fr}.pub-box .pub-row{grid-template-columns:1fr}.pub-box .year{display:inline-block;padding:4px 10px}}
   </style>
 </head>
 <body>
+<div id="site-header"></div>
 
-  <!-- Header -->
-  <header>
-    <div class="container nav">
-      <a class="brand" href="/index.html">
-        <img class="brand-logo" src="/assets/knu-logo.png" alt="KNU logo"><!-- ← 교체 가능 -->
-        <span class="brand-stack">
-          <span class="dept">경북대학교 토목공학과</span>
-          <span class="lab">수자원 연구실</span>
-        </span>
+<!-- ================= Hero ================= -->
+<section class="hero" aria-label="메인 배너">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+  <div class="container hero-content">
+    <span class="badge">KNU Water Resources Lab · 경북대학교 토목공학과 수자원 연구실</span>
+    <h1>Computational Hydraulics<br>for Flood-Resilient Cities</h1>
+    <p class="lead">도시·연안 홍수의 물리 기반 수치모델링과 AI 예측, 그리고 재난 의사결정 지원까지.
+      수자원 연구실은 물의 흐름을 계산하여 더 안전한 도시를 설계합니다.</p>
+    <div class="hero-cta">
+      <a class="btn white" href="research.html">View Research</a>
+      <a class="btn ghost" href="publication.html">Publications</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= Stats ================= -->
+<section class="section tight" aria-label="연구실 현황">
+  <div class="container">
+    <div class="stats" id="stats"></div>
+  </div>
+</section>
+
+<!-- ================= About ================= -->
+<section class="section" style="padding-top:16px" aria-labelledby="about-title">
+  <div class="container about-split">
+    <div class="about-photo ph">
+      <img src="assets/img/about.jpg" alt="수자원 연구실 단체 사진" data-label="Lab photo" onerror="imgFallback(this)"> <!-- ← assets/img/about.jpg -->
+    </div>
+    <div>
+      <span class="eyebrow">About us</span>
+      <h2 class="section-title" id="about-title">물과 도시, 그리고 재난을 잇는 연구</h2>
+      <p class="section-lead">Water Resources Laboratory, Kyungpook National University</p>
+      <p>경북대학교 토목공학과 수자원 연구실은 하천·도시·연안에서 일어나는 홍수 현상을 <b>물리 기반 수치모형</b>으로 재현하고,
+        이를 <b>인공지능</b>과 결합하여 실시간 예측과 위험도 평가로 확장합니다.
+        자체 개발한 유한체적모형(FVM)과 HEC-RAS, SWMM, CFD/SPH를 아우르는 다중규모 해석 역량을 바탕으로
+        정부·산업계의 재난 대응 의사결정을 지원합니다.</p>
+      <a class="btn outline" href="about.html">View More →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= Research tiles ================= -->
+<section class="dark" style="padding:60px 0" aria-labelledby="research-title">
+  <div class="container">
+    <div class="head-row">
+      <div><span class="eyebrow" style="color:#f87171">What we do</span><h2 class="section-title" id="research-title">Research</h2></div>
+      <a class="btn ghost sm" href="research.html">View More →</a>
+    </div>
+    <div class="tile-grid">
+      <a class="tile t1" href="research.html#urban-flood">
+        <div class="tile-cover"></div><div class="wave"></div>
+        <div class="num">01</div>
+        <div class="title">Urban Flood Modeling<small>1D–2D coupled · SWMM · HEC-RAS · FVM</small></div>
       </a>
-      <nav>
-        <button class="menu-toggle" aria-label="메뉴 열기" onclick="toggleMenu()">☰</button>
-        <div id="menu" class="menu">
-          <a href="/index.html">Home</a>
-          <a href="/research.html">Research</a>
-          <a href="/members.html">Members</a>
-          <a href="/publication.html">Publication</a>
-          <a href="/gallery.html">Gallery</a>
-          <a href="/about.html">About</a>
-          <a href="/contact.html" class="cta">Contact</a>
-        </div>
-      </nav>
+      <a class="tile t2" href="research.html#coastal">
+        <div class="tile-cover"></div><div class="wave"></div>
+        <div class="num">02</div>
+        <div class="title">Coastal &amp; Compound Flooding<small>Storm surge · Wave overtopping · 3D CFD/SPH</small></div>
+      </a>
+      <a class="tile t3" href="research.html#ai">
+        <div class="tile-cover"></div><div class="wave"></div>
+        <div class="num">03</div>
+        <div class="title">AI-based Flood Prediction<small>Random Forest · LSTM · XAI · Vision Transformer</small></div>
+      </a>
+      <a class="tile t4" href="research.html#hazard">
+        <div class="tile-cover"></div><div class="wave"></div>
+        <div class="num">04</div>
+        <div class="title">Flood Hazard &amp; Decision Support<small>Dam-break · Probabilistic hazard (NPP) · System Dynamics · SWMM-LID</small></div>
+      </a>
     </div>
-  </header>
+  </div>
+</section>
 
-  <!-- Hero -->
-  <section class="hero" aria-label="메인 배너">
-    <div class="hero-media"></div>
-    <div class="inner">
-      <div class="content">
-        <span class="badge">KNU Water Resources Lab</span>
-        <h1>Multiscale Fluid Engineering Lab</h1>
-        <p class="lead">From urban flood modeling to decision-ready platforms — HEC-RAS, SWMM, FVM, and System Dynamics.</p>
-        <div class="hero-cta">
-          <a class="btn primary" href="/research.html">View Research</a>
-          <a class="btn ghost" href="/publication.html">See Publications</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- About -->
-  <section class="section">
-    <div class="container about-split">
-      <div class="about-photo"></div>
+<!-- ================= Publications + News ================= -->
+<section class="section" aria-label="최근 논문 및 소식">
+  <div class="container">
+    <div class="pub-grid">
       <div>
-        <h2 class="section-title">About us</h2>
-        <p class="section-lead">Multiscale Water & Flood Engineering at Kyungpook National University.</p>
-        <p>우리는 도시 홍수 메커니즘과 의사결정 지원 시스템을 연구합니다. HEC-RAS 1D/2D, SWMM, FVM, System Dynamics를 결합하여 과학적 분석을 실무로 연결합니다.</p>
-        <p><a class="btn inline" href="/about.html">View More →</a></p>
+        <div class="head-row">
+          <div><span class="eyebrow">Recent</span><h2 class="section-title">Publications</h2></div>
+          <a class="btn outline sm" href="publication.html">All publications →</a>
+        </div>
+        <div id="recent-pubs" class="pub-box"></div>
+      </div>
+      <div>
+        <div class="head-row">
+          <div><span class="eyebrow">What's new</span><h2 class="section-title">News</h2></div>
+        </div>
+        <ul class="news-list" id="news"></ul>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Research tiles -->
-  <section class="tiles-wrap">
-    <div class="container tiles">
-      <div class="head">
-        <h2>Research</h2>
-        <a class="more" href="/research.html">View More →</a>
-      </div>
-      <div class="tile-grid">
-        <article class="tile t1">
-          <div class="tile-cover"></div>
-          <div class="num">01</div>
-          <div class="title">Urban Flood Modeling (HEC-RAS 1D/2D + SWMM)</div>
-        </article>
-        <article class="tile t2">
-          <div class="tile-cover"></div>
-          <div class="num">02</div>
-          <div class="title">FVM-based Shallow Water Simulation</div>
-        </article>
-        <article class="tile t3">
-          <div class="tile-cover"></div>
-          <div class="num">03</div>
-          <div class="title">Flow Visualization & Validation</div>
-        </article>
-        <article class="tile t4">
-          <div class="tile-cover"></div>
-          <div class="num">04</div>
-          <div class="title">Mass transport phenomena in nature and artificial system</div>
-        </article>
-      </div>
+<!-- ================= Gallery ================= -->
+<section class="dark" style="padding:64px 0" aria-labelledby="gallery-title">
+  <div class="container">
+    <div class="head-row">
+      <div><h2 class="section-title" id="gallery-title">Gallery</h2><p class="section-lead">Lab life, conferences and field works</p></div>
+      <a class="btn ghost sm" href="gallery.html">View More →</a>
     </div>
-  </section>
+    <div class="grid c3" id="home-gallery"></div>
+  </div>
+</section>
 
-  <!-- Publication -->
-  <section class="pub">
-    <div class="container">
-      <h2 class="section-title">Publication</h2>
-      <div class="tabs">
-        <button class="tab active" onclick="switchPubTab(event,'journal')">Journal</button>
-        <button class="tab" onclick="switchPubTab(event,'conference')">Conference</button>
-        <button class="tab" onclick="switchPubTab(event,'patent')">Patent</button>
+<div id="site-footer"></div>
+
+<script>
+(function () {
+  const D = window.LAB_DATA || {};
+  const P = D.publications || {};
+  const M = D.members || {};
+  const n = (k) => (P[k] || []).length;
+
+  /* 현황 숫자 (데이터에서 자동 계산) */
+  const stats = [
+    { n: n("sci"), l: "SCI(E) 논문" },
+    { n: n("domestic"), l: "국내 논문" },
+    { n: n("intConf") + n("domConf"), l: "학술발표" },
+    { n: (M.students || []).length + (M.professor ? 1 : 0) + (M.emeritus ? 1 : 0), l: "구성원" }
+  ];
+  document.getElementById("stats").innerHTML = stats.map((s) =>
+    `<div class="stat"><div class="n">${s.n}</div><div class="l">${s.l}</div></div>`).join("");
+
+  /* 최근 학술지 논문 5편 */
+  const journals = [
+    ...(P.sci || []).map((x) => ({ ...x, type: "SCI(E)" })),
+    ...(P.domestic || []).map((x) => ({ ...x, type: "국내" }))
+  ].map((x, i) => ({ ...x, _i: i })).sort((a, b) => (b.year || 0) - (a.year || 0) || b._i - a._i).slice(0, 5);
+
+  document.getElementById("recent-pubs").innerHTML = journals.map((it) => {
+    const l = LAB.pubLink(it);
+    return `<div class="pub-row">
+      <div class="year">${esc(it.year)}</div>
+      <div>
+        <div class="title">${esc(it.title)}</div>
+        <div class="meta"><span class="tag">${esc(it.type)}</span>${esc(it.authors)}${it.venue ? ` · <b>${esc(it.venue)}</b>` : ""}</div>
       </div>
-      <div class="pub-grid">
-        <div class="pub-list" id="pub-list">
-          <!-- 기본: Journal 3개 예시 -->
-          <div class="pub-item">
-            <div class="pub-date"><div><div style="font-size:22px">02</div><div style="font-size:12px;opacity:.7">2025-06</div></div></div>
-            <div><b>Water hyacinth-inspired self-floating photocatalytic system…</b><br><span class="section-lead">npj Clean Water</span></div>
-          </div>
-          <div class="pub-item">
-            <div class="pub-date"><div><div style="font-size:22px">08</div><div style="font-size:12px;opacity:.7">2025-06</div></div></div>
-            <div><b>Luffa cylindrica-inspired powerless micropump…</b><br><span class="section-lead">Lab on a Chip</span></div>
-          </div>
-          <div class="pub-item">
-            <div class="pub-date"><div><div style="font-size:22px">08</div><div style="font-size:12px;opacity:.7">2025-05</div></div></div>
-            <div><b>Portable multi-ionic reverse electrodialysis…</b><br><span class="section-lead">Electrochimica Acta</span></div>
-          </div>
-        </div>
-        <div class="pub-cards">
-          <div class="pub-card">
-            <div class="section-lead">Poster</div>
-            <h3 style="margin:6px 0">AOGS 2025</h3>
-            <p>Naengcheon flood comparison (HEC-RAS/FVM).</p>
-          </div>
-          <div class="pub-card">
-            <div class="section-lead">Patent</div>
-            <h3 style="margin:6px 0">A swimming robot for collecting microplastics</h3>
-            <p>여러 수환경에서의 미세플라스틱 수거 로봇 개념.</p>
-          </div>
-        </div>
+      <a class="btn outline sm" href="${esc(l.href)}" target="_blank" rel="noopener">${l.label}</a>
+    </div>`;
+  }).join("") || `<p class="empty">등록된 논문이 없습니다.</p>`;
+
+  /* 소식 */
+  const news = (D.news || []).slice().sort((a, b) => String(b.date).localeCompare(String(a.date))).slice(0, 5);
+  document.getElementById("news").innerHTML = news.map((x) => `
+    <li>
+      <div class="date">${esc(x.date)}</div>
+      <div>
+        <span class="tag">${esc(x.tag || "News")}</span>
+        <span class="title">${x.link ? `<a href="${esc(x.link)}">${esc(x.title)}</a>` : esc(x.title)}</span>
+        ${x.desc ? `<div class="desc">${esc(x.desc)}</div>` : ""}
       </div>
-    </div>
-  </section>
+    </li>`).join("") || `<li class="empty">등록된 소식이 없습니다.</li>`;
 
-  <!-- Gallery -->
-  <section class="gallery" aria-label="Gallery">
-    <div class="container">
-      <h2 class="section-title" style="color:#fff">Gallery</h2>
-      <p class="section-lead" style="color:#cbd5e1">Lab life, conferences and field works</p>
-      <div class="g-row">
-        <article class="gcard">
-          <div class="gthumb" style="background:url('/assets/gallery01.jpg') center/cover"></div> <!-- ← 교체 -->
-          <div class="gbody">Appreciation for Our Lab Captain · 2025-09-28</div>
-        </article>
-        <article class="gcard">
-          <div class="gthumb" style="background:url('/assets/gallery02.jpg') center/cover"></div>
-          <div class="gbody">2025 ISTP Presentation · 2025-09-24</div>
-        </article>
-        <article class="gcard">
-          <div class="gthumb" style="background:url('/assets/gallery03.jpg') center/cover"></div>
-          <div class="gbody">2025 ACFM · 2025-09-12</div>
-        </article>
-      </div>
-      <p style="margin-top:16px"><a class="btn inline" href="/gallery.html" style="color:#fff; border-color:#334155">View More →</a></p>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <div class="brand" style="margin-bottom:8px">
-            <img class="brand-logo" src="/assets/knu-logo.png" alt="KNU logo">
-            <span class="brand-stack">
-              <span class="dept">경북대학교 토목공학과</span>
-              <span class="lab">수자원 연구실</span>
-            </span>
-          </div>
-          <p style="margin:0;color:var(--muted)">© <span id="year"></span> KNU Water Resources Lab</p>
-        </div>
-        <div>
-          <h4>Links</h4>
-          <ul class="footer-links">
-            <li><a href="/research.html">Research</a></li>
-            <li><a href="/members.html">Members</a></li>
-            <li><a href="/publication.html">Publication</a></li>
-            <li><a href="/gallery.html">Gallery</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Contact</h4>
-          <ul class="footer-links">
-            <li><a href="mailto:hello@example.com">hello@example.com</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    function toggleMenu(){ const m=document.getElementById('menu'); if(m) m.classList.toggle('open'); }
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    function activateTab(key){
-      document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-      const map={
-        journal: `
-          <div class="pub-item">
-            <div class="pub-date"><div><div style="font-size:22px">02</div><div style="font-size:12px;opacity:.7">2025-06</div></div></div>
-            <div><b>Water hyacinth-inspired self-floating photocatalytic system…</b><br><span class="section-lead">npj Clean Water</span></div>
-          </div>
-          <div class="pub-item">
-            <div class="pub-date"><div><div style="font-size:22px">08</div><div style="font-size:12px;opacity:.7">2025-06</div></div></div>
-            <div><b>Luffa cylindrica-inspired powerless micropump…</b><br><span class="section-lead">Lab on a Chip</span></div>
-          </div>
-          <div class="pub-item">
-            <div class="pub-date"><div><div style="font-size:22px">08</div><div style="font-size:12px;opacity:.7">2025-05</div></div></div>
-            <div><b>Portable multi-ionic reverse electrodialysis…</b><br><span class="section-lead">Electrochimica Acta</span></div>
-          </div>
-        `,
-        conference: `
-          <div class="pub-item">
-            <div class="pub-date"><div><div style="font-size:22px">07</div><div style="font-size:12px;opacity:.7">2025-07</div></div></div>
-            <div><b>AOGS 2025 Poster — Naengcheon flood comparison.</b><br><span class="section-lead">Conference</span></div>
-          </div>
-          <div class="pub-item">
-            <div class="pub-date"><div><div style="font-size:22px">05</div><div style="font-size:12px;opacity:.7">2025-05</div></div></div>
-            <div><b>KWRA Talk — Urban flood internal/external coupling.</b><br><span class="section-lead">Talk</span></div>
-          </div>
-        `,
-        patent: `
-          <div class="pub-item">
-            <div class="pub-date"><div><div style="font-size:22px">05</div><div style="font-size:12px;opacity:.7">2025-05</div></div></div>
-            <div><b>Smart water dashboard alerting method (provisional).</b><br><span class="section-lead">Patent</span></div>
-          </div>
-        `
-      };
-      document.getElementById('pub-list').innerHTML = map[key] || map.journal;
-    }
-    function switchPubTab(e,key){ e.target.classList.add('active'); activateTab(key); }
-  </script>
+  /* 갤러리 최신 3장 */
+  const g = (D.gallery || []).slice().sort((a, b) => String(b.date).localeCompare(String(a.date))).slice(0, 3);
+  document.getElementById("home-gallery").innerHTML = g.map((it) => `
+    <a class="g-card" href="gallery.html">
+      <div class="g-thumb ph">${it.image
+        ? `<img src="${esc(it.image)}" alt="${esc(it.title)}" data-label="${esc(it.category || "")}" onerror="imgFallback(this)">`
+        : `<span class="ph-label">${esc(it.category || "")}</span>`}</div>
+      <div class="g-body"><div class="date">${esc(it.date)}</div><div class="title">${esc(it.title)}</div></div>
+    </a>`).join("") || `<p class="empty">등록된 사진이 없습니다.</p>`;
+})();
+</script>
 </body>
 </html>
