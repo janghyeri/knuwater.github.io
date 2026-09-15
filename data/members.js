@@ -85,7 +85,7 @@ window.LAB_DATA.members = {
     courses: null
   },
 
-  /* ---------------- 학생 ---------------- */
+  /* ---------------- 학생 (전일제 · 재학생만) ---------------- */
   students: [
     {
       nameEn: "Jaehwan Yoo", nameKo: "유재환", level: "phd",
@@ -95,47 +95,41 @@ window.LAB_DATA.members = {
       interests: ["Coastal overtopping", "Urban flooding", "3D CFD / SPH"]
     },
     {
-      nameEn: "Gwiun Jeong", nameKo: "정귀운", level: "ms",
-      status: "M.S. Student",
-      email: "ryryanan1999@gmail.com",
-      photo: "assets/img/members/jeong-gwiun.jpg",
-      interests: ["Coastal flood", "Tide / Surge", "Rain-on-Mesh (InfoWorks ICM)"]
-    },
-    {
-      nameEn: "Hyeontak Jo", nameKo: "조현탁", level: "ms",
-      status: "M.S. Student",
-      email: "hogata0922@icloud.com",
-      photo: "assets/img/members/jo-hyeontak.jpg",
-      interests: ["Explainable AI (XAI)", "ClimaX / ViT rainfall prediction", "Flood vulnerability mapping"]
-    },
-    {
-      nameEn: "Hoyeon Kim", nameKo: "김호연", level: "ms",
-      status: "M.S. Student",
-      email: "hoy8977@naver.com",
-      photo: "assets/img/members/kim-hoyeon.jpg",
-      interests: ["System dynamics", "Flood damage analysis", "Scenario rainfall"]
-    },
-    {
-      nameEn: "Hyeri Jang", nameKo: "장혜리", level: "ms",
-      status: "M.S. Student",
+      nameEn: "Hyeri Jang", nameKo: "장혜리", level: "phd",
+      status: "Ph.D. Student",
       email: "hyeri4540@knu.ac.kr",
       photo: "assets/img/members/jang-hyeri.jpg",
-      interests: ["HEC-RAS 2D", "FVM", "Compound flooding"]
+      interests: ["HEC-RAS 2D", "FVM", "Compound flooding", "KlimaX rainfall prediction"]
+    },
+    {
+      nameEn: "Hoyeon Kim", nameKo: "김호연", level: "phd",
+      status: "Ph.D. Student",
+      email: "hoy8977@naver.com",
+      photo: "assets/img/members/kim-hoyeon.jpg",
+      interests: ["1D–2D fully coupled urban flood model", "System dynamics", "Flood damage analysis"]
     },
     {
       nameEn: "Jiyun Jeon", nameKo: "전지윤", level: "ms",
       status: "M.S. Student",
       email: "wendyjjy215@naver.com",
       photo: "assets/img/members/jeon-jiyun.jpg",
-      interests: ["XAI maps", "Machine learning", "Urban flood"]
+      interests: ["XAI maps", "Machine learning", "Urban flood", "Distributed rainfall"]
     }
     // 예시 — 학석연계: { nameEn: "Gildong Hong", nameKo: "홍길동", level: "ug", status: "B.S.–M.S. Combined Student", email: "", photo: "", interests: ["SWMM"] }
     // 예시 — 학부연구생: { nameEn: "Gildong Hong", nameKo: "홍길동", level: "ug", status: "Undergraduate Researcher", email: "", photo: "", interests: ["HEC-RAS"] }
   ],
 
-  /* ---------------- 졸업생 ---------------- */
+  /* ---------------- 졸업생 (graduated: YYYY-MM, 최근 졸업순 자동 정렬) ---------------- */
   alumni: [
-    // 예시:
-    // { nameEn: "Gildong Hong", nameKo: "홍길동", degree: "M.S.", graduated: "2025-02", thesis: "기계학습 기반 도시침수 예측", current: "○○연구원 연구원", email: "", photo: "" }
+    {
+      nameEn: "Gwiun Jeong", nameKo: "정귀운", degree: "M.S.", graduated: "2025-08",   // TODO: 졸업 월 확인 (2월/8월)
+      thesis: "", current: "",
+      email: "ryryanan1999@gmail.com", photo: "assets/img/members/jeong-gwiun.jpg"
+    },
+    {
+      nameEn: "Hyeontak Jo", nameKo: "조현탁", degree: "M.S.", graduated: "2025-08",    // TODO: 졸업 월 확인 (2월/8월)
+      thesis: "", current: "",
+      email: "hogata0922@icloud.com", photo: "assets/img/members/jo-hyeontak.jpg"
+    }
   ]
 };

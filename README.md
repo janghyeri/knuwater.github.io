@@ -63,14 +63,31 @@ data/news.js          소식 데이터
 2. Source: **Deploy from a branch**, Branch: **main** / **(root)** → Save
 3. 몇 분 뒤 상단에 주소가 표시됩니다.
 
-### 주소 안내
+### 현재 주소
 
-* 이 저장소(`janghyeri/knuwater.github.io`)는 `janghyeri` 계정의 프로젝트 사이트이므로 주소는
-  **https://janghyeri.github.io/knuwater.github.io/** 가 됩니다.
-* **https://knuwater.github.io** 주소를 쓰려면 `knuwater` 라는 GitHub 계정(또는 Organization)을 만들고
-  그 계정에 `knuwater.github.io` 저장소를 만들어 이 파일들을 올려야 합니다. (Settings → General → Transfer 로 옮길 수 있습니다.)
-* 모든 링크는 상대 경로라서 어느 주소에서도 그대로 동작합니다.
-* 주소가 정해지면 `sitemap.xml` 과 `robots.txt` 의 주소를 맞춰 주세요.
+* **https://janghyeri.github.io/knuwater.github.io/** (관리자: `…/admin/`)
+* 모든 링크는 상대 경로라서 어느 주소에서도 그대로 동작합니다. 주소를 바꾸면 `sitemap.xml`, `robots.txt`의 주소만 맞춰 주세요.
+
+### 연구실 도메인 연결하기
+
+* `www.knuwater.ac.kr` 같은 **`.ac.kr` 도메인은 교육기관(대학) 명의로만 등록**할 수 있어 연구실이 직접 살 수 없습니다.
+  대신 대학 도메인 아래 **서브도메인**(예: `water.knu.ac.kr`, `knuwater.knu.ac.kr`)을 경북대학교 정보전산원(IT 서비스)에
+  신청하는 것이 가장 일반적이고 공식적인 방법입니다. 신청 시 "CNAME 레코드를 `janghyeri.github.io` 로 지정"해 달라고 요청하면 됩니다.
+* 빠르게 쓰려면 일반 도메인을 구매해도 됩니다 (예: `knuwater.kr`, `knuwater.com`, `knuwaterlab.com` — 가비아·호스팅케이알·Cloudflare 등, 연 1~2만 원).
+  DNS 설정: `www` → CNAME `janghyeri.github.io`, 루트(apex) → A 레코드 `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`.
+* 도메인이 준비되면: 저장소 Settings → Pages → **Custom domain**에 입력 → 저장 → DNS 확인 후 **Enforce HTTPS** 체크.
+  (저장소에 `CNAME` 파일이 자동으로 생깁니다.)
+
+### 저장소를 비공개로 두고 싶다면
+
+GitHub 무료 계정은 **공개 저장소에서만** GitHub Pages를 쓸 수 있습니다. 선택지는 세 가지입니다.
+
+1. **GitHub Pro**(월 4달러) 로 업그레이드하면 비공개 저장소에서도 Pages가 동작합니다. 가장 간단합니다.
+2. **Cloudflare Pages 또는 Netlify**(무료)에 비공개 GitHub 저장소를 연결해 사이트를 배포합니다. 저장소는 비공개, 사이트는 공개가 되고,
+   관리자 페이지도 그대로 동작합니다(금고 파일은 사이트에서 읽고, 저장은 토큰으로 GitHub API에 씁니다). 도메인 연결도 무료입니다.
+3. 그대로 공개 유지 — 저장소 안의 파일은 어차피 홈페이지로 모두 공개되는 내용이라 비공개로 얻는 실익이 크지 않습니다.
+
+어느 경우든 `admin/vault.json`(암호화된 금고)은 사이트와 함께 공개되므로 관리자 비밀번호는 길게 정하세요.
 
 ## 로컬에서 미리보기
 
