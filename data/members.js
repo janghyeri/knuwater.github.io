@@ -1,7 +1,8 @@
 /* =====================================================================
    구성원 데이터 — 이 파일만 수정하면 Members 페이지와 메인 페이지에 반영됩니다.
    - 사진: assets/img/members/ 폴더에 올리고 photo 경로를 맞추세요. 없으면 이니셜 아바타가 표시됩니다.
-   - level: "phd" (박사) | "ms" (석사) | "ug" (학부연구생)
+   - level: "phd" (박사과정) | "msphd" (석박사통합) | "ms" (석사과정) | "bsms" (학석연계) | "ug" (학부연구생)
+   - 졸업생: graduated ("YYYY-MM") 기준으로 최근 졸업순 자동 정렬. 관리자 페이지의 "졸업 처리" 버튼으로 학생 → 졸업생 이동
    - 졸업생은 alumni 배열에 추가하세요.
    ===================================================================== */
 window.LAB_DATA = window.LAB_DATA || {};
@@ -128,13 +129,13 @@ window.LAB_DATA.members = {
       photo: "assets/img/members/jeon-jiyun.jpg",
       interests: ["XAI maps", "Machine learning", "Urban flood"]
     }
-    // 학부연구생 예시:
-    // { nameEn: "Gildong Hong", nameKo: "홍길동", level: "ug", status: "Undergraduate Researcher", email: "", photo: "", interests: ["SWMM"] }
+    // 예시 — 학석연계: { nameEn: "Gildong Hong", nameKo: "홍길동", level: "bsms", status: "B.S.–M.S. Combined Student", email: "", photo: "", interests: ["SWMM"] }
+    // 예시 — 학부연구생: { nameEn: "Gildong Hong", nameKo: "홍길동", level: "ug", status: "Undergraduate Researcher", email: "", photo: "", interests: ["HEC-RAS"] }
   ],
 
   /* ---------------- 졸업생 ---------------- */
   alumni: [
     // 예시:
-    // { nameEn: "Sedong Jang", nameKo: "장세동", degree: "M.S. 2025", thesis: "기계학습 기반 도시침수 예측", current: "○○연구원", email: "" }
+    // { nameEn: "Gildong Hong", nameKo: "홍길동", degree: "M.S.", graduated: "2025-02", thesis: "기계학습 기반 도시침수 예측", current: "○○연구원 연구원", email: "", photo: "" }
   ]
 };

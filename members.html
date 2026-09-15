@@ -60,12 +60,7 @@
 
     <section id="panel-students" class="panel" role="tabpanel" hidden>
       <h2 class="kicker">Students</h2>
-      <div class="subtabs" role="tablist" aria-label="Student categories" id="subtabs">
-        <button type="button" class="active" data-sub="all">All</button>
-        <button type="button" data-sub="phd">Ph.D.</button>
-        <button type="button" data-sub="ms">M.S.</button>
-        <button type="button" data-sub="ug">Undergraduate</button>
-      </div>
+      <div class="subtabs" role="tablist" aria-label="Student categories" id="subtabs"></div>
       <div class="grid c3" id="student-cards"></div>
     </section>
 
@@ -122,8 +117,13 @@
     d.textContent = ini;
     img.replaceWith(d);
   };
-  const LEVEL = { phd: "Ph.D. Student", ms: "M.S. Student", ug: "Undergraduate Researcher" };
+  // 과정 코드: phd 박사 | msphd 석박사통합 | ms 석사 | bsms 학석연계 | ug 학부연구생
+  const LEVELS = [["phd", "Ph.D."], ["msphd", "M.S.–Ph.D."], ["ms", "M.S."], ["bsms", "B.S.–M.S."], ["ug", "Undergraduate"]];
+  const LEVEL = { phd: "Ph.D. Student", msphd: "M.S.–Ph.D. Integrated Student", ms: "M.S. Student", bsms: "B.S.–M.S. Combined Student", ug: "Undergraduate Researcher" };
   const students = M.students || [];
+  document.getElementById("subtabs").innerHTML =
+    [["all", "All"], ...LEVELS].map(([k, l]) => { const n = k === "all" ? students.length : students.filter((s) => s.level === k).length;
+      return `<button type="button" data-sub="${k}" class="${k === "all" ? "active" : ""}">${l} <span style="opacity:.65;font-weight:600">${n}</span></button>`; }).join("");
 
   function card(s) {
     const name = `${s.nameEn || ""}${s.nameKo ? ` (${s.nameKo})` : ""}`;
@@ -143,7 +143,7 @@
       </div>
     </div>`;
   }
-  const EMPTY = { all: "등록된 학생이 없습니다.", phd: "현재 박사과정 학생이 없습니다.", ms: "현재 석사과정 학생이 없습니다.", ug: "현재 학부연구생이 없습니다." };
+  const EMPTY = { all: "등록된 학생이 없습니다.", phd: "현재 박사과정 학생이 없습니다.", msphd: "현재 석박사통합과정 학생이 없습니다.", ms: "현재 석사과정 학생이 없습니다.", bsms: "현재 학석연계과정 학생이 없습니다.", ug: "현재 학부연구생이 없습니다." };
   function renderStudents(filter) {
     const data = students.filter((s) => filter === "all" || s.level === filter);
     const el = document.getElementById("student-cards");
@@ -159,17 +159,29 @@
     });
   });
 
-  /* ---------- 졸업생 ---------- */
-  const alumni = M.alumni || [];
-  document.getElementById("cnt-alumni").textContent = alumni.length;
-  document.getElementById("alumni-list").innerHTML = alumni.length
-    ? `<div class="alumni">${alumni.map((a) => `<div class="card">
+  /* ---------- 졸업생: 졸업 연월(graduated, YYYY-MM) 내림차순 → 최근 졸업생이 먼저 ---------- */
+  const DEG = { "Ph.D.": "박사", "M.S.": "석사", "B.S.": "학사" };
+  const fmtYM = (s) => (s ? String(s).replace("-", ".") : "");
+  function renderAlumni(list) {
+    const sorted = (list || []).slice().sort((a, b) =>
+      String(b.graduated || "").localeCompare(String(a.graduated || "")) || String(a.nameEn || "").localeCompare(String(b.nameEn || "")));
+    document.getElementById("cnt-alumni").textContent = sorted.length;
+    if (!sorted.length) { document.getElementById("alumni-list").innerHTML = `<p class="empty">졸업생 정보는 준비 중입니다.</p>`; return; }
+    let html = "", year = null;
+    sorted.forEach((a) => {
+      const y = String(a.graduated || "").slice(0, 4) || "기타";
+      if (y !== year) { year = y; html += `${html ? "</div>" : ""}<div class="year-head">${esc(y)}</div><div class="alumni">`; }
+      html += `<div class="card">
         <b>${esc(a.nameEn || "")}${a.nameKo ? ` (${esc(a.nameKo)})` : ""}</b>
-        ${a.degree ? `<small>${esc(a.degree)}</small>` : ""}
+        <small>${[a.degree ? `${esc(a.degree)}${DEG[a.degree] ? ` (${DEG[a.degree]})` : ""}` : "", fmtYM(a.graduated) ? `${esc(fmtYM(a.graduated))} 졸업` : ""].filter(Boolean).join(" · ")}</small>
         ${a.thesis ? `<p style="margin:8px 0 0;font-size:14px">${esc(a.thesis)}</p>` : ""}
         ${a.current ? `<p style="margin:6px 0 0;font-size:14px;color:var(--muted)">현재: ${esc(a.current)}</p>` : ""}
-      </div>`).join("")}</div>`
-    : `<p class="empty">졸업생 정보는 준비 중입니다. (data/members.js 의 alumni 배열에 추가하세요)</p>`;
+      </div>`;
+    });
+    document.getElementById("alumni-list").innerHTML = html + "</div>";
+  }
+  renderAlumni(M.alumni || []);
+  window.__renderAlumni = renderAlumni;   // (테스트/미리보기용)
 
   /* ---------- 상단 탭 (URL 해시 연동: members.html#students) ---------- */
   const tabs = document.querySelectorAll(".tabs button[data-tab]");

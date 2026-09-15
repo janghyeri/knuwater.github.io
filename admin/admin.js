@@ -132,15 +132,18 @@
   ];
   const STUDENT = [
     { k: "nameEn", l: "영문 이름", req: 1 }, { k: "nameKo", l: "한글 이름", req: 1 },
-    { k: "level", l: "과정", t: "select", opts: [["phd", "박사"], ["ms", "석사"], ["ug", "학부연구생"]], req: 1 },
+    { k: "level", l: "과정", t: "select", opts: [["phd", "박사과정"], ["msphd", "석박사통합과정"], ["ms", "석사과정"], ["bsms", "학석연계과정"], ["ug", "학부연구생"]], req: 1 },
     { k: "status", l: "표시 문구 (예: M.S. Student, Ph.D. Candidate)" },
     { k: "email", l: "이메일" }, { k: "photo", l: "사진", t: "image", folder: "assets/img/members" },
     { k: "interests", l: "연구 관심사", t: "lines", full: 1 }
   ];
   const ALUMNI = [
     { k: "nameEn", l: "영문 이름", req: 1 }, { k: "nameKo", l: "한글 이름" },
-    { k: "degree", l: "학위·졸업연도 (예: M.S. 2025)" }, { k: "current", l: "현재 소속" },
-    { k: "thesis", l: "논문 제목", full: 1 }, { k: "email", l: "이메일" }
+    { k: "degree", l: "학위", t: "select", opts: ["Ph.D.", "M.S.", "B.S."], req: 1 },
+    { k: "graduated", l: "졸업 연월", t: "month", req: 1 },
+    { k: "current", l: "현재 소속 (직장·직위)" }, { k: "email", l: "이메일" },
+    { k: "thesis", l: "학위논문 제목", full: 1 },
+    { k: "photo", l: "사진 (선택)", t: "image", folder: "assets/img/members", full: 1 }
   ];
   const COLS = [
     { id: "news", label: "소식", file: "data/news.js", key: "news", kind: "list", sort: (a, b) => String(b.date).localeCompare(String(a.date)),
@@ -167,8 +170,8 @@
       sections: [
         { key: "professor", label: "교수", kind: "object", fields: PERSON },
         { key: "emeritus", label: "명예교수", kind: "object", fields: PERSON },
-        { key: "students", label: "학생", kind: "list", fields: STUDENT, cols: [["nameEn", "이름"], ["level", "과정"], ["email", "이메일"]], manual: 1 },
-        { key: "alumni", label: "졸업생", kind: "list", fields: ALUMNI, cols: [["nameEn", "이름"], ["degree", "학위"], ["current", "현재 소속"]], manual: 1 }
+        { key: "students", label: "학생", kind: "list", fields: STUDENT, cols: [["nameEn", "이름"], ["level", "과정"], ["email", "이메일"]], manual: 1, graduate: 1 },
+        { key: "alumni", label: "졸업생", kind: "list", fields: ALUMNI, cols: [["nameEn", "이름"], ["degree", "학위"], ["graduated", "졸업"], ["current", "현재 소속"]], sort: (a, b) => String(b.graduated || "").localeCompare(String(a.graduated || "")) || String(a.nameEn || "").localeCompare(String(b.nameEn || "")) }
       ] },
     { id: "gallery", label: "갤러리", file: "data/gallery.js", key: "gallery", kind: "list", sort: (a, b) => String(b.date).localeCompare(String(a.date)),
       cols: [["date", "날짜"], ["category", "분류"], ["title", "제목"]],
@@ -233,6 +236,7 @@
       // 저장 전 정렬
       if (col.kind === "list" && col.sort) f.data.sort(col.sort);
       if (col.kind === "groups") Object.keys(f.data).forEach((g) => Array.isArray(f.data[g]) && f.data[g].sort(col.sort));
+      if (col.kind === "members" && Array.isArray(f.data.alumni)) f.data.alumni = window.AdminUtil.sortAlumni(f.data.alumni);
       const sha = await putFile(col.file, VC.b64.enc(VC.utf8.enc(serialize(col, f.data))), f.sha, `Update ${col.file} (admin: ${S.user.login})`);
       f.sha = sha; f.dirty = false;
       toast("저장되었습니다. 1~2분 후 사이트에 반영됩니다.");
@@ -528,17 +532,49 @@
       if (!Array.isArray(f.data[sec.key])) f.data[sec.key] = [];
       const items = f.data[sec.key];
       const sub = { id: col.id, label: sec.label, cols: sec.cols, fields: sec.fields, manual: sec.manual };
-      body.innerHTML = `<div class="toolbar"><span class="muted" style="font-size:14px">${items.length}명</span><span class="grow"></span><button class="btn outline" id="add">+ 추가</button></div><div id="form"></div>
+      const shown = sec.sort ? items.map((it, i) => ({ it, i })).sort((a, b) => sec.sort(a.it, b.it)) : items.map((it, i) => ({ it, i }));
+      body.innerHTML = `<div class="toolbar"><span class="muted" style="font-size:14px">${items.length}명 · ${sec.manual ? "표시 순서는 목록 순서(↑↓)" : "저장 시 최근 졸업순으로 자동 정렬"}${sec.graduate ? " · 졸업하면 <b>졸업 처리</b>를 눌러 졸업생으로 옮기세요" : ""}</span><span class="grow"></span><button class="btn outline" id="add">+ 추가</button></div><div id="form"></div>
         <div style="overflow-x:auto"><table class="list"><thead><tr>${sec.cols.map(([, l]) => `<th>${esc(l)}</th>`).join("")}<th></th></tr></thead><tbody>
-        ${items.map((it, i) => `<tr>${sec.cols.map(([k]) => `<td><div class="trunc">${esc(display(sub, k, it[k]))}</div></td>`).join("")}<td class="ops"><button data-up="${i}">↑</button><button data-down="${i}">↓</button><button data-edit="${i}">수정</button><button data-del="${i}">삭제</button></td></tr>`).join("") || `<tr><td colspan="${sec.cols.length + 1}" class="muted" style="text-align:center;padding:24px">아직 항목이 없습니다.</td></tr>`}
+        ${shown.map(({ it, i }) => `<tr>${sec.cols.map(([k]) => `<td><div class="trunc">${esc(display(sub, k, it[k]))}</div></td>`).join("")}<td class="ops">${sec.manual ? `<button data-up="${i}">↑</button><button data-down="${i}">↓</button>` : ""}${sec.graduate ? `<button data-grad="${i}" style="color:var(--brand);border-color:#f5c2c4">졸업 처리</button>` : ""}<button data-edit="${i}">수정</button><button data-del="${i}">삭제</button></td></tr>`).join("") || `<tr><td colspan="${sec.cols.length + 1}" class="muted" style="text-align:center;padding:24px">아직 항목이 없습니다.</td></tr>`}
         </tbody></table></div>`;
       $("#add").addEventListener("click", () => openForm(main, sub, items, null));
+      $$("[data-grad]").forEach((b) => b.addEventListener("click", () => openGraduate(main, col, items, +b.dataset.grad)));
       $$("[data-edit]").forEach((b) => b.addEventListener("click", () => openForm(main, sub, items, +b.dataset.edit)));
       $$("[data-del]").forEach((b) => b.addEventListener("click", () => { const i = +b.dataset.del; if (!confirm(`삭제할까요?\n${summary(sub, items[i])}`)) return; items.splice(i, 1); f.dirty = true; renderApp(); }));
       $$("[data-up]").forEach((b) => b.addEventListener("click", () => move(col, items, +b.dataset.up, -1)));
       $$("[data-down]").forEach((b) => b.addEventListener("click", () => move(col, items, +b.dataset.down, 1)));
       if (S.ui.edit && S.ui.edit.col === col.id) openForm(main, sub, items, S.ui.edit.index, true);
     }
+  }
+
+  /* ----- 졸업 처리: 학생 → 졸업생 ----- */
+  function openGraduate(main, col, students, i) {
+    const s = students[i], U = window.AdminUtil, f = S.files[col.id];
+    const box = $("#form");
+    const name = `${s.nameEn || ""}${s.nameKo ? ` (${s.nameKo})` : ""}`;
+    box.innerHTML = `<form class="form" id="gradForm"><h3>졸업 처리 — ${esc(name)}</h3>
+      <p class="hint">아래 정보를 입력하면 학생 목록에서 빠지고 졸업생 목록으로 이동합니다. 사진·이메일은 그대로 옮겨집니다.</p>
+      <div class="fgrid">
+        <div class="field"><label class="req">학위</label><select name="degree">${["Ph.D.", "M.S.", "B.S."].map((d) => `<option ${d === (U.DEGREE_BY_LEVEL[s.level] || "M.S.") ? "selected" : ""}>${d}</option>`).join("")}</select></div>
+        <div class="field"><label class="req">졸업 연월</label><input name="graduated" type="month" value="${U.thisMonth()}" required></div>
+        <div class="field full"><label>현재 소속 (직장·직위, 선택)</label><input name="current"></div>
+        <div class="field full"><label>학위논문 제목 (선택)</label><input name="thesis"></div>
+      </div>
+      <div class="actions"><button class="btn primary" type="submit">졸업생으로 이동</button><button class="btn outline" type="button" id="cancel">취소</button></div></form>`;
+    box.scrollIntoView({ behavior: "smooth", block: "start" });
+    $("#cancel").addEventListener("click", () => (box.innerHTML = ""));
+    $("#gradForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const a = U.toAlumni(s, { degree: fd.get("degree"), graduated: fd.get("graduated"), current: fd.get("current").trim(), thesis: fd.get("thesis").trim() });
+      if (!Array.isArray(f.data.alumni)) f.data.alumni = [];
+      f.data.alumni.unshift(a);
+      students.splice(i, 1);
+      f.dirty = true; S.ui.edit = null;
+      toast(`${name} 님을 졸업생으로 옮겼습니다. 'GitHub에 저장'을 눌러 반영하세요.`);
+      S.ui.section[col.id] = "alumni";
+      renderApp();
+    });
   }
 
   /* ----- 관리자 계정 ----- */

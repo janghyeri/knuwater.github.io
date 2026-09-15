@@ -35,7 +35,7 @@ data/news.js          소식 데이터
 | 하고 싶은 일 | 수정할 파일 |
 |---|---|
 | 논문 추가 | `data/publications.js` — 해당 카테고리 배열에 `{year:2025, title:"…", authors:"…", venue:"…", link:"https://doi.org/…"}` 한 줄 추가 |
-| 학생 추가/졸업 처리 | `data/members.js` — `students` 배열에 추가, 졸업 시 `alumni` 배열로 이동 |
+| 학생 추가/졸업 처리 | 관리자 페이지 → 구성원 → 학생: `+ 추가` / 행의 **졸업 처리** 버튼(졸업생으로 자동 이동). 파일로는 `data/members.js` |
 | 교수님 이력 수정 | `data/members.js` — `professor` / `emeritus` 의 `education`, `career`, `activities`, `awards` |
 | 사진 추가 | `assets/img/gallery/`에 업로드 후 `data/gallery.js`에 한 줄 추가 |
 | 소식 추가 | `data/news.js` |
