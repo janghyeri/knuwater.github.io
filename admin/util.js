@@ -11,11 +11,9 @@
 
   // 학생 과정 코드 → 표시 이름
   const LEVELS = [
-    ["phd",   "박사과정",     "Ph.D. Student"],
-    ["msphd", "석박사통합과정", "M.S.–Ph.D. Integrated Student"],
-    ["ms",    "석사과정",     "M.S. Student"],
-    ["bsms",  "학석연계과정",   "B.S.–M.S. Combined Student"],
-    ["ug",    "학부연구생",    "Undergraduate Researcher"]
+    ["phd", "박사과정",   "Ph.D. Student"],
+    ["ms",  "석사과정",   "M.S. Student"],
+    ["ug",  "학부연구생 (학석연계 포함)", "Undergraduate Researcher"]
   ];
   // 졸업 처리 시 기본 학위
   const DEGREE_BY_LEVEL = { phd: "Ph.D.", msphd: "Ph.D.", ms: "M.S.", bsms: "M.S.", ug: "B.S." };

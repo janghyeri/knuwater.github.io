@@ -8,6 +8,13 @@ window.LAB_DATA = window.LAB_DATA || {};
 
 window.LAB_DATA.gallery = [
   {
+    date: "2026-05-21",
+    title: "한국수자원학회 2026 학술발표회 (부산)",
+    category: "Conference",
+    image: "assets/img/gallery/2026-05-kwra.jpg",
+    caption: "부산항국제전시컨벤션센터 — 구두발표 5편"
+  },
+  {
     date: "2025-09-28",
     title: "Appreciation for Our Lab Captain",
     category: "Lab life",

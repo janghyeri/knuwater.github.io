@@ -28,7 +28,7 @@ sci: [
   {year:2022,title:"A Study on the Optimal Deep Learning Model for Dam Inflow Prediction",authors:"Kim, B.-J.; Lee, Y.-T; Kim, B.H.*",venue:"Water, 14(17), 2766",link:"https://doi.org/10.3390/w14172766"},
   {year:2023,title:"Parameter Optimization of Coupled 1D–2D Hydrodynamic Model for Urban Flood Inundation",authors:"Kim, B.H.*; Kim, B.J.; Ha, C.Y.; Lee, J.N.",venue:"Water, 15, 2946",link:"https://doi.org/10.3390/w15162946"},
   {year:2025,title:"Flood prediction in urban areas based on machine learning considering the statistical characteristics of rainfall",authors:"Jang, S. D.; Yoo, J. H.; Lee, Y. S.; Kim, B.H.*",venue:"Progress in Disaster Science, 26, 100415",link:"https://doi.org/10.1016/j.pdisas.2025.100415"},
-  {year:2025,title:"Rapid Simulation for Real-time Flood Depth Prediction Using Support Vector Machine",authors:"Kim, B.J.; Kim, M.K.; Yoo, J.H.; Kim, B.H.*",venue:"",link:"#"}
+  {year:2025,title:"Rapid simulation for real-time flood depth prediction using support vector machine",authors:"Kim, B.J.; Kim, M.; Yoo, J.; Kim, B.H.*",venue:"Scientific Reports, 15, 31818",link:"https://doi.org/10.1038/s41598-025-17090-2"}
 ],
 
 /* ---------- 국내 논문 ---------- */
@@ -176,7 +176,13 @@ domConf: [
   {year:2025,title:"HEC-RAS 2D 및 FVM 모형 기반 복합 도시 홍수 모델링",authors:"장혜리; 유재환; 김병현",venue:"한국수자원학회 학술발표회, 2025.05",link:"#"},
   {year:2025,title:"설명가능한 인공지능(XAI) 기반 서울시 홍수 취약성 매핑",authors:"조현탁; 장세동; 김병현",venue:"한국수자원학회 학술발표회, 2025.05",link:"#"},
   {year:2025,title:"Infoworks ICM의 Rain-on-Mesh 기법 적용을 통한 2차원 도시침수해석",authors:"정귀운; 유재환; 조현탁; 김병현",venue:"한국수자원학회 학술발표회, 2025.05",link:"#"},
-  {year:2025,title:"FVM 기반 2차원 침수 해석과 System Dynamics 활용 피해 영향 분석",authors:"김호연; 전지윤; 김병현",venue:"한국수자원학회 학술발표회, 2025.05",link:"#"}
+  {year:2025,title:"FVM 기반 2차원 침수 해석과 System Dynamics 활용 피해 영향 분석",authors:"김호연; 전지윤; 김병현",venue:"한국수자원학회 학술발표회, 2025.05",link:"#"},
+  {year:2025,title:"3D Flood Analysis of Coastal Nuclear Power Plant Sites under Extreme Wave Overtopping Scenarios",authors:"Yoo, J.; Jeong, G.; Kim, B.H.*",venue:"한국원자력학회 추계학술발표회, 창원, 2025.10",link:"https://www.kns.org/files/pre_paper/54/25A-322-%EC%9C%A0%EC%9E%AC%ED%99%98.pdf"},
+  {year:2026,title:"극한 해상 조건에서의 해안 도시 월파량 산정을 위한 경험식 및 3차원 수치해석 비교 연구",authors:"유재환; 전지윤; 김병현",venue:"한국수자원학회 학술발표회, 부산, 2026.05",link:"#"},
+  {year:2026,title:"격자기반 분포형 강우를 활용한 2차원 도시침수해석",authors:"전지윤; 정귀운; 김병현",venue:"한국수자원학회 학술발표회, 부산, 2026.05",link:"#"},
+  {year:2026,title:"고해상도 격자 강우자료를 활용한 KlimaX 기반 강우 예측 모델 개발",authors:"장혜리; 조현탁; 김병현",venue:"한국수자원학회 학술발표회, 부산, 2026.05",link:"#"},
+  {year:2026,title:"복합 도시침수 해석을 위한 1-2차원 완전 결합 수치모형 개발",authors:"김호연; 유재환; 김병현",venue:"한국수자원학회 학술발표회, 부산, 2026.05",link:"#"},
+  {year:2026,title:"EFDC 기반 3차원 수질예측 대리모델(Surrogate Model) 구축 연구",authors:"황현동; 윤진혁; 강보승; 김병현; 김종찬",venue:"한국수자원학회 학술발표회, 부산, 2026.05",link:"#"}
 ],
 
 /* ---------- 특허 (예: {year:2024, title:"…", authors:"발명자", venue:"등록번호 10-XXXXXXX", link:""}) ---------- */

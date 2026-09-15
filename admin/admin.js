@@ -132,8 +132,8 @@
   ];
   const STUDENT = [
     { k: "nameEn", l: "영문 이름", req: 1 }, { k: "nameKo", l: "한글 이름", req: 1 },
-    { k: "level", l: "과정", t: "select", opts: [["phd", "박사과정"], ["msphd", "석박사통합과정"], ["ms", "석사과정"], ["bsms", "학석연계과정"], ["ug", "학부연구생"]], req: 1 },
-    { k: "status", l: "표시 문구 (예: M.S. Student, Ph.D. Candidate)" },
+    { k: "level", l: "과정", t: "select", opts: [["phd", "박사과정"], ["ms", "석사과정"], ["ug", "학부연구생 (학석연계 포함)"]], req: 1 },
+    { k: "status", l: "표시 문구 (예: M.S. Student, Ph.D. Candidate, B.S.–M.S. Combined Student)" },
     { k: "email", l: "이메일" }, { k: "photo", l: "사진", t: "image", folder: "assets/img/members" },
     { k: "interests", l: "연구 관심사", t: "lines", full: 1 }
   ];
@@ -150,7 +150,7 @@
       cols: [["date", "날짜"], ["tag", "구분"], ["title", "제목"]],
       fields: [
         { k: "date", l: "날짜", t: "date", req: 1 },
-        { k: "tag", l: "구분", t: "select", opts: ["Notice", "Paper", "Conference", "Award", "Welcome", "News"] },
+        { k: "tag", l: "구분", t: "select", opts: ["Notice", "Paper", "Conference", "Award", "Press", "Welcome", "News"] },
         { k: "title", l: "제목", req: 1, full: 1 },
         { k: "desc", l: "요약 (한두 줄)", t: "textarea", full: 1 },
         { k: "body", l: "상세 내용 (선택, 소식 페이지에서 펼쳐서 표시)", t: "textarea", rows: 6, full: 1 },

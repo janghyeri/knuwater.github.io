@@ -60,7 +60,7 @@
 
     <section id="panel-students" class="panel" role="tabpanel" hidden>
       <h2 class="kicker">Students</h2>
-      <p class="note" style="margin:-6px 0 14px">※ 현재 재학 중인 <b>전일제(full-time)</b> 대학원생·학부연구생만 표시합니다. 파트타임(직장 병행) 과정은 포함하지 않습니다.</p>
+      <p class="note" style="margin:-6px 0 14px">※ 현재 재학 중인 <b>전일제(full-time)</b> 대학원생과 학부연구생(학석연계과정 포함)만 표시합니다. 파트타임(직장 병행) 과정은 포함하지 않습니다.</p>
       <div class="subtabs" role="tablist" aria-label="Student categories" id="subtabs"></div>
       <div class="grid c3" id="student-cards"></div>
     </section>
@@ -118,12 +118,13 @@
     d.textContent = ini;
     img.replaceWith(d);
   };
-  // 과정 코드: phd 박사 | msphd 석박사통합 | ms 석사 | bsms 학석연계 | ug 학부연구생
-  const LEVELS = [["phd", "Ph.D."], ["msphd", "M.S.–Ph.D."], ["ms", "M.S."], ["bsms", "B.S.–M.S."], ["ug", "Undergraduate"]];
-  const LEVEL = { phd: "Ph.D. Student", msphd: "M.S.–Ph.D. Integrated Student", ms: "M.S. Student", bsms: "B.S.–M.S. Combined Student", ug: "Undergraduate Researcher" };
+  // 과정 코드: phd 박사 | ms 석사 | ug 학부연구생 (학석연계 포함; 옛 코드 bsms 도 ug 로 취급)
+  const LEVELS = [["phd", "Ph.D."], ["ms", "M.S."], ["ug", "Undergraduate"]];
+  const LEVEL = { phd: "Ph.D. Student", ms: "M.S. Student", bsms: "B.S.–M.S. Combined Student", ug: "Undergraduate Researcher" };
+  const lv = (s) => (s.level === "bsms" || s.level === "msphd" ? (s.level === "bsms" ? "ug" : "phd") : s.level);
   const students = M.students || [];
   document.getElementById("subtabs").innerHTML =
-    [["all", "All"], ...LEVELS].map(([k, l]) => { const n = k === "all" ? students.length : students.filter((s) => s.level === k).length;
+    [["all", "All"], ...LEVELS].map(([k, l]) => { const n = k === "all" ? students.length : students.filter((s) => lv(s) === k).length;
       return `<button type="button" data-sub="${k}" class="${k === "all" ? "active" : ""}">${l} <span style="opacity:.65;font-weight:600">${n}</span></button>`; }).join("");
 
   function card(s) {
@@ -144,9 +145,9 @@
       </div>
     </div>`;
   }
-  const EMPTY = { all: "등록된 학생이 없습니다.", phd: "현재 박사과정 학생이 없습니다.", msphd: "현재 석박사통합과정 학생이 없습니다.", ms: "현재 석사과정 학생이 없습니다.", bsms: "현재 학석연계과정 학생이 없습니다.", ug: "현재 학부연구생이 없습니다." };
+  const EMPTY = { all: "등록된 학생이 없습니다.", phd: "현재 박사과정 학생이 없습니다.", ms: "현재 석사과정 학생이 없습니다.", ug: "현재 학부연구생(학석연계 포함)이 없습니다." };
   function renderStudents(filter) {
-    const data = students.filter((s) => filter === "all" || s.level === filter);
+    const data = students.filter((s) => filter === "all" || lv(s) === filter);
     const el = document.getElementById("student-cards");
     el.innerHTML = data.map(card).join("") || `<p class="empty" style="grid-column:1/-1">${EMPTY[filter] || EMPTY.all}</p>`;
   }
